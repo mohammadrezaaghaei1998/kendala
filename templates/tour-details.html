@@ -1,0 +1,1421 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSI - Tour Details</title>
+
+
+    <!-- Custom CSS -->
+     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tour_details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/destinations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/7.4.1/smooth-scrollbar.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- Favicon link -->
+    <link rel="icon" type="image/png" href="{% static 'images/logopngdark.png' %}">
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+   {% include 'main/header.html' %}
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container-wide mt-5" style="margin-top: 120px !important;">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="col-lg-10 tour-detail-title">
+                    <h2>Amalfi Coast Walking - Agriturismo</h2>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 tour-detail-stars">
+                            <strong>4.6</strong>
+                            <i class="fa-solid fa-star text-warning"></i>
+                            <i class="fa-solid fa-star text-warning"></i>
+                            <i class="fa-solid fa-star text-warning"></i>
+                            <i class="fa-solid fa-star text-warning"></i>
+                            <i class="fa-solid fa-star-half-stroke text-warning"></i> <!-- Half star -->
+                        </div>                        
+                        <div class="col-lg-3 tour-detail-reviews">
+                            <a href="">147 traveler reviews</a>
+                        </div>
+                        <div class="col-lg-6 tour-detail-duration">
+                            <h6>
+                                <strong>8 days</strong> 
+                                <i class="fa-solid fa-circle m-2" style="font-size: 10px; vertical-align: middle;"></i> 
+                                Start and end in <strong>Nepal</strong>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-lg-12 mb-5">
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active tour-details-carousel">
+                            <img src="{% static 'images/nature.jpg' %}" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item tour-details-carousel">
+                            <img src="{% static 'images/culture.jfif' %}" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item tour-details-carousel">
+                            <img src="{% static 'images/oman-tourism.jpg' %}" class="d-block w-100" alt="...">
+                          </div>
+                        </div>
+                        <a class="carousel-control-prev tour-details-carousel-icon" href="#carouselExampleFade" role="button" data-slide="prev">
+                            <i class="fas fa-chevron-left"></i>  
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next tour-details-carousel-icon" href="#carouselExampleFade" role="button" data-slide="next">
+                            <i class="fas fa-chevron-right"></i> 
+                            <span class="sr-only">Next</span>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-12 tours-tags text-center">
+                    <a href="">Hiking & Trekking</a>
+                    <a href="">Coastal Walks</a>
+                    <a href="">Group</a>
+                    <a href="">Fully Guided</a>
+                    <a href="">Explorer</a>
+                    <a href="">Sun</a>
+                    <a href="">Mountains</a>
+                    <a href="">River</a>
+                </div>
+
+                <div class="col-lg-12 tour-specification">
+                    <div class="row align-items-start ">
+                       
+                        <div class="col-auto p-2">
+                            <i class="fa-solid fa-star gold-star mt-2"></i> 
+                        </div>
+                        <div class="col p-2 mt-1">
+                           <h6>Gold Operator</h6>
+                            <p>Wide Sky Inernational</p>
+                        </div>
+                        <div class="col-auto p-2">
+                            <i class="fa-solid fa-users y mt-3 fa-lg"></i>
+                        </div>
+                        <div class="col p-2 mt-1">
+                           <h6>Group Tour</h6>
+                            <p>Join a group and forge lifelong friendships</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-start ">
+                        <div class="col-auto p-2">
+                            <i class="fa-solid fa-hat-cowboy y mt-3 fa-lg"></i>
+                        </div>
+                        <div class="col p-2 mt-1">
+                           <h6>Fully Guided</h6>
+                            <p>An experienced guide will be with you for the entire tour</p>
+                        </div>
+                        <div class="col-auto p-2">
+                            <i class="fa-solid fa-globe y mt-3 fa-lg"></i>
+                        </div>
+                        <div class="col p-2 mt-1">
+                           <h6>Guided in English</h6>
+                        </div>
+                    </div>
+                    <div class="row align-items-start ">
+                        <div class="col-auto p-2">
+                            <i class="fa-solid fa-user-group y mt-3 fa-lg"></i>
+                        </div>
+                        <div class="col p-2 mt-1">
+                           <h6>Group Size 7 - 16</h6>
+                        </div>
+                        <div class="col-auto p-2">
+                             <i class="fa-solid fa-user-clock y mt-3 fa-lg"></i>
+                        </div>
+                        <div class="col p-2 mt-1">
+                           <h6>Age range 16 to 85</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="col-lg-6  mb-4">
+                        <h3>Places You’ll See
+                        </h3>
+                    </div>
+                    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-4 place-you-see-carousel-images">
+                                        <img src="{% static 'images/nature.jpg' %}" class="d-block w-100" alt="Nature">
+                                    </div>
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/culture.jfif' %}" class="d-block w-100" alt="Culture">
+                                    </div>
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/oman-tourism.jpg' %}" class="d-block w-100" alt="Oman Tourism">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/nature.jpg' %}" class="d-block w-100" alt="Nature">
+                                    </div>
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/culture.jfif' %}" class="d-block w-100" alt="Culture">
+                                    </div>
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/oman-tourism.jpg' %}" class="d-block w-100" alt="Oman Tourism">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/nature.jpg' %}" class="d-block w-100" alt="Nature">
+                                    </div>
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/culture.jfif' %}" class="d-block w-100" alt="Culture">
+                                    </div>
+                                    <div class="col-4  place-you-see-carousel-images">
+                                        <img src="{% static 'images/oman-tourism.jpg' %}" class="d-block w-100" alt="Oman Tourism">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                            <i class="fas fa-chevron-left place-you-see-carousel-icon"></i>  
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                            <i class="fas fa-chevron-right place-you-see-carousel-icon"></i>   
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12 mt-5">
+                    <div class="col-lg-6  mb-4">
+                        <h3>Highlights</h3>
+                    </div>    
+                    <div class="col p-2">
+                        <p> <i class="fa-solid fa-check text-green-500 ml-1 fa-lg mt-2 mr-2"></i>Explore San Lazzaro's authentic village life</a></p>
+                        <p> <i class="fa-solid fa-check text-green-500 ml-1 fa-lg mr-2"></i>Hike ancient paths with coastal views</a></p>
+                        <p> <i class="fa-solid fa-check text-green-500 ml-1 fa-lg  mr-2"></i>Join a cooking class at our agriturismo</a></p>
+                        <p> <i class="fa-solid fa-check text-green-500 ml-1 fa-lg  mr-2"></i>Discover Amalfi and Ravello's hidden gems</a></p>
+                        <p> <i class="fa-solid fa-check text-green-500 ml-1 fa-lg  mr-2"></i>Trek the famous Walk of the Gods</a></p>
+                    </div>
+               
+                </div>
+
+
+
+                <div class="container mb-5">
+                    <div class="col-lg-12 p-2 ">
+                        <div class="row">
+                            <div class="col-lg-6  mb-4">
+                                <h3>Itinerary</h3>
+                            </div> 
+                            <div class="col-md-12">
+                               
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                                    Day 1 Rome <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            </h4>
+                                            
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div class="panel-body pr-5 pl-5">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">
+                                                    Day 2 Rome <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                            <div class="panel-body pr-5 pl-5">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">
+                                                    Day 3 Rome <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            <div class="panel-body pr-5 pl-5">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="collapsed">
+                                                    Day 4 Rome, Orvieto, Castiglione Del Lago, Siena <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            <div class="panel-body pr-5 pl-5">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive" class="collapsed">
+                                                    Day 5 Siena, Monteriggioni, San Gimignano, Florence <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            <div class="panel-body pr-5 pl-5">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 mb-5 p-5">
+                    <div class="row align-items-center download-brochure pl-4 pt-4">
+                        <div class="col-lg-8">
+                            <h4><strong>Want to read it later?</strong></h4>
+                            <p>Download this tour’s PDF brochure and start tour planning offline</p>
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-end pr-5 pb-4">
+                            <a href="" class="btn btn-block download-brochure-btn tour-detail-price">
+                                <h4>Download Brochure</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+<!-- ==========================================
+     WHAT'S INCLUDED
+=========================================== -->
+
+<div class="container mb-5">
+    <div class="col-lg-12">
+        <div class="row">
+
+            <div class="col-lg-6 mb-4">
+                <h3>What's Included</h3>
+            </div>
+
+            <div class="panel-group col-lg-12"
+                 id="accordionIncluded"
+                 role="tablist"
+                 aria-multiselectable="true">
+
+                <!-- Accommodation -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingIncludedOne">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionIncluded"
+                               href="#includedOne"
+                               aria-expanded="false"
+                               aria-controls="includedOne"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-bed mr-3"></i> Accommodation</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="includedOne"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingIncludedOne">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guide -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingIncludedTwo">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionIncluded"
+                               href="#includedTwo"
+                               aria-expanded="false"
+                               aria-controls="includedTwo"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-hat-cowboy mr-3"></i> Guide</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="includedTwo"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingIncludedTwo">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Insurance -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingIncludedThree">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionIncluded"
+                               href="#includedThree"
+                               aria-expanded="false"
+                               aria-controls="includedThree"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-hand-holding-medical mr-3"></i> Insurance</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="includedThree"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingIncludedThree">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meals -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingIncludedFour">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionIncluded"
+                               href="#includedFour"
+                               aria-expanded="false"
+                               aria-controls="includedFour"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-utensils mr-4"></i> Meals</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="includedFour"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingIncludedFour">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Services -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingIncludedFive">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionIncluded"
+                               href="#includedFive"
+                               aria-expanded="false"
+                               aria-controls="includedFive"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-plus mr-3"></i> Additional Services</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="includedFive"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingIncludedFive">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bus / Transport -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingIncludedSix">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionIncluded"
+                               href="#includedSix"
+                               aria-expanded="false"
+                               aria-controls="includedSix"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-bus mr-3"></i> Transportation</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="includedSix"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingIncludedSix">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ==========================================
+     WHAT'S NOT INCLUDED
+=========================================== -->
+
+<div class="container mb-5">
+    <div class="col-lg-12">
+        <div class="row">
+
+            <div class="col-lg-6 mb-4">
+                <h4>What's Not Included</h4>
+            </div>
+
+            <div class="panel-group col-lg-12"
+                 id="accordionNotIncluded"
+                 role="tablist"
+                 aria-multiselectable="true">
+
+                <!-- Flights -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingExcludedOne">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionNotIncluded"
+                               href="#excludedOne"
+                               aria-expanded="false"
+                               aria-controls="excludedOne"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-xmark mr-3"></i> Flights</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="excludedOne"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingExcludedOne">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Flights are not included.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optional -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingExcludedTwo">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionNotIncluded"
+                               href="#excludedTwo"
+                               aria-expanded="false"
+                               aria-controls="excludedTwo"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-xmark mr-3"></i> Optional</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="excludedTwo"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingExcludedTwo">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Services -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingExcludedThree">
+                        <h4 class="panel-title">
+                            <a role="button"
+                               data-toggle="collapse"
+                               data-parent="#accordionNotIncluded"
+                               href="#excludedThree"
+                               aria-expanded="false"
+                               aria-controls="excludedThree"
+                               class="collapsed">
+
+                                <p><i class="fa-solid fa-xmark mr-3"></i> Additional Services</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="excludedThree"
+                         class="panel-collapse collapse"
+                         role="tabpanel"
+                         aria-labelledby="headingExcludedThree">
+
+                        <div class="panel-body pr-5 pl-5">
+                            <p>Other activities and services are not included.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                
+                <div class="container p-2 mb-5">
+                    <div class="col-lg-6  mb-4">
+                        <h4>Sustainability Initiatives</h4>
+                    </div> 
+                    <div class="col-lg-12 pl-4 p-2">
+                       <div class="row align-items-center pt-4 sustainability-cards">
+
+                            <div class="col-lg-3 sustainability p-4">
+                               <a href="#" data-toggle="modal" data-target="#sustainabilityModal">
+                                    <i class="fa-solid fa-smog mr-2 p-2"></i>
+                                    <p class="p-2"> Reduce Carbon Emissions</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 sustainability p-4">
+                               <a href="#" data-toggle="modal" data-target="#sustainabilityModal">
+                                    <i class="fa-solid fa-earth-americas mr-2 p-2"></i>
+                                    <p class="p-2">Supporting Destinations</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 sustainability p-4">
+                                <a href="#" data-toggle="modal" data-target="#sustainabilityModal">
+                                    <i class="fa-solid fa-leaf mr-2 p-2"></i>
+                                    <p class="p-2">Sustainability Programs</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 sustainability p-4">
+                                <a href="#" data-toggle="modal" data-target="#sustainabilityModal">
+                                    
+                                     <i class="fa-solid fa-paw mr-2 p-2"></i>
+                                    <p class="p-2">Animal Welfare</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 60px;" class="modal fade" id="sustainabilityModal" tabindex="-1" role="dialog" aria-labelledby="sustainabilityModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+       
+                            <div class="modal-body" style="max-height: 90vh; overflow-y: auto;">
+                                <div class="col-12 sustainability-modal">
+                                    <h4 class="modal-title" id="askQuestionModalLabel" style="margin: 0;"><strong>Sustainability Initiatives</strong></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                           
+                                        <div class="col-12 mt-2">
+                                                <div class="col-12">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <i class="fa-solid fa-cloud-arrow-down mr-2"></i>
+                                                        <p class="mb-0"><strong>Reduce Carbon Emissions</strong></p>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                        <p class="mb-0">We are fully carbon neutral</p>
+                                                    </div>
+                                                </div>
+                                        </div>
+
+                                        <div class="col-12 mt-2">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i class="fa-solid fa-paw mr-2"></i>
+                                                    <p class="mb-0"><strong>Animal Welfare</strong></p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We do not offer any tours that include elephant riding</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We do not offer any tours that use animals for entertainment</p>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We avoid places that sell/eat parts of endangered animals on tour</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mt-2">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i class="fa-solid fa-earth-americas mr-2"></i>
+                                                    <p class="mb-0"><strong>Supporting Destinations</strong></p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We hire local guides</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We bring our passengers to locally run restaurants</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We consciously try to reduce over-tourism by taking travellers outside of the main visitor hubs</p>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">Our tours stay in locally run hotels/accommodations</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mt-2">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i class="fa-solid fa-leaf mr-2"></i>
+                                                    <p class="mb-0"><strong>Sustainability Programs</strong></p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We invest a percentage of revenue back into community projects or sustainability projects</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We host community-building or sustainability projects for staff to partake in</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We educate passengers about sustainability while on tour</p>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <span style="font-size: 1.5em; margin-right: 8px;">•</span>
+                                                    <p class="mb-0">We educate people about sustainability through our marketing</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mt-2">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <p class="mb-0"><strong>Other</strong></p>
+                                                </div>
+                                                <p>Sustainability is embedded within the fibre of Explore, it emanates from the inside out. But as we enter a new decade it is clearer than ever that our world needs help, and Explore has created a sustainability strategy based on the 2015 UN’s Sustainable Development Goals.</p>
+                                                <p>The goals define a common framework of action and language to address the world’s most urgent challenges, and whilst all of the goals interweave to underpin sustainable development, we have chosen five where we can have the biggest impact.</p>
+                                                <p>Our primary focus will be on climate change. We have a comprehensive carbon strategy which is supported by continuing and elevating our attention on education and training, without which long term change would not be possible. We aim to be single use plastic free across all trips by 2021, we have a new robust animal welfare policy. Crucially we will be transparent, honest and collaborative in our efforts to lead our industry in responsible travel.</p>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container p-4 mb-5">
+                    <div class="col-lg-12 pl-4 p-2 cancellation-policy">
+                        <div class="row align-items-center pt-4 p-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h4>Your Peace of Mind Options</h4>
+                                </div>
+                                <div class="row pl-4 w-100">
+                                    <div class="col-1 d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-calendar-times ml-2"></i>
+                                    </div>
+                                    <div class="col-11 mt-4">
+                                        <h5>Cancellation Policy</h5>
+                                        <p>A transparent overview of applicable fees.</p>
+                                    </div>
+                                </div>
+                               <div class="col-lg-4 mt-3">
+                                    <a href="#" 
+                                    class="btn btn-block explore-btn tour-detail-price" 
+                                    data-toggle="modal" 
+                                    data-target="#cancellation-policy-modal">
+                                        <h6>Explore your options</h6>
+                                    </a>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div style="margin-top: 60px;" class="modal fade" id="cancellation-policy-modal" tabindex="-1" role="dialog" aria-labelledby="sustainabilityModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+       
+                            <div class="modal-body" style="max-height: 90vh; overflow-y: auto;">
+                                <div class="col-12 sustainability-modal">
+                                    <h4 class="modal-title" style="margin: 0;"><strong>Your options if plans change</strong></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                           
+                                        <div class="col-12 mt-2">
+                                            <p>We understand these are uncertain times and want to make sure you feel confident about your options if your plans change.</p>
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa-solid fa-ban mr-2"></i>
+                                                <p class="mb-0"><strong>Cancellation</strong></p>
+                                            </div>
+                                            <p class="ml-4 mt-2">If there’s no other option than to cancel, we’d like to make sure you’re aware of the potential fees involved. The overview below shows this tour’s cancellation fees depending on how far ahead of the departure date you cancel.</p>
+                                        </div>
+                                    </div>
+                                    <div class="vertical-stepper">
+
+                                        <div class="step mb-5">
+                                            <div class="d-flex align-items-center">
+                                                <div class="circle d-flex justify-content-center align-items-center mr-3">
+                                                    <i class="fa fa-circle-check"></i> 
+                                                </div>
+                                                <div>
+                                                    <p class="mb-1"><strong>Up to 70 days before departure</strong></p>
+                                                    <p class="mb-0">You forfeit your deposit</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="step mb-5">
+                                            <div class="d-flex align-items-center">
+                                                <div class="circle d-flex justify-content-center align-items-center mr-3">
+                                                    <span><strong>69</strong><br>Days</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-1"><strong>69 days before departure</strong></p>
+                                                    <p class="mb-0">You forfeit 30% of the tour cost</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="step mb-5">
+                                            <div class="d-flex align-items-center">
+                                                <div class="circle d-flex justify-content-center align-items-center mr-3">
+                                                    <span><strong>41</strong><br>Days</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-1"><strong>41 days before departure</strong></p>
+                                                    <p class="mb-0">You forfeit 60% of the tour cost</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="step mb-5">
+                                            <div class="d-flex align-items-center">
+                                                <div class="circle d-flex justify-content-center align-items-center mr-3">
+                                                    <span><strong>27</strong><br>Days</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-1"><strong>27 days before departure</strong></p>
+                                                    <p class="mb-0">You forfeit 90% of the tour cost</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="step">
+                                            <div class="d-flex align-items-center">
+                                                <div class="circle d-flex justify-content-center align-items-center mr-3">
+                                                    <span><strong>13</strong> <br>Days</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-1"><strong>13 days before departure</strong></p>
+                                                    <p class="mb-0">You forfeit 100% of the tour cost</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-12 mt-5">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa-solid fa-headphones mr-2" style="font-size: 28px;"></i>
+                                            <p class="mb-0">Need a human touch? Our friendly Customer Support is there for you 24/7.</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="container">
+                    <div class="col-lg-12  ">
+                        <div class="row align-items-center pt-4 p-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h4>Can’t find the answer to your question?</h4>
+                                </div>
+                                <div class="col-lg-12 mt-2">
+                                    <p>Reach out to the experts at Europamundo with your enquiry, they usually respond within 7 hours.</p>
+                                </div>
+                                <div class="col-lg-4 mt-3">
+                                    <a href="" data-toggle="modal" data-target="#askQuestionModal"  class="btn btn-block explore-btn tour-detail-price">
+                                        <h6>Ask a Question</h6>
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container MT-5 mb-5">
+                    <div class="col-lg-12">
+                       
+                        
+                        <div class="row">
+                            <div class="col-lg-6  mb-4">
+                                <h4>Good to know</h4>
+                                <p>Tour ID: 291182</p>
+                            </div> 
+                               
+                            <div class="panel-group col-lg-12" id="accordioninclude" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#Currency" aria-expanded="false" aria-controls="Currency" class="collapsed">
+                                                <p>Currency</p>
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="Currency" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body pl-2 pr-5 mb-2">
+                                            <div class="row">
+                                                <div class="col-lg-2 col-2 d-flex align-items-center justify-content-center currencycol ml-2 mr-2">
+                                                    <img src="{% static 'images/currency.png' %}" alt="" class="mt-2 mb-2" style="width: 60px;">
+                                                </div>
+                                                <div class="col-lg-9 col-9 d-flex align-items-start currencycol">
+                                                   <div class="row pt-2">
+                                                        <div class="col-lg-12">
+                                                            <h6><strong>Euro</strong></h6>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <p>Italy </p>
+                                                        </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#Plugs" aria-expanded="false" aria-controls="Plugs" class="collapsed">
+                                                <p>Plugs & Adapters</p>
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="Plugs" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body pl-2 pr-5 mb-2">
+                                            <div class="row">
+                                                <div class="col-lg-2 col-2 d-flex align-items-center justify-content-center plugscol ml-2 mr-2">
+                                                    <img src="{% static 'images/plug.png' %}" alt="" class="mt-2 mb-2" style="width: 60px;">
+                                                </div>
+                                                <div class="col-lg-9 col-9 d-flex align-items-start plugscol">
+                                                   <div class="row pt-2">
+                                                        <div class="col-lg-12">
+                                                            <h6><strong>Type L</strong></h6>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <p>Italy </p>
+                                                        </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#Payment" aria-expanded="false" aria-controls="Payment" class="collapsed">
+                                                <p>Payment information</p>
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="Payment" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <div class="panel-body ">
+                                            <p>For any tour departing before May 1st, 2025 a full payment is necessary. For tours departing after May 1st, 2025, a minimum payment of $125 is required to confirm your booking with Europamundo. The final payment will be automatically charged to your credit card on the designated due date. The final payment of the remaining balance is required at least 50 days prior to the departure date of your tour. TourRadar never charges you a booking fee and will charge you in the stated currency.
+                                                Some departure dates and prices may vary and Europamundo will contact you with any discrepancies before your booking is confirmed.
+                                                The following cards are accepted for "Europamundo" tours: Visa, Maestro, Mastercard, American Express or PayPal. TourRadar does NOT charge you an extra fee for using any of these payment methods.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingFour">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#Cancellation-Policy" aria-expanded="false" aria-controls="Cancellation-Policy" class="collapsed">
+                                                <p>Cancellation Policy</p>
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="Cancellation-Policy" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                        <div class="panel-body ">
+                                            <p>Your money is safe with TourRadar, as we only pay the tour operator after your tour has departed.</p>
+                                            <p class="p">TourRadar is an authorized Agent of Europamundo. Please familiarize yourself with the <a href="">Europamundo payment, cancellation and refund conditions.</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingFive">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#Accessibility" aria-expanded="false" aria-controls="Accessibility" class="collapsed">
+                                                <p>Accessibility</p>
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="Accessibility" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                        <div class="panel-body ">
+                                            <p>Some tours are not suitable for mobility-restricted traveler, however, some operators may be able to accommodate special requests. For any enquiries, you can contact our customer support team, who are ready and waiting to help you.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                                
+                    </div>
+                </div>
+
+
+                <div class="col-12 mb-5 p-3 ls-banner">
+                    <div class="row">
+                        <div class="col-lg-4 d-flex justify-content-center p-3">
+                           <a href="" class="ls-banner-a-tag">
+                                <div class="row align-items-center">
+                                    <i class="fa-solid fa-heart mr-2"></i>
+                                    <p class="mb-0"><strong style="color: #7046d9 !important;">Add To Wishlist</strong></p>
+                                </div>
+                           </a>
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-center p-3">
+                           <a href="" class="ls-banner-a-tag">
+                                <div class="row align-items-center">
+                                    <i class="fa-solid fa-file-arrow-down mr-2"></i>
+                                    <p class="mb-0"><strong style="color: #7046d9 !important;">Download Brochure</strong></p>
+                                </div>
+                           </a>
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-center p-3">
+                            <a href="" data-toggle="modal" data-target="#askQuestionModal" class="ls-banner-a-tag">
+                                <div class="row align-items-center">
+                                    <i class="fa-solid fa-question-circle mr-2"></i>
+                                    <p class="mb-0"><strong style="color: #7046d9 !important;">Ask A Question</strong></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="container my-5">
+                    <h3 class="mb-4">Customer Reviews</h3>
+
+                    <div id="reviews-container">
+                        <!-- REPEATED CARDS (like your code) -->
+                        <div class="card mb-3">
+                            <div class="card-body"> 
+                                <div class="d-flex align-items-center comments">
+                                    <img src="{% static 'images/109d03b9-b77e-4985-becf-ee8c025feb3c.png' %}" class="rounded-circle mr-3">
+                                    <div class="w-100">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="mb-1">John Doe</h5>
+                                            <small class="text-muted">2 days ago</small>
+                                        </div>
+                                        <div class="mb-2">
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star-half-alt text-warning"></i>
+                                        </div>
+                                        <p>Really enjoyed the tour! Highly recommend!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body"> 
+                                <div class="d-flex align-items-center comments">
+                                    <img src="{% static 'images/109d03b9-b77e-4985-becf-ee8c025feb3c.png' %}" class="rounded-circle mr-3">
+                                    <div class="w-100">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="mb-1">John Doe</h5>
+                                            <small class="text-muted">2 days ago</small>
+                                        </div>
+                                        <div class="mb-2">
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <i class="fa fa-star-half-alt text-warning"></i>
+                                        </div>
+                                        <p>Really enjoyed the tour! Highly recommend!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button id="show-more" class="btn btn-primary">Show More</button>
+                        <button id="show-less" class="btn btn-secondary ml-2" style="display:none;">Show Less</button>
+                    </div>
+                </div>
+
+
+
+                <form class="askaquestion">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                        <textarea class="textarea" rows="4" placeholder="Leave Your Comment *"></textarea>
+
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-start">
+                        <p class="p_class">
+                            <label class="rating-label" for="{{ radio.id_for_label }}">&#9733;</label>
+                            <label class="rating-label" for="{{ radio.id_for_label }}">&#9733;</label>
+                            <label class="rating-label" for="{{ radio.id_for_label }}">&#9733;</label>
+                            <label class="rating-label" for="{{ radio.id_for_label }}">&#9733;</label>
+                            <label class="rating-label" for="{{ radio.id_for_label }}">&#9733;</label>
+                        </p>
+                    </div>
+                    <button class="red" type="button"><i class="icon ion-md-lock"></i> Submit</button>
+                </form>
+                
+
+            </div>
+
+    
+
+
+
+            <div class="col-lg-4 mt-5">
+                <div class="col-lg-12 tour-detail-price mt-4">
+                    <p>from</p>
+                    <h2>Us <strong>$2500</strong></h2>
+                    <a href="#" class="btn mr-2">Check Availability</a>
+                    <a href="" title="Add to favorite"><i class="fa-solid fa-heart text-danger p-4 save-and-compare"></i> </a>
+                    <div class="col-lg-12 mt-4">
+                        <div class="row align-items-start tour-detail-price-details">
+                            <div class="col-auto p-2">
+                                <i class="fa-solid fa-user-group y mt-2"></i>
+                            </div>
+                            <div class="col p-2">
+                                <p>Price based on per person in Twin Share for <a href="" style="color: #7046d9 !important;">departure 05 April 2025</a></p>
+                            </div>
+                        </div>
+                    
+                        <div class="row align-items-start  tour-detail-price-details">
+                            <div class="col-auto p-2 mt-2">
+                                <i class="fa-solid fa-tag fa-lg"></i>
+                            </div>
+                            <div class="col p-2">
+                                <p>Best price guarantee <a href="" style="color: #7046d9 !important;">Learn More</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 tour-detail-price mt-5">
+                    <p>Plan your adventure:</p>
+    
+                    <div class="col-lg-12 mt-4">
+                        <div class="row align-items-start tour-detail-price-details">
+                            <div class="col-auto p-2">
+                                <i class="fa-solid fa-download"></i>
+                            </div>
+                            <div class="col p-2">
+                                <a href="" class="top-a-tag">
+                                 <h6 style="color: #7046d9 !important;">Download PDF Brochure</h6>
+                               </a>
+                            </div>
+                        </div>
+                    
+                        <div class="row align-items-start  tour-detail-price-details">
+                            <div class="col-auto p-2 mt-2">
+                                <i class="fa-regular fa-lg fa-circle-question"></i>
+                            </div>
+                            <div class="col  p-2">
+                                <a href="#" class="top-a-tag" data-toggle="modal" data-target="#askQuestionModal">
+                                    <h6 style="color: #7046d9 !important;">Ask A Question</h6>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div style="margin-top: 100px;" class="modal fade" id="askQuestionModal" tabindex="-1" role="dialog" aria-labelledby="askQuestionModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+       
+      <div class="modal-body">
+       <div class="col-12 mb-5">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+       </div>
+        <div class="col-12">
+             <div class="row">
+                <div class="col-12">
+                    <h4 class="modal-title" id="askQuestionModalLabel"><strong>Ask Explore! a Question</strong></h4>
+                </div>
+                <div class="col-12 mt-2">
+                    <p><strong>About:</strong> Rome, Sorrento and the Amalfi Coast</p>
+                </div>
+                <div class="col-12">
+                    <p>Do you have a question before you book? After completing this form, you can check your inquiry with Explore! in the booking conversation page.</p>
+
+                </div>
+            </div>
+            
+        </div>
+        <hr>
+        <form class="askaquestion">
+           
+            
+            <div class="row">
+                <div class="col-md-6 mb-3 ask-a-question-form">
+                    <label>
+                        <input class="input" type="text" class="form-control" placeholder="First Name *"/>
+                    </label>
+                </div>
+                <div class="col-md-6 mb-3 ask-a-question-form">
+                    <label>
+                        <input class="input" type="text" class="form-control" placeholder="Last Name *"/>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="col-md-6 mb-3 ask-a-question-form">
+                    <label>
+                        <input class="input" type="text" placeholder="Phone Number (optional)"/>
+                    </label>
+                </div>
+                <div class="col-md-6 mb-3 ask-a-question-form">
+                    <label>
+                        <input class="input" type="email" placeholder="Email Address *"/>
+                    </label>
+                </div>
+                
+            </div>
+
+           
+
+            <!-- <div class="row">
+                <div class="col-12">
+                    <h6><strong>Travelers(Optional)</strong></h6>
+                </div>  
+            </div>
+            <div class="row pl-4 pr-4 align-items-center mb-4">
+                <div class="col-lg-2 col-6">
+                    <p>Adults</p>
+                </div>
+                <div class="col-lg-3 col-6 d-flex justify-content-end align-items-center">
+                    <button class="btn btn-danger-decrease" id="decrease"><strong>-</strong></button>
+                    <span id="count" class="px-3">1</span>
+                    <button class="btn  btn-success-increase" id="increase"><strong>+</strong></button>
+                </div>
+            </div>
+             <div class="row pl-4 pr-4 align-items-center mb-4">
+                <div class="col-lg-2 col-6">
+                    <p>Children</p>
+                </div>
+                <div class="col-lg-3 col-6 d-flex justify-content-end align-items-center">
+                    <button class="btn btn-danger-decrease" id="decrease"><strong>-</strong></button>
+                    <span id="count" class="px-3">1</span>
+                    <button class="btn  btn-success-increase" id="increase"><strong>+</strong></button>
+                </div>
+            </div> -->
+            
+
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                  <textarea class="textarea" rows="4" placeholder="Your Question *"></textarea>
+
+                </div>
+            </div>
+            
+            <button class="red" type="button"><i class="icon ion-md-lock"></i> Submit</button>
+            
+           
+
+         
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+   
+      
+
+       
+     {% include 'main/footer.html' %}
+
+
+
+
+    
+
+
+    <!-- Bootstrap 4 JS (jQuery, Popper.js, and Bootstrap JS) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+   <!-- <script src="https://unpkg.com/smooth-scrollbar@8.7.4/dist/smooth-scrollbar.js"></script> -->
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/scroll.js' %}"></script>
+    <script src="{% static 'js/slider.js' %}"></script>
+    <script src="{% static 'js/booking.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+     <script src="{% static 'js/tour-details.js' %}"></script>
+
+   
+  
+</body>
+</html>
+
+
+
+
+

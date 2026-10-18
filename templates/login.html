@@ -1,0 +1,202 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WSI | Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="icon" type="image/png" href="{% static 'images/logopngdark.png' %}">
+
+    
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- Replace with your own cinematic background video -->
+        <video
+            class="login-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            poster="images/login-poster.jpg"
+            aria-hidden="true">
+
+            <source
+                src="{% static 'videos/login.mp4' %}"
+                type="video/mp4">
+
+        </video>
+
+        <div class="video-overlay"></div>
+
+        <!-- LEFT: BRANDING AND DESCRIPTION -->
+
+        <section class="login-brand">
+
+            <a href="{% url 'index' %}" class="brand-logo"
+               aria-label="WSI home">
+
+                <img src="{% static 'images/logopng.png' %}" alt="WSI">
+
+            </a>
+
+            <p class="brand-eyebrow">
+                Discover something extraordinary
+            </p>
+
+            <h1 class="brand-title">
+                Your next<br>
+                journey<br>
+                starts <span>here.</span>
+            </h1>
+
+            <p class="brand-description">
+                Explore remarkable destinations, discover unforgettable
+                experiences, and make every journey a story worth telling.
+                Your next adventure is just a step away.
+            </p>
+
+            <a href="{% url 'index' %}" class="home-button">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Home
+            </a>
+
+        </section>
+
+        <!-- RIGHT: LOGIN FORM -->
+
+        <section class="login-side">
+
+            <div class="login-card">
+
+                <h2 class="login-heading">Welcome back.</h2>
+
+                <p class="login-subtitle">
+                    Sign in to continue your journey with us.
+                </p>
+
+                <form id="loginForm" action="#" method="post">
+
+                    <div class="form-group">
+
+                        <label for="username" class="form-label">
+                            Username or Email
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            class="form-input"
+                            placeholder="Enter your username or email"
+                            autocomplete="username"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="password" class="form-label">
+                            Password
+                        </label>
+
+                        <div class="input-wrap">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-input password-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="togglePassword"
+                                aria-label="Show password"
+                                aria-pressed="false">
+
+                                <i class="fa-regular fa-eye"
+                                   id="passwordIcon"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-options">
+
+                        <label class="remember-option">
+                            <input type="checkbox" name="remember">
+                            <span>Remember me</span>
+                        </label>
+
+                        <a href="forgot-password.html"
+                           class="form-link">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <button type="submit" class="login-submit">
+                        Sign In
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <p class="form-message" id="formMessage"
+                       role="alert"></p>
+
+                </form>
+
+                <div class="divider">
+                    Or continue with
+                </div>
+
+                <button type="button"
+                        class="google-button"
+                        id="googleLogin">
+
+                   <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                     alt="">
+                    Continue with Google
+
+                </button>
+
+                <p class="signup-text">
+                    Don't have an account?
+                    <a href="{% url 'signup' %}" class="form-link">
+                        Create an account
+                    </a>
+                </p>
+
+                <div class="login-footer">
+                    By continuing, you agree to our
+                    <a href="terms.html">Terms of Service</a>
+                    and
+                    <a href="privacy.html">Privacy Policy</a>.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

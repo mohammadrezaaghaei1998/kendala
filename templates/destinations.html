@@ -1,0 +1,623 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSI| Destination</title>
+
+    <link rel="stylesheet" href="{% static 'css/destinations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <!-- Your existing libraries -->
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="icon" type="image/png" href="{% static 'images/logopngdark.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     TOP NAVIGATION — dark, compact, 
+========================================================= -->
+<!-- <header class="site-header">
+    <div class="top-nav">
+        <a class="brand" href="#">
+            <span class="brand-mark">W</span>
+            <span>WIDE SKY</span>
+        </a>
+
+        <nav class="main-nav">
+            <a href="#about">About</a>
+            <a href="#events">Things to do</a>
+            <a href="#tours">Tours</a>
+            <a href="#areas">Explore</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="nav-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="nav-pill">EN <i class="fa-solid fa-chevron-down"></i></button>
+            <a class="nav-button" href="#tours">Book Now</a>
+            <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+
+    <div class="mobile-nav">
+        <a href="#about">About</a>
+        <a href="#events">Things to do</a>
+        <a href="#tours">Tours</a>
+        <a href="#areas">Explore</a>
+        <a href="#faq">FAQ</a>
+    </div>
+</header> -->
+
+
+
+
+<!-- =========================================================
+     WSI NAVBAR
+========================================================= -->
+
+{% include 'main/header.html' %}
+
+
+
+
+<main>
+
+    <!-- =====================================================
+         BREADCRUMB
+    ====================================================== -->
+    <div class="container-wide breadcrumb-row">
+        <a href="#">Home</a>
+        <span>/</span>
+        <span>Destinations</span>
+        <span>/</span>
+        <strong>Turkey</strong>
+    </div>
+
+    <!-- =====================================================
+         HERO
+        ====================================================== -->
+    <section class="hero-wrap">
+
+        <div class="hero-media-destinations">
+            <img
+                src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2200&q=85"
+                alt="Destination hero">
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <div class="eyebrow">CAPITAL OF CULTURE & MODERNITY</div>
+
+                <h1>Turkey</h1>
+
+                <p>
+                    Discover a city where heritage, modern life and unforgettable experiences meet.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#tours" class="btn-primary">
+                        Explore Tours
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <a href="#about" class="btn-ghost">
+                        Discover Turkey
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-controls">
+                <button>
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+
+                <button>
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- STICKY NAV MUST BE OUTSIDE HERO -->
+    <div class="destination-tabs-wrap">
+
+      <div class="container">
+          <div class="destination-tabs">
+
+            <a href="#about" class="active">
+                About Turkey
+            </a>
+
+            <a href="#events">
+                Current Events
+            </a>
+
+            <a href="#tours">
+                Tours To Discover
+            </a>
+
+            <a href="#areas">
+                Distinctive Areas
+            </a>
+
+            <a href="#explore">
+                Explore
+            </a>
+
+            <a href="#faq">
+                FAQ
+            </a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+         ABOUT + WEATHER / QUICK INFO
+    ====================================================== -->
+    <section id="about" class="destination-about" data-aos="fade-up">
+        <div class="container-wide">
+            <div class="destination-about-grid">
+                <div class="destination-about-copy">
+                    <div class="about-title-row">
+                        <h2>About Turkey</h2>
+                        <button class="about-share" aria-label="Share"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                    </div>
+
+                    <p>Discover Turkey, the capital of Turkey, where modern architecture meets a dynamic cultural and artistic scene to offer diverse experiences across the city. Explore museums and art galleries that reflect the city’s creative energy, and enjoy cultural, artistic, and sporting events taking place throughout the year.</p>
+
+                    <p>Plan your trip to the capital during <span>Turkey Season</span> and experience unique entertainment and cultural attractions that co...</p>
+
+                    <a class="about-read-more" href="#">Read More</a>
+
+                    <div class="about-tags">
+                        <span><i class="fa-solid fa-feather"></i> Culture &amp; History</span>
+                        <span><i class="fa-solid fa-leaf"></i> Nature</span>
+                        <span><i class="fa-solid fa-bag-shopping"></i> Shopping</span>
+                    </div>
+                </div>
+
+                <div class="destination-about-info">
+                    <div class="about-info-tabs" role="tablist">
+                        <button class="about-info-tab" data-tab="weather" role="tab">
+                            <i class="fa-solid fa-sun"></i>
+                            <span>Weather</span>
+                        </button>
+                        <button class="about-info-tab" data-tab="best-time" role="tab">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>Best Time to Visit</span>
+                        </button>
+                        <button class="about-info-tab active" data-tab="transportation" role="tab">
+                            <i class="fa-solid fa-car"></i>
+                            <span>Transportation</span>
+                        </button>
+                    </div>
+
+                    <div class="about-info-card">
+                        <div class="about-panel" data-panel="weather">
+                            <div class="weather-main">
+                                <span class="panel-label">TODAY</span>
+                                <div class="weather-degree"><i class="fa-solid fa-sun"></i><strong>35.1</strong><sup>°C</sup></div>
+                                <span class="weather-status">Sunny</span>
+                            </div>
+                            <div class="weather-stats">
+                                <div><small>Humidity</small><strong>19%</strong></div>
+                                <div><small>Wind</small><strong>18 km/h</strong></div>
+                                <div><small>High</small><strong>38°</strong></div>
+                                <div><small>Low</small><strong>24°</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="about-panel" data-panel="best-time">
+                            <div class="simple-info-item"><i class="fa-regular fa-calendar"></i><strong>October — March</strong><span>Cooler and more comfortable months</span></div>
+                            <div class="simple-info-item"><i class="fa-solid fa-temperature-half"></i><strong>20° — 30°C</strong><span>Ideal for outdoor exploration</span></div>
+                            <div class="simple-info-item"><i class="fa-solid fa-sun"></i><strong>Clear skies</strong><span>Great conditions for sightseeing</span></div>
+                        </div>
+
+                        <div class="about-panel active" data-panel="transportation">
+                            <div class="transport-item"><i class="fa-solid fa-car"></i><strong>Private car</strong></div>
+                            <div class="transport-item"><i class="fa-solid fa-bus"></i><strong>Public<br>Transportation</strong></div>
+                            <div class="transport-item"><i class="fa-solid fa-taxi"></i><strong>Ride hailing</strong></div>
+                            <div class="transport-item"><i class="fa-solid fa-train-subway"></i><strong>Turkey Metro</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         WIDE IMAGE BANNER
+    ====================================================== -->
+    <section class="wide-image-section" data-aos="fade-up">
+        <div class="container-wide">
+            <div class="wide-image-card">
+                <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=2200&q=85" alt="">
+                <div class="wide-image-overlay"></div>
+                <div class="wide-image-content">
+                    <span>EXPERIENCE SOMETHING DIFFERENT</span>
+                    <h3>Your next story starts here.</h3>
+                    <a href="#tours" class="btn-primary">Find an experience</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         EVENTS — horizontal slider
+    ====================================================== -->
+    <section id="events" class="section section-slider" data-aos="fade-up">
+        <div class="container-wide">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">WHAT'S HAPPENING</span>
+                    <h2>Discover Current Events</h2>
+                </div>
+                <a class="text-link" href="#">View all <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="swiper eventsSwiper">
+                <div class="swiper-wrapper">
+
+                    <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>21</b><small>OCT</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Culture</small>
+                            <h3>Live Cultural Experience</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+
+                    <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>09</b><small>NOV</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Entertainment</small>
+                            <h3>Night Market</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+
+                    <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>15</b><small>NOV</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Music</small>
+                            <h3>Live Music Weekend</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+
+                    <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>21</b><small>NOV</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Festival</small>
+                            <h3>City Festival</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+                     <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>21</b><small>NOV</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Festival</small>
+                            <h3>City Festival</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+                     <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>21</b><small>NOV</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Festival</small>
+                            <h3>City Festival</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+                     <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>21</b><small>NOV</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Festival</small>
+                            <h3>City Festival</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+                     <article class="swiper-slide event-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="date-badge"><b>21</b><small>NOV</small></span>
+                        </div>
+                        <div class="card-body">
+                            <small>Turkey • Festival</small>
+                            <h3>City Festival</h3>
+                            <span class="card-arrow">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="slider-bottom">
+                    <div class="swiper-scrollbar"></div>
+                    <div class="slider-buttons">
+                        <button class="event-prev"><i class="fa-solid fa-arrow-left"></i></button>
+                        <button class="event-next"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         TOURS
+    ====================================================== -->
+    <section id="tours" class="section section-tours" data-aos="fade-up">
+        <div class="container-wide">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">CURATED FOR YOU</span>
+                    <h2>Tours To Discover</h2>
+                </div>
+                <a class="text-link" href="#">View all tours <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="swiper toursSwiper">
+                <div class="swiper-wrapper">
+
+                    <article class="swiper-slide tour-card">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="tour-duration">3 DAYS</span>
+                        </div>
+                        <div class="tour-content">
+                            <span>Turkey • Private Tour</span>
+                            <h3>Turkey Highlights</h3>
+                            <p>Discover the city's essential landmarks and hidden corners.</p>
+                            <div class="tour-footer">
+                                <strong>From 250 OMR</strong>
+                                <a href="#">View Tour <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                      <article class="swiper-slide tour-card">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="tour-duration">3 DAYS</span>
+                        </div>
+                        <div class="tour-content">
+                            <span>Turkey • Private Tour</span>
+                            <h3>Turkey Highlights</h3>
+                            <p>Discover the city's essential landmarks and hidden corners.</p>
+                            <div class="tour-footer">
+                                <strong>From 250 OMR</strong>
+                                <a href="#">View Tour <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                      <article class="swiper-slide tour-card">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="tour-duration">3 DAYS</span>
+                        </div>
+                        <div class="tour-content">
+                            <span>Turkey • Private Tour</span>
+                            <h3>Turkey Highlights</h3>
+                            <p>Discover the city's essential landmarks and hidden corners.</p>
+                            <div class="tour-footer">
+                                <strong>From 250 OMR</strong>
+                                <a href="#">View Tour <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                      <article class="swiper-slide tour-card">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="tour-duration">3 DAYS</span>
+                        </div>
+                        <div class="tour-content">
+                            <span>Turkey • Private Tour</span>
+                            <h3>Turkey Highlights</h3>
+                            <p>Discover the city's essential landmarks and hidden corners.</p>
+                            <div class="tour-footer">
+                                <strong>From 250 OMR</strong>
+                                <a href="#">View Tour <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="swiper-slide tour-card">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="tour-duration">2 DAYS</span>
+                        </div>
+                        <div class="tour-content">
+                            <span>Turkey • Culture</span>
+                            <h3>Heritage & Old Turkey</h3>
+                            <p>A slower journey through history, architecture and local life.</p>
+                            <div class="tour-footer">
+                                <strong>From 180 OMR</strong>
+                                <a href="#">View Tour <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="swiper-slide tour-card">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="tour-duration">4 DAYS</span>
+                        </div>
+                        <div class="tour-content">
+                            <span>Turkey • Adventure</span>
+                            <h3>Desert Escape</h3>
+                            <p>Trade the city skyline for dramatic desert landscapes.</p>
+                            <div class="tour-footer">
+                                <strong>From 320 OMR</strong>
+                                <a href="#">View Tour <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="swiper-slide tour-card">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1524498250077-390f9e378fc0?auto=format&fit=crop&w=900&q=80" alt="">
+                            <span class="tour-duration">5 DAYS</span>
+                        </div>
+                        <div class="tour-content">
+                            <span>Turkey • Premium</span>
+                            <h3>The Complete Turkey</h3>
+                            <p>A premium itinerary combining culture, food and experiences.</p>
+                            <div class="tour-footer">
+                                <strong>From 490 OMR</strong>
+                                <a href="#">View Tour <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="slider-bottom">
+                    <div class="swiper-scrollbar"></div>
+                    <div class="slider-buttons">
+                        <button class="tour-prev"><i class="fa-solid fa-arrow-left"></i></button>
+                        <button class="tour-next"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         FEATURED CINEMATIC BANNER
+    ====================================================== -->
+    <section class="feature-section" data-aos="fade-up">
+        <div class="container-wide">
+            <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2200&q=85" alt="">
+                <div class="feature-overlay"></div>
+                <div class="feature-content">
+                    <span>EXPERIENCE Turkey</span>
+                    <h2>A city of contrasts.</h2>
+                    <p>From contemporary skylines to ancient landscapes.</p>
+                    <a href="#" class="btn-primary">Explore the city</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         AREAS
+    ====================================================== -->
+    <section id="areas" class="section" data-aos="fade-up">
+        <div class="container-wide">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">EXPLORE MORE</span>
+                    <h2>Distinctive Turkey Areas</h2>
+                </div>
+                <a class="text-link" href="#">View all <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="area-grid">
+                <a href="#" class="area-card">
+                    <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=900&q=80" alt="">
+                    <div><span>01</span><h3>Historic Turkey</h3></div>
+                </a>
+                <a href="#" class="area-card">
+                    <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80" alt="">
+                    <div><span>02</span><h3>Modern City</h3></div>
+                </a>
+                <a href="#" class="area-card">
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=80" alt="">
+                    <div><span>03</span><h3>Desert Escapes</h3></div>
+                </a>
+                <a href="#" class="area-card">
+                    <img src="https://images.unsplash.com/photo-1524498250077-390f9e378fc0?auto=format&fit=crop&w=900&q=80" alt="">
+                    <div><span>04</span><h3>Cultural Quarter</h3></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         FAQ
+    ====================================================== -->
+    <section id="faq" class="section faq-section" data-aos="fade-up">
+        <div class="container-narrow">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">NEED TO KNOW</span>
+                    <h2>FAQs</h2>
+                </div>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">What is the best time to visit Turkey? <i class="fa-solid fa-plus"></i></button>
+                    <div class="faq-answer">The cooler months from October to March are generally the most comfortable for exploring the city.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Can I customise a tour? <i class="fa-solid fa-plus"></i></button>
+                    <div class="faq-answer">Yes. Private tours can be adjusted around your preferred dates, interests and pace.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How do I book? <i class="fa-solid fa-plus"></i></button>
+                    <div class="faq-answer">Choose a tour, review the itinerary and continue to the booking page to complete your reservation.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do you offer airport transfers? <i class="fa-solid fa-plus"></i></button>
+                    <div class="faq-answer">Airport transfers can be added to selected packages. Contact us if you need a customised transfer.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+    <!-- =========================================================
+        FOOTER
+    ========================================================= -->
+   {% include 'main/footer.html' %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script src="{% static 'js/scroll_destinations.js' %}"></script>
+<script src="{% static 'js/slider_destinations.js' %}"></script>
+<script src="{% static 'js/navbar.js' %}"></script>
+
+
+
+</body>
+</html>

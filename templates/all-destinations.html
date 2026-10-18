@@ -1,0 +1,358 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WSI | All Destinations</title>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/destinations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all-destinations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/map.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+     
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+
+    <!-- Favicon link -->
+    <link rel="icon" type="image/png" href="{% static 'images/logopngdark.png' %}">
+
+
+
+
+  
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- Leaftlet Map 4 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+
+<body>
+
+
+{% include 'main/header.html' %}
+
+
+
+
+ <!-- =====================================================
+         BREADCRUMB
+    ====================================================== -->
+    <div class="container-wide breadcrumb-row">
+        <a href="#">Home</a>
+        <span>/</span>
+        <span>Destinations</span>
+        <span>/</span>
+        <strong>Turkey</strong>
+    </div>
+
+
+
+
+  <!-- Hero Section -->
+  <section class="hero-stage">
+        <div class="destination-hero">
+
+            <img
+                src="{% static 'images/oman-tourism.jpg' %}"
+                alt="Aerial view of a dramatic desert landscape"
+                class="hero-image">
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <h1>Destinations</h1>
+            </div>
+
+        </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   <!-- =====================================================
+         Map — Starts
+    ====================================================== -->
+
+    <section class="dx-section" id="destination-explorer" data-aos="fade-up">
+    <div class="container-wide">
+
+        <div class="dx-heading">
+        <div>
+            <span class="dx-eyebrow">CURATED TRAVEL EXPERIENCES</span>
+            <h2>Know the Destinations</h2>
+            <p>Discover remarkable places and find your next adventure.</p>
+        </div>
+
+        <span class="dx-country-count" id="dxCountryCount">06 destinations</span>
+        </div>
+
+        <!-- Country tabs -->
+        <div class="dx-country-tabs" role="tablist" aria-label="Choose a country">
+        <button class="dx-country-tab is-active"
+                type="button" role="tab" aria-selected="true"
+                data-country="kazakhstan">
+            <span class="dx-tab-number">01</span>
+            Kazakhstan
+        </button>
+
+        <button class="dx-country-tab"
+                type="button" role="tab" aria-selected="false"
+                data-country="turkey">
+            <span class="dx-tab-number">02</span>
+            Turkey
+        </button>
+
+        <button class="dx-country-tab"
+                type="button" role="tab" aria-selected="false"
+                data-country="oman">
+            <span class="dx-tab-number">03</span>
+            Oman
+        </button>
+
+        <button class="dx-country-tab"
+                type="button" role="tab" aria-selected="false"
+                data-country="malaysia">
+            <span class="dx-tab-number">04</span>
+            Malaysia
+        </button>
+        </div>
+
+        <!-- Main explorer -->
+        <div class="dx-layout">
+
+        <!-- Destination cards -->
+        <div class="dx-destinations-panel">
+            <div class="dx-panel-heading">
+            <div>
+                <span class="dx-eyebrow">EXPLORE THE COUNTRY</span>
+                <h3 id="dxCountryTitle">Kazakhstan</h3>
+            </div>
+            <span class="dx-result-count" id="dxResultCount">06 places</span>
+            </div>
+
+            <div class="dx-destination-grid" id="dxDestinationGrid">
+            <!-- JavaScript renders destination cards here -->
+            </div>
+
+            <p class="dx-map-hint">
+            <span class="dx-hint-dot"></span>
+            Hover over a destination or map marker to explore
+            </p>
+        </div>
+
+        <!-- Interactive map -->
+        <div class="dx-map-panel">
+            <div class="dx-map-topbar">
+            <div>
+                <span class="dx-eyebrow">EXPLORE ON THE MAP</span>
+                <h3 id="dxMapTitle">Kazakhstan</h3>
+            </div>
+
+            <span class="dx-live-label">
+                <span></span> INTERACTIVE MAP
+            </span>
+            </div>
+
+            <div class="dx-map-wrap">
+            <div id="dxLeafletMap" aria-label="Interactive destination map"></div>
+
+            <div class="dx-map-loading" id="dxMapLoading">
+                Loading map...
+            </div>
+            </div>
+
+            <div class="dx-map-footer">
+            <span>
+                <span class="dx-legend-dot"></span>
+                Available destinations
+            </span>
+            <span>Drag to explore · Zoom to discover</span>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </section>
+
+
+   <!-- =====================================================
+         Map — Ends
+    ====================================================== -->
+
+
+
+
+
+  <!-- All Destinations -->
+  <section class="destination-section all-destinations"
+           id="all-destinations">
+
+
+            <div class="container-wide">
+                <div class="container-fluid">
+                    
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">WHAT'S HAPPENING</span>
+                            <h2>Discover Current Events</h2>
+                        </div>
+                         <p>Find your next unforgettable experience.</p>
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="col-xl-4 col-md-6 col-12 mb-4">
+                        <a href="#" class="destination-card">
+                            <div class="destination-image">
+                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Abha">
+                            <div class="card-overlay"></div>
+                            <div class="destination-card-content">
+                                <span>NATURE & MOUNTAINS</span>
+                                <h3>Abha</h3>
+                            </div>
+                            </div>
+                        </a>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6 col-12 mb-4">
+                        <a href="#" class="destination-card">
+                            <div class="destination-image">
+                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Taif">
+                            <div class="card-overlay"></div>
+                            <div class="destination-card-content">
+                                <span>NATURE & ADVENTURE</span>
+                                <h3>Taif</h3>
+                            </div>
+                            </div>
+                        </a>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6 col-12 mb-4">
+                        <a href="#" class="destination-card">
+                            <div class="destination-image">
+                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="The Red Sea">
+                            <div class="card-overlay"></div>
+                            <div class="destination-card-content">
+                                <span>SEA & ISLANDS</span>
+                                <h3>The Red Sea</h3>
+                            </div>
+                            </div>
+                        </a>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6 col-12 mb-4">
+                        <a href="#" class="destination-card">
+                            <div class="destination-image">
+                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Diriyah">
+                            <div class="card-overlay"></div>
+                            <div class="destination-card-content">
+                                <span>HERITAGE & CULTURE</span>
+                                <h3>Diriyah</h3>
+                            </div>
+                            </div>
+                        </a>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6 col-12 mb-4">
+                        <a href="#" class="destination-card">
+                            <div class="destination-image">
+                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Yanbu">
+                            <div class="card-overlay"></div>
+                            <div class="destination-card-content">
+                                <span>COASTAL ADVENTURES</span>
+                                <h3>Yanbu</h3>
+                            </div>
+                            </div>
+                        </a>
+                        </div>
+
+                        <div class="col-xl-4 col-md-6 col-12 mb-4">
+                        <a href="#" class="destination-card">
+                            <div class="destination-image">
+                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Jazan">
+                            <div class="card-overlay"></div>
+                            <div class="destination-card-content">
+                                <span>NATURE & EXPLORATION</span>
+                                <h3>Jazan</h3>
+                            </div>
+                            </div>
+                        </a>
+                        </div>
+
+                    </div>
+
+                </div>
+           </div>
+  </section>
+
+
+
+
+
+
+   {% include 'main/footer.html' %}
+
+
+
+
+
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script src="{% static 'js/scroll_destinations.js' %}"></script>
+    <script src="{% static 'js/slider_destinations.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+
+
+
+
+
+  <script>
+    document.getElementById('mobileMenu').addEventListener('click', function () {
+      document.getElementById('mobileNavLinks').classList.toggle('show');
+    });
+  </script>
+
+</body>
+</html>

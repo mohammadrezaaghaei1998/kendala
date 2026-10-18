@@ -1,0 +1,381 @@
+ 
+ {% load static %}
+ 
+ <header class="wsi-navbar">
+
+        <div class="wsi-navbar-inner">
+
+            <!-- LOGO -->
+            <a href="/" class="wsi-navbar-logo">
+                <img src="{% static 'images/logopng.png' %}" alt="Logo">
+            </a>
+
+            <!-- DESKTOP NAV -->
+            <nav class="wsi-navbar-menu">
+
+                <div class="wsi-navbar-item wsi-navbar-dropdown-trigger">
+                    <button class="wsi-navbar-link" type="button" data-wsi-navbar-menu="destinations">
+                        Destinations
+                        <span class="wsi-navbar-chevron">⌄</span>
+                    </button>
+                </div>
+
+                <div class="wsi-navbar-item wsi-navbar-dropdown-trigger">
+                    <button class="wsi-navbar-link" type="button" data-wsi-navbar-menu="trip">
+                        Plan Your Trip
+                        <span class="wsi-navbar-chevron">⌄</span>
+                    </button>
+                </div>
+
+                <a href="#" class="wsi-navbar-link">Things to Do</a>
+                <a href="#" class="wsi-navbar-link">Saudi Offers</a>
+                <a href="#" class="wsi-navbar-link">Saudi Calendar</a>
+                <a href="#" class="wsi-navbar-link">Interactive Map</a>
+
+            </nav>
+
+
+            <!-- DESKTOP ACTIONS -->
+            <div class="wsi-navbar-actions">
+
+            
+
+                <button type="button" class="wsi-navbar-action-button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Search</span>
+                </button>
+
+                <!-- <button type="button" class="wsi-navbar-action-button">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>EN</span>
+                </button> -->
+
+            
+
+                <a href="{% url 'login' %}" class="wsi-navbar-login">
+                    Log In / Sign Up
+                </a>
+
+            </div>
+
+
+            <!-- HAMBURGER -->
+            <button
+                class="wsi-navbar-mobile-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+
+        <!-- DESKTOP MEGA MENU -->
+        <div class="wsi-navbar-mega-wrapper">
+
+            <div class="wsi-navbar-mega">
+
+                <!-- DESTINATIONS -->
+                <div
+                    class="wsi-navbar-mega-content"
+                    data-wsi-navbar-panel="destinations">
+
+                    <div class="wsi-navbar-mega-left">
+
+                        <div class="wsi-navbar-destination-grid">
+
+                            <div class="wsi-navbar-destination-column">
+
+                                <a href="#"
+                                class="wsi-navbar-destination"
+                                data-wsi-navbar-image="riyadh">
+                                   Turkey
+                                </a>
+
+                                <a href="#"
+                                class="wsi-navbar-destination"
+                                data-wsi-navbar-image="alula">
+                                    Kazakhstan
+                                </a>
+
+                                <a href="#"
+                                class="wsi-navbar-destination"
+                                data-wsi-navbar-image="jeddah">
+                                    Oman
+                                </a>
+
+                            </div>
+
+
+                            <!-- <div class="wsi-navbar-destination-column">
+
+                                <a href="#"
+                                class="wsi-navbar-destination"
+                                data-wsi-navbar-image="eastern">
+                                    Eastern Province
+                                </a>
+
+                                <a href="#"
+                                class="wsi-navbar-destination"
+                                data-wsi-navbar-image="hail">
+                                    Hail
+                                </a>
+
+                                <a href="#"
+                                class="wsi-navbar-destination"
+                                data-wsi-navbar-image="diriyah">
+                                    Diriyah
+                                </a>
+
+                            </div> -->
+
+
+                            <div class="wsi-navbar-destination-view">
+                                <a href="{% url 'all-destinations' %}" class="wsi-navbar-view-all">
+                                    View All
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="wsi-navbar-mega-image">
+
+                        <img
+                            class="wsi-navbar-menu-image wsi-navbar-image-active"
+                            data-wsi-navbar-image-target="riyadh"
+                            src="{% static 'images/nature.jpg' %}"
+                            alt="Riyadh">
+
+                        <img
+                            class="wsi-navbar-menu-image"
+                            data-wsi-navbar-image-target="alula"
+                            src="{% static 'images/navbar/alula.jpg' %}"
+                            alt="AlUla">
+
+                        <!-- <img
+                            class="wsi-navbar-menu-image"
+                            data-wsi-navbar-image-target="jeddah"
+                            src="{% static 'images/navbar/jeddah.jpg' %}"
+                            alt="Jeddah">
+
+                        <img
+                            class="wsi-navbar-menu-image"
+                            data-wsi-navbar-image-target="eastern"
+                            src="{% static 'images/navbar/eastern.jpg' %}"
+                            alt="Eastern Province">
+
+                        <img
+                            class="wsi-navbar-menu-image"
+                            data-wsi-navbar-image-target="hail"
+                            src="{% static 'images/navbar/hail.jpg' %}"
+                            alt="Hail">
+
+                        <img
+                            class="wsi-navbar-menu-image"
+                            data-wsi-navbar-image-target="diriyah"
+                            src="{% static 'images/navbar/diriyah.jpg' %}"
+                            alt="Diriyah"> -->
+
+                    </div>
+
+                </div>
+
+
+                <!-- PLAN YOUR TRIP -->
+                <div
+                    class="wsi-navbar-mega-content"
+                    data-wsi-navbar-panel="trip">
+
+                    <div class="wsi-navbar-mega-left">
+
+                        <div class="wsi-navbar-trip-list">
+
+                            <a href="#"
+                            class="wsi-navbar-trip-link"
+                            data-wsi-navbar-image="about">
+                                About Saudi Arabia
+                            </a>
+
+                            <a href="#"
+                            class="wsi-navbar-trip-link"
+                            data-wsi-navbar-image="guide">
+                                Travel Guide
+                            </a>
+
+                            <a href="#"
+                            class="wsi-navbar-trip-link"
+                            data-wsi-navbar-image="getting-around">
+                                Getting Around Saudi Arabia
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="wsi-navbar-mega-image">
+
+                        <img
+                            class="wsi-navbar-menu-image wsi-navbar-image-active"
+                            data-wsi-navbar-image-target="about"
+                            src="{% static 'images/navbar/about.jpg' %}"
+                            alt="About Saudi Arabia">
+
+                        <img
+                            class="wsi-navbar-menu-image"
+                            data-wsi-navbar-image-target="guide"
+                            src="{% static 'images/navbar/guide.jpg' %}"
+                            alt="Travel Guide">
+
+                        <img
+                            class="wsi-navbar-menu-image"
+                            data-wsi-navbar-image-target="getting-around"
+                            src="{% static 'images/navbar/getting-around.jpg' %}"
+                            alt="Getting Around">
+
+                    </div>
+
+                </div>
+
+
+                <div class="wsi-navbar-pattern"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REFERENCE-STYLE MOBILE / TABLET MENU -->
+        <div class="wsi-navbar-mobile-menu">
+
+            <div class="wsi-navbar-mobile-top">
+                <button type="button" class="wsi-navbar-mobile-back" aria-label="Back">
+                    <span></span>
+                </button>
+
+                <button type="button" class="wsi-navbar-mobile-close" aria-label="Close navigation">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- MAIN MENU -->
+            <div class="wsi-navbar-mobile-page wsi-navbar-mobile-main-page">
+                <nav class="wsi-navbar-mobile-nav">
+
+                    <button type="button" class="wsi-navbar-mobile-link wsi-navbar-mobile-submenu-trigger"
+                            data-wsi-mobile-menu="destinations">
+                        <span>DESTINATIONS</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <button type="button" class="wsi-navbar-mobile-link wsi-navbar-mobile-submenu-trigger"
+                            data-wsi-mobile-menu="trip">
+                        <span>PLAN YOUR TRIP</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <a href="#" class="wsi-navbar-mobile-link">
+                        <span>THINGS TO DO</span>
+                    </a>
+
+                    <a href="#" class="wsi-navbar-mobile-link">
+                        <span>SAUDI OFFERS</span>
+                    </a>
+
+                    <a href="#" class="wsi-navbar-mobile-link">
+                        <span>SAUDI CALENDAR</span>
+                    </a>
+
+                    <a href="#" class="wsi-navbar-mobile-link">
+                        <span>INTERACTIVE MAP</span>
+                    </a>
+
+                </nav>
+
+                <div class="wsi-navbar-mobile-divider"></div>
+
+                <nav class="wsi-navbar-mobile-secondary">
+                    <a href="#">GET YOUR VISA</a>
+                    <a href="#">LOG IN / SIGN UP</a>
+                </nav>
+
+                <div class="wsi-navbar-mobile-divider"></div>
+
+                <div class="wsi-navbar-mobile-language">
+                    <strong>LANGUAGE</strong>
+                    <a href="#">English <span>›</span></a>
+                </div>
+            </div>
+
+            <!-- DESTINATIONS SUBMENU -->
+            <div class="wsi-navbar-mobile-page wsi-navbar-mobile-submenu-page"
+                data-wsi-mobile-page="destinations">
+                <div class="wsi-navbar-mobile-submenu-header">
+                    <h3>DESTINATIONS</h3>
+                    <a href="{% url 'all-destinations' %}">View All</a>
+                </div>
+
+                <div class="wsi-navbar-mobile-submenu-list">
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/riyadh.jpg' %}" alt="Turkey">
+                        <span>Turkey</span>
+                    </a>
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/alula.jpg' %}" alt="Kazakhstan">
+                        <span>Kazakhstan</span>
+                    </a>
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/jeddah.jpg' %}" alt="Oman">
+                        <span>Oman</span>
+                    </a>
+                    <!-- <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/eastern.jpg' %}" alt="Eastern Province">
+                        <span>Eastern Province</span>
+                    </a>
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/hail.jpg' %}" alt="Hail">
+                        <span>Hail</span>
+                    </a>
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/diriyah.jpg' %}" alt="Diriyah">
+                        <span>Diriyah</span>
+                    </a> -->
+                </div>
+            </div>
+
+            <!-- PLAN YOUR TRIP SUBMENU -->
+            <div class="wsi-navbar-mobile-page wsi-navbar-mobile-submenu-page"
+                data-wsi-mobile-page="trip">
+                <div class="wsi-navbar-mobile-submenu-header">
+                    <h3>PLAN YOUR TRIP</h3>
+                    <a href="#">View All</a>
+                </div>
+
+                <div class="wsi-navbar-mobile-submenu-list">
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/about.jpg' %}" alt="About Saudi Arabia">
+                        <span>About Saudi Arabia</span>
+                    </a>
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/guide.jpg' %}" alt="Travel Guide">
+                        <span>Travel Guide</span>
+                    </a>
+                    <a href="#" class="wsi-navbar-mobile-destination">
+                        <img src="{% static 'images/navbar/getting-around.jpg' %}" alt="Getting Around Saudi Arabia">
+                        <span>Getting Around Saudi Arabia</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </header>

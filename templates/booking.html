@@ -1,0 +1,783 @@
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WSI | Booking</title>
+
+
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/destinations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/destinations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+
+    <!-- Favicon link -->
+   <link rel="icon" type="image/png" href="{% static 'images/logopngdark.png' %}">
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+    
+
+    <!-- Leaftlet Map 4 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+
+</head>
+
+
+
+
+
+
+
+
+
+
+<body>
+{% include 'main/header.html' %}
+
+
+
+
+
+
+  
+<div class="container-wide my-5 mt-5" style="margin-top: 130px !important;">
+     <h1 class="tour-booking-header-title">Rome, Sorrento and the Amalfi Coast</h1>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <!-- Tour Header -->
+                <div class="col-lg-12">
+                   
+                    <div class="mt-4 booking-details-cards">
+                        <h5 class="ml-2">Your adventure overview</h5>
+                        <div class="row p-4">
+                            <div class="col-lg-4 p-3 calendar-left">
+                                <h6><strong>Wednesday, April 2nd, 2025</strong></h6>
+                                <p>to Saturday, April 12th, 2025</p>
+                            </div>
+                            <div class="col-lg-8 p-3 calendar-right">
+                                <div class="row mb-2">
+                                    <div class="col-1">
+                                        <i class="fas fa-credit-card mt-1"></i>
+                                    </div>
+                                    <div class="col-11">
+                                        <p>You will only be charged once your space is confirmed.</p>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-1">
+                                        <i class="fas fa-user-check mt-2"></i>
+                                    </div>
+                                    <div class="col-11">
+                                        <p><strong>10+ spaces left</strong> and yours is reserved for the next 10 minutes</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fas fa-gift mt-1"></i>
+                                    </div>
+                                    <div class="col-11">
+                                        <p><strong>Why book with us?</strong> <br>Travel and earn credits for your next trip <a href="">Learn More</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Step 1: Travelers -->
+                <div class="col-lg-12">
+                    <div class="mt-4 booking-details-cards">
+                        <div class="row p-4 align-items-center">
+                            <div class="col-auto">
+                                <div class="p-2 text-center text-white" style="background-color: #7046d9; border-radius: 50%; width: 40px; height: 40px;">
+                                    <i class="fa-solid fa-1 mt-1 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5><strong>How many are traveling?</strong></h5>
+                            </div>
+                        </div>
+                        <div class="row pl-4 pr-4 align-items-center">
+                            <div class="col-6">
+                                <h6><strong>Travellers</strong></h6>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end align-items-center">
+                                <button class="btn btn-danger-decrease booking-button" id="decrease"><strong>-</strong></button>
+                                <span id="count" class="px-3">1</span>
+                                <button class="btn btn-success-increase booking-button" id="increase"><strong>+</strong></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <!-- Step 2: Accommodation -->
+                <div class="col-lg-12">
+                    <div class="mt-4 booking-details-cards">
+                        <div class="row p-4 align-items-center">
+                            <div class="col-auto">
+                                <div class="p-2 text-center text-white" style="background-color: #7046d9; border-radius: 50%; width: 40px; height: 40px;">
+                                    <i class="fa-solid fa-2 mt-1 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5><strong>Select accommodation</strong></h5>
+                            </div>
+                        </div>
+                        <div class="row pl-4 pr-4 align-items-center">
+                            <div class="col-12">
+                                <p>Please assign <strong class="travelers-count">7 Travelers</strong> to a room.</p>
+                            </div>
+                        </div>
+                        <div class="row pl-4 pr-4 align-items-center mt-3">
+                            <div class="col-12 accommodation-recommended">
+                                <div class="row p-3">
+                                    <div class="col-auto text-center">
+                                        <i class="fas fa-user-check mt-1"></i>
+                                    </div>
+                                    <div class="col">
+                                        <p><strong>Best Price</strong></p>
+                                    </div>
+                                </div>
+                                <div class="accommodation-recommended-room-wrapper pt-3 pl-3 pb-1">
+                                    <h6><strong>Triple Room</strong></h6>
+                                    <p>9 Travelers</p>
+                                </div>
+                                <div class="row mt-4 mb-4 pr-4 align-items-center">
+                                    <div class="col-6">
+                                        <p>Total accommodation price: <strong>$16,017</strong></p>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end align-items-center">
+                                        <a href="#" class="btn btn-danger">Learn More</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                           <hr>
+                            
+                            <div class="row mt-5 pt-3 pb-3" style="border-bottom: 1px solid rgba(0, 0, 0, 0.13); border-top: 1px solid rgba(0, 0, 0, 0.13);">
+                                <div class="col-lg-7">
+                                    <h6><strong>Single Share</strong></h6>
+                                    <p >Per person in a shared room for two people. If you're booking together, you'll be paired with your travel partner. Solo adult travelers are matched with a fellow guest of the same gender.</p>
+                                    
+                                </div>
+                                <div class="col-lg-2">
+                                    <p style="font-size: 13px;">US <strong style="font-size: 15px;">$2,760</strong><br>per Traveler</p>
+                                    
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="0 Traveler">0 Traveler</option>
+                                            <option value="1 Traveler">1 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row pt-3 pb-3">
+                                <div class="col-lg-7">
+                                    <h6><strong>Twin Room</strong></h6>
+                                    <p>Please contact us for full details on the single room option availability on a night by night basis for this tour. Examples of exceptions can include but are not limited to camping and jungle lodges.</p>                                    
+                                </div>
+                                <div class="col-lg-2">
+                                    <p style="font-size: 13px;">US <strong style="font-size: 15px;">$3,510</strong><br>per Traveler</p>
+                                    
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="0 Traveler">0 Traveler</option>
+                                            <option value="1 Traveler">1 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt-3 pb-3" style="border-bottom: 1px solid rgba(0, 0, 0, 0.13); border-top: 1px solid rgba(0, 0, 0, 0.13);">
+                                <div class="col-lg-7">
+                                    <h6><strong>Triple Room</strong></h6>
+                                    <p>Please contact us for full details on the single room option availability on a night by night basis for this tour. Examples of exceptions can include but are not limited to camping and jungle lodges.</p>                                    
+                                </div>
+                                <div class="col-lg-2">
+                                    <p style="font-size: 13px;">US <strong style="font-size: 15px;">$4260</strong><br>per Traveler</p>
+                                    
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="0 Traveler">0 Traveler</option>
+                                            <option value="1 Traveler">1 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt-3 pb-3">
+                                <div class="col-lg-7">
+                                    <h6><strong>Family Room</strong></h6>
+                                    <p>Please contact us for full details on the single room option availability on a night by night basis for this tour. Examples of exceptions can include but are not limited to camping and jungle lodges.</p>                                    
+                                </div>
+                                <div class="col-lg-2">
+                                    <p style="font-size: 13px;">US <strong style="font-size: 15px;">$5010</strong><br>per Traveler</p>
+                                    
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="0 Traveler">0 Traveler</option>
+                                            <option value="1 Traveler">1 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                            <option value="2 Traveler">2 Traveler</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-5">
+                <!-- Step 3: Information -->
+                <div class="col-lg-12">
+                    <div class="mt-4 booking-details-cards">
+                        <div class="row p-4 align-items-center">
+                            <div class="col-auto">
+                                <div class="p-2 text-center text-white" style="background-color: #7046d9; border-radius: 50%; width: 40px; height: 40px;">
+                                    <i class="fa-solid fa-3 mt-1 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5><strong>Add traveler details</strong></h5>
+                            </div>
+                        </div>
+                        <div class="row pl-3 pr-3 align-items-center">
+                        <div class="col">
+                            <div class="info-warning col-lg-12 col-12 pt-3 pl-2 pb-1">
+                                <div class="row pl-4">
+                                    <div class="text-center note-col">
+                                        <i class="fa-solid fa-exclamation mt-1 text-white"></i>
+                                    </div>
+                                    <div class="col-10 col-lg-10 mb-2">
+                                        <p style="font-size: 16px;"><strong>Please note:</strong> Traveler details should match information on passport</p>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <form class="askaquestion"> 
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="text" class="form-control" placeholder="First Name *"/>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="text" class="form-control" placeholder="Last Name *"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="text" placeholder="Phone Number (optional)"/>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="email" placeholder="Email Address *"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 minput">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="">Nationality</option>
+                                            <option value="morocco">Morocco</option>
+                                            <option value="algeria">Algeria</option>
+                                            <option value="tunisia">Tunisia</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row mt-4">
+                                <div class="col-3 minput">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="">DD</option>
+                                            <option value="morocco">01</option>
+                                            <option value="algeria">02</option>
+                                            <option value="tunisia">03</option>
+                                            <option value="tunisia">04</option>
+                                            <option value="tunisia">05</option>
+                                            <option value="tunisia">06</option>
+                                            <option value="tunisia">07</option>
+                                            <option value="tunisia">08</option>
+                                            <option value="tunisia">09</option>
+                                            <option value="tunisia">10</option>
+                                            <option value="tunisia">11</option>
+                                            <option value="tunisia">12</option>
+                                            <option value="tunisia">13</option>
+                                            <option value="tunisia">14</option>
+                                            <option value="tunisia">15</option>
+                                            <option value="tunisia">16</option>
+                                            <option value="tunisia">17</option>
+                                            <option value="tunisia">18</option>
+                                            <option value="tunisia">19</option>
+                                            <option value="tunisia">20</option>
+                                            <option value="tunisia">21</option>
+                                            <option value="tunisia">22</option>
+                                            <option value="tunisia">23</option>
+                                            <option value="tunisia">24</option>
+                                            <option value="tunisia">25</option>
+                                            <option value="tunisia">26</option>
+                                            <option value="tunisia">27</option>
+                                            <option value="tunisia">28</option>
+                                            <option value="tunisia">29</option>
+                                            <option value="tunisia">30</option>
+                                            <option value="tunisia">31</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="col-3 minput">
+                                    <div class="select">
+                                    <select id="pays" class="input">
+                                            <option value="">MM</option>
+                                            <option value="january">January</option>
+                                            <option value="february">February</option>
+                                            <option value="march">March</option>
+                                            <option value="april">April</option>
+                                            <option value="may">May</option>
+                                            <option value="june">June</option>
+                                            <option value="july">July</option>
+                                            <option value="august">August</option>
+                                            <option value="september">September</option>
+                                            <option value="october">October</option>
+                                            <option value="november">November</option>
+                                            <option value="december">December</option>
+                                        </select>
+
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                                <div class="col-3 minput">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="">YY</option>
+                                            <option value="morocco">Morocco</option>
+                                            <option value="algeria">Algeria</option>
+                                            <option value="tunisia">Tunisia</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 mb-3">
+                                <div class="col-12 control-group">
+                                    <div class="row align-items-start">
+                                        <div class="col-auto">
+                                            <span class="sex">Gender :</span>
+                                        </div>
+                                        <label class="control control--radio">Male
+                                            <input type="radio" name="radio" id="male" />
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                        <label class="control control--radio">Female
+                                            <input type="radio" name="radio" id="femelle" />
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+ 
+                            <div class="row mb-4">
+                                <div class="col-6 minput">
+                                    <div class="select">
+                                        <select id="pays" class="input">
+                                            <option value="">Country</option>
+                                            <option value="morocco">Morocco</option>
+                                            <option value="algeria">Algeria</option>
+                                            <option value="tunisia">Tunisia</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="text" class="form-control" placeholder="Address *"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="text" class="form-control" placeholder="City *"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="text" class="form-control" placeholder="Postal Or Zip Code *"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>
+                                        <input class="input" type="text" class="form-control" placeholder="State or Province *"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr>
+                            
+                            
+                          
+                        </form>
+                    </div>
+                </div> 
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mt-4 booking-details-cards">
+                        <div class="row p-4 align-items-center">
+                            <div class="col-auto">
+                                <div class="p-2 text-center text-white" style="background-color: #7046d9; border-radius: 50%; width: 40px; height: 40px;">
+                                    <i class="fa-solid fa-4 mt-1 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5><strong>TourRadar Savings</strong></h5>
+                            </div>
+                        </div>
+                        <div class="row pl-4 pr-4 align-items-center">
+                            <div class="col-6">
+                                <a href="#" id="redeemPromoLink">
+                                    <h6>Redeem Promo Code</h6>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Hidden container -->
+                        <div class="promo-code-container">
+                            <div class="row">
+                                <div class="col-lg-7 p-3 mt-3">
+                                  
+                                    <input class="input" type="text" class="form-control" placeholder="Enter your code"/>
+                                </div>
+                                <div class="col-lg-4 d-flex align-items-center">
+                                    <!-- <button class="btn apply-btn w-100"><strong>Apply</strong></button> -->
+                                      <button class="red mt-2 booking-button" type="button"><i class="icon ion-md-lock"></i> Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                       
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="row mt-5">
+                <!-- Step 5: Payment -->
+                <div class="col-lg-12">
+                    <div class="mt-4 booking-details-cards">
+                        <div class="row p-4 align-items-center">
+                            <div class="col-auto">
+                                <div class="p-2 text-center text-white" style="background-color: #7046d9; border-radius: 50%; width: 40px; height: 40px;">
+                                    <i class="fa-solid fa-5 mt-1 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5><strong>Add payment details</strong></h5>
+                            </div>
+                        </div>
+                        <div class="row pl-3 pr-3 align-items-center">
+                            <div class="col">
+                                <div class="info-warning col-lg-12 col-12 pt-3 pl-2 pb-1">
+                                    <div class="row pl-4">
+                                        <div class="text-center note-col">
+                                            <i class="fa-solid fa-exclamation mt-1 text-white"></i>
+                                        </div>
+                                        <div class="col-10 col-lg-11 mb-2">
+                                            <p style="font-size: 16px;">This is a secure and SSL encrypted payment. Your credit card details are safe.</p>
+                                        </div>  
+                                    </div>
+                                </div>
+                                
+                                <p class="mt-4">Select your payment method:</p>
+                                
+
+                                <form class="askaquestion"> 
+                            
+                                    <div class="row booking-details-cards">
+                                        <div class="col-12">
+                                            <div class="row mb-2 align-items-center">
+                                                <div class="col d-flex align-items-center">
+                                                    <div class="vertical-list-item">
+                                                        <input type="radio" id="pay_card" name="vertical-list" checked>
+                                                        <label for="pay_card">Pay by card</label>
+                                                    </div>
+                                                    <div class="ml-auto d-flex mb-2">
+                                                        <img src="{% static 'images/visa.png' %}" alt="Visa" class="mx-2" style="height:20px;">
+                                                        <img src="{% static 'images/master.png' %}" alt="MasterCard" class="mx-2" style="height:20px;">
+                                                        <img src="{% static 'images/amx.png' %}" alt="Amex" class="mx-2" style="height:20px;">
+                                                        <img src="{% static 'images/discover.png' %}" alt="Discover" class="mx-2" style="height:20px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+
+                                        <div class="col-12" id="paybycard-section">
+                                            <div class="h-divider">
+                                                <div class="shadow"></div>
+                                            </div>
+                                            <div class="col-md-8  mt-5">
+                                                <div class="form-floating-label">
+                                                    <input type="text" class="form-control" id="cardholder" placeholder="Emma Jones " />
+                                                    <label for="cardholder">Cardholder Name *</label>
+                                                </div>
+
+                                                <div class="form-floating-label">
+                                                    <input type="text" class="form-control" id="cardnumber" placeholder=" **** **** **** ****" />
+                                                    <label for="cardnumber">Card Number *</label>
+                                                </div>
+
+                                                <div class="form-floating-label">
+                                                    <input type="text" class="form-control" id="expiry" placeholder="MM/YY" maxlength="5" />
+                                                    <label for="expiry">Expiry Date *</label>
+                                                </div>
+
+
+                                                <div class="form-floating-label">
+                                                    <input type="text" class="form-control" id="cardnumber" placeholder="123 " />
+                                                    <label for="cardnumber">Cvv *</label>
+                                                </div>
+
+                                                <div class="form-floating-label payment-country-select-div">
+                                                    <select class="form-control payment-country-select" id="billing-country">
+                                                        <option value="" disabled selected>Select Country</option>
+                                                        <option value="US">United States</option>
+                                                        <option value="UK">United Kingdom</option>
+                                                        <option value="CA">Canada</option>
+                                                        <option value="OM">Oman</option>
+                                                        <option value="IN">India</option>
+                                                    </select>
+                                                    <label for="billing-country">Billing Country*</label>
+                                                </div>
+
+                                                <div class="form-floating-label">
+                                                    <input type="text" class="form-control" id="cardnumber" placeholder="123 " />
+                                                    <label for="cardnumber">Zip Code*</label>
+                                                </div>
+
+                                            </div>
+                                            
+                                        </div>
+
+                                       
+                                    </div>
+
+
+
+
+                                    <div class="row booking-details-cards mt-5">
+                                        <div class="col-12">
+                                            <div class="row mb-2 align-items-center">
+                                                <div class="col d-flex align-items-center">
+                                                    <div class="vertical-list-item">
+                                                       <input type="radio" id="pay_paypal" name="vertical-list">
+                                                        <label for="pay_paypal">Pay with PayPal</label>
+                                                    </div>
+                                                    <div class="ml-auto d-flex mb-2">
+                                                        <img src="{% static 'images/paypal.png' %}" alt="PayPal" class="mx-2" style="height:20px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="paypal-section" style="display: none;">
+                                                 <div class="h-divider">
+                                                <div class="shadow"></div>
+                                            </div>
+                                                <p class="mt-4">Click here to sign into your PayPal Account:</p>
+                                                <button  class="booking-button"
+                                                    style="
+                                                        background-image: url('images/paypal.png');
+                                                        background-size: contain;
+                                                        background-repeat: no-repeat;
+                                                        background-position: center;
+                                                        border: none;
+                                                        height:40px;
+                                                        width: 160px;
+                                                        cursor: pointer;
+                                                        background-color:#7046d96b;
+                                                        border-radius: 5px;
+                                                    
+                                                    ">
+                                                </button>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                               
+
+                                    <div class="vertical-list-item mt-5 align-items-start">
+                                        <input class="mt-1"  type="checkbox" id="terms" name="terms" style="width: 15px; height: 15px;">
+                                        <label class=" ml-2" for="terms">
+                                            I accept WSI's Terms & Conditions and Privacy Policy; and Explore!'s payment, cancellation and refund conditions
+                                        </label>
+                                    </div>
+                                   
+
+                                   
+                                    <button class="red mt-5 booking-button" type="button"><i class="icon ion-md-lock"></i> Submit</button>
+                            
+                                </form>
+
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div> 
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <div class="col-lg-4">
+                <div class="col-lg-12 booking-details-cards mt-4">
+                    <div class="col-auto">
+                        <h5 class="mb-3"><strong>My  Trip</strong></h5>
+                    </div>
+                    <div class="col-auto">
+                        <p class="mb-0 my-trip-header"><strong>Rome, Sorrento and the Amalfi Coast</strong></p>
+                        <p class="my-trip-desc">8 days</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="mb-0  my-trip-header"><strong>Starts in Rome, Italy</strong></p>
+                        <p class="my-trip-desc">Saturday, 26 Jul 2025</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="mb-0  my-trip-header"><strong>Ends in Sorrento, Italy</strong></p>
+                        <p class="my-trip-desc">Saturday, 2 Aug 2025</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="mb-0  my-trip-header"><strong>Tour Type</strong></p>
+                        <p class="my-trip-desc">Group</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="mb-0  my-trip-header"><strong>Operated in</strong></p>
+                        <p class="my-trip-desc">English</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="mb-0  my-trip-header"><strong>What's included</strong></p>
+                        <p class="my-trip-desc">Accommodation, Guide, Meals, Transport</p>
+                    </div>
+                   
+                </div>
+
+                <div class="col-lg-12 booking-details-cards mt-5">
+                    <div class="col-auto">
+                        <h5 class="mb-3"><strong>Price Breakdown</strong></h5>
+                    </div>
+                    <div class="col-auto p-3 price-breakdown-info">
+                        <div class="row mb-2">
+                            <div class="col-1 ml-2 rounded-circle border d-flex align-items-center justify-content-center price-breakdown-info-div" style="width: 32px; height: 32px; border: 1px solid #7046d9 !important;">
+                               <i class="fa-solid fa-exclamation"></i>
+                            </div>
+                            <div class="col-10">
+                                <p>Select the number of travelers and assign accommodation to display the price</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>  
+
+</div> 
+
+
+   {% include 'main/footer.html' %}
+
+
+
+
+   <!-- Bootstrap 4 JS (jQuery, Popper.js, and Bootstrap JS) -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  <!-- <script src="https://unpkg.com/smooth-scrollbar@8.7.4/dist/smooth-scrollbar.js"></script> -->
+
+   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+   <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/scroll.js' %}"></script>
+    <script src="{% static 'js/slider.js' %}"></script>
+    <script src="{% static 'js/booking.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+
+
+   
+
+</body>
+</html>

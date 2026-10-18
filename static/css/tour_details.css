@@ -1,0 +1,1143 @@
+/*  
+ body, p, input, select, textarea, button {
+	 font-family: Arial, Helvetica, sans-serif !important;
+	 letter-spacing: -0.2px;
+	 font-size: 16px;
+} */
+
+
+
+
+a{
+    text-decoration: none !important;
+}
+
+button:focus, button:active,
+.btn:focus, .btn:active {
+    outline: 2px solid rgb(209, 209, 209) !important;
+    box-shadow: none !important;
+}
+
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1340px !important;
+    }
+}
+
+.tour-detail-title h2{
+    font-weight: bold;
+}
+.tour-detail-price{
+    padding: 20px;
+    border-radius: 30px;
+    background-color:rgba(150, 154, 158, 0.055);
+     box-shadow: 0 1px 2px rgba(3, 54, 63, .4), 0 -1px 2px rgba(3, 54, 63, .04);
+    transition: all 0.3s ease-in-out;
+
+}
+
+
+
+
+/* .tour-detail-price:hover {
+    box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #ffffff; 
+} */
+
+
+
+
+
+
+.tour-detail-price .btn {
+    --color: #ffffff;
+    --color2: rgb(0, 0, 0);
+    background-color:#7046d9;
+    border-radius: 50px;
+    /* border: .3px solid var(--color); */
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 800;
+    font-size: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 70px;
+    padding-left: 70px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+    box-shadow: 
+    4px 4px 16px 0 rgba(0, 0, 0, 0.137),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.096);
+   }
+   
+   .tour-detail-price .btn::after, .btn::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: #aa9fc765;
+   }
+   
+   .tour-detail-price .btn::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .tour-detail-price .btn:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .tour-detail-price .btn:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+   }
+   
+   .tour-detail-price .btn:hover {
+    color: rgb(3, 3, 3);
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.144),
+    -2px -2px 4px rgba(255, 255, 255, 0.082),
+    2px 2px 2px rgba(255, 255, 255, .05),
+    2px 2px 4px rgba(0, 0, 0, .1);
+   }
+   
+   .tour-detail-price .btn:active {
+    filter: brightness(.7);
+    transform: scale(.98);
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.062),
+                inset -2px -2px 4px rgba(255, 255, 255, 0.123),
+                inset 2px 2px 2px rgba(255, 255, 255, .075),
+                inset 2px 2px 4px rgba(0, 0, 0, .15);
+   } 
+
+   .save-and-compare{
+    background-color: aliceblue;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+
+   }
+   .tour-detail-price-details p{
+    font-size: 15px;
+   }
+   .tour-details-carousel img{
+    border-radius: 20px;
+    min-height: 400px;
+    max-height: 400px;
+    object-fit: cover;
+   }
+.carousel {
+    position: relative;
+}
+
+.tour-details-carousel-icon {
+    background-color:aliceblue;
+    border-radius: 50%;
+    width: 60px !important;
+    height: 60px !important;
+    position: absolute;
+    top: 50% !important;
+    transform: translateY(-50%);
+    z-index: 1;
+    margin: 10px;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
+.fa-chevron-left, .fa-chevron-right{
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+
+}
+
+.tours-tags {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+}
+.tours-tags a {
+    background-color: aliceblue;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 30px;
+    color: black;
+    outline: none !important;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.tours-tags a:hover {
+    
+    outline: none !important;
+    text-decoration: none;
+    color: rgb(51, 51, 51);
+}
+.tour-specification{
+    padding: 35px !important;
+}   
+
+.gold-star {
+    font-size: 12px;      
+    color: white;         
+    background-color: gold; 
+    padding: 8px;         
+    border-radius: 50%;  
+    display: inline-block; 
+}
+
+
+
+.place-you-see-carousel-icon{
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.place-you-see-carousel-images img{
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    
+}
+
+
+
+
+#accordion:before{
+    content: "";
+    width: 1px;
+    height: 80%;
+    background: #550527;
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    bottom: 20px;
+}
+#accordion .panel{
+    border: none;
+    border-radius: 0;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.192);
+    margin: 0 0 0 50px;
+    position: relative;
+}
+#accordion .panel:before{
+    content: "";
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -2px;
+}
+#accordion .panel-heading{
+    padding: 0;
+    position: relative;
+}
+#accordion .panel-heading:before{
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    background: #000000;
+    border: 1px solid #550527;
+    position: absolute;
+    top: 50%;
+    left: -48px;
+    transform: translateY(-50%);
+}
+#accordion .panel-title a{
+    display: block;
+    padding: 15px 55px 15px 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #550527;
+    border: none;
+    margin: 0;
+    position: relative;
+}
+#accordion .panel-title a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+
+.collapsed i:hover {
+   background-color: rgb(216, 216, 216);
+}
+
+#accordion .panel-title a i {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    /* border-radius: 50%;
+    border: 1px solid #000; */
+    font-size: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+
+
+.download-brochure{
+    box-shadow: 0 1px 2px rgba(3, 54, 63, .4), 0 -1px 2px rgba(3, 54, 63, .04);
+    border-radius: 10px;
+
+}
+
+.download-brochure .download-brochure-btn h4{
+    font-size: 18px;
+}
+
+
+
+
+
+
+#accordionIncluded .panel{
+    border: none;
+    border-radius: 0;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.192);
+    /* margin: 0 0 0 50px; */
+    position: relative;
+}
+#accordionIncluded .panel:before{
+    content: "";
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -2px;
+}
+#accordionIncluded .panel-heading{
+    padding: 0;
+    position: relative;
+}
+
+#accordionIncluded .panel-title a{
+    display: block;
+    padding: 15px 0 15px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #550527;
+    border: none;
+    margin: 0;
+    position: relative;
+}
+#accordionIncluded .panel-title a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+
+.collapsed i:hover {
+   background-color: rgba(216, 216, 216, 0.411);
+   border-radius: 50%;
+}
+
+#accordionIncluded .panel-title a i {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    text-align: center;
+    /* border: 1px solid #000;
+    border-radius: 50%; */
+
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#accordionNotIncluded .panel{
+    border: none;
+    border-radius: 0;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.192);
+    /* margin: 0 0 0 50px; */
+    position: relative;
+}
+#accordionNotIncluded .panel:before{
+    content: "";
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -2px;
+}
+#accordionNotIncluded .panel-heading{
+    padding: 0;
+    position: relative;
+}
+
+#accordionNotIncluded .panel-title a{
+    display: block;
+    padding: 15px 0 15px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #550527;
+    border: none;
+    margin: 0;
+    position: relative;
+}
+#accordionNotIncluded .panel-title a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+
+.collapsed i:hover {
+   background-color: rgba(216, 216, 216, 0.411);
+   border-radius: 50%;
+}
+
+#accordionNotIncluded .panel-title a i {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    text-align: center;
+    /* border: 1px solid #000;
+    border-radius: 50%; */
+
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#accordioninclude .panel{
+    border: none;
+    border-radius: 0;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.192);
+    /* margin: 0 0 0 50px; */
+    position: relative;
+}
+#accordioninclude .panel:before{
+    content: "";
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -2px;
+}
+#accordioninclude .panel-heading{
+    padding: 0;
+    position: relative;
+}
+
+#accordioninclude .panel-title a{
+    display: block;
+    padding: 15px 0 15px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #550527;
+    border: none;
+    margin: 0;
+    position: relative;
+}
+#accordioninclude .panel-title a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+
+.accordioninclude i:hover {
+   background-color: rgba(216, 216, 216, 0.411);
+   border-radius: 50%;
+}
+
+#accordioninclude .panel-title a i {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    text-align: center;
+    /* border: 1px solid #000;
+    border-radius: 50%; */
+
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sustainability {
+    background: #ffffff; 
+    box-shadow: 0 1px 2px rgba(3, 54, 63, .4), 0 -1px 2px rgba(3, 54, 63, .04);
+    margin: 10px;
+    height: 140px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer; 
+}
+
+.sustainability:hover {
+    box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #ffffff; 
+}
+
+.sustainability i {
+    font-size: 28px;
+    color: #333;
+}
+
+.sustainability p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.fa-calendar-times{
+    font-size:35px;
+}
+.cancellation-policy {
+    border-radius: 15px;
+    background: #f5f5f5; 
+    box-shadow: 0 1px 2px rgba(3, 54, 63, .4), 0 -1px 2px rgba(3, 54, 63, .04);
+    padding: 20px;
+    transition: all 0.3s ease-in-out; 
+}
+
+.cancellation-policy:hover {
+    box-shadow: 
+        5px 5px 10px rgba(0, 0, 0, 0.15),  
+        -15px -15px 30px rgba(255, 255, 255, 0.37);
+}
+
+.explore-btn{
+    background-color:rgba(150, 154, 158, 0.055) !important;
+}
+.explore-btn:hover{
+    background-color: #d1d1d13b !important;
+}
+
+
+.plugscol{
+    background: #f5f5f5; 
+    border-radius: 10px;
+}
+
+.currencycol{
+    background: #f5f5f5; 
+    border-radius: 10px;
+}
+
+
+
+.booking-details{
+     /* position: absolute; */
+    padding: 20px;
+    border-radius: 12px;
+    background-color:rgba(150, 154, 158, 0.055);
+        box-shadow: 0 1px 2px rgba(3, 54, 63, .4), 0 -1px 2px rgba(3, 54, 63, .04);
+    transition: all 0.3s ease-in-out;
+    
+}
+
+
+
+.calendar-right , .calendar-left{
+    border: 1px solid rgba(0, 0, 0, 0.253);
+}
+
+.calendar-right {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.calendar-left {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+.calendar-right i{
+    font-size: 22px;
+    color: #7046d9;
+}
+.btn-danger-decrease, .btn-success-increase{
+    border-radius: 50% !important;
+       box-shadow: 0 1px 2px rgba(3, 54, 63, .4), 0 -1px 2px rgba(3, 54, 63, .04);
+    background-color: #212529;
+    width: 45px;
+    height: 45px;
+   
+   
+}
+.travelers-count{
+    color: #7046d9;
+}
+
+.accommodation-recommended{
+    border-radius: 12px;
+    background-color:rgba(150, 154, 158, 0.055);
+    box-shadow: 5px 5px 10px #b8b9becb, -5px -5px 10px #ffffff; 
+}
+.accommodation-recommended-room-wrapper{
+    background-color:rgb(255, 255, 255);
+    border-radius: 12px;
+}
+#count{
+    font-size: 15px;   
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: rgb(133, 132, 132);
+}
+
+.info-warning{
+    border-radius: 12px;
+    background-color: #7046d9;
+    color: white;
+}
+
+i{
+    color: #7046d9 !important;
+}
+.note-col{
+    border-radius: 50%;
+    border: 3px solid white;
+    width: 30px;
+    height: 30px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.note-col i{
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+
+.info-warning p{
+    font-size: 18px;
+}
+
+
+
+
+
+
+
+
+.askaquestion {
+	 padding: 16px;
+	 /* width: 320px; */
+	 margin: 0 auto;
+}
+
+ /* button, input {
+	 border: 0;
+	 outline: 0;
+	 font-size: 16px;
+	 border-radius: 10px;
+	 padding: 16px;
+	 background-color: #ebecf079;
+	 text-shadow: 1px 1px 0 #fff;
+} */
+
+.ask-a-question-form input{
+     border: 0;
+	 outline: 0;
+	 font-size: 16px;
+	 border-radius: 10px;
+	 padding: 12px;
+	 background-color: #ebecf079;
+	 text-shadow: 1px 1px 0 #fff;
+}
+
+.askaquestion button{
+     border: 0;
+	 outline: 0;
+	 font-size: 16px;
+	 border-radius: 10px;
+	 padding: 12px;
+	 background-color: #ebecf079;
+	 text-shadow: 1px 1px 0 #fff;
+}
+
+
+.askaquestion .askquestion-button{
+     border: 0;
+	 outline: 0;
+	 font-size: 16px;
+	 border-radius: 10px;
+	 padding: 16px;
+	 background-color: #ebecf079;
+	 text-shadow: 1px 1px 0 #fff;
+}
+ label {
+	 display: block;
+	 margin-bottom: 24px;
+	 width: 100%;
+}
+ .input {
+	 margin-right: 8px;
+	 box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+	 width: 100%;
+	 box-sizing: border-box;
+	 transition: all 0.2s ease-in-out;
+	 appearance: none;
+	 -webkit-appearance: none;
+}
+.input:focus {
+	 box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+  /* button {
+	 color: #61677c;
+	 font-weight: bold;
+	 box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+	 transition: all 0.2s ease-in-out;
+	 cursor: pointer;
+	 font-weight: 600;
+}  */
+
+
+.submit-button-tour-details{
+     border: 0;
+	 outline: 0;
+	 font-size: 16px;
+	 border-radius: 10px;
+	 padding: 16px;
+	 background-color: #ebecf079;
+	 text-shadow: 1px 1px 0 #fff;
+}
+
+ /* button:hover {
+	 box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+} */
+ button:active {
+	 box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+
+
+.wsi-navbar .wsi-navbar-link {
+    text-decoration: none !important;
+    outline: none !important;
+}
+.fa-magnifying-glass{
+    color: white !important;
+}
+
+ button .icon {
+	 margin-right: 8px;
+}
+ button.unit {
+	 border-radius: 8px;
+	 line-height: 0;
+	 width: 48px;
+	 height: 48px;
+	 display: inline-flex;
+	 justify-content: center;
+	 align-items: center;
+	 margin: 0 8px;
+	 font-size: 19.2px;
+}
+ button.unit .icon {
+	 margin-right: 0;
+}
+ .red {
+	 display: block;
+	 width: 100%;
+	 color: #000000;
+     border-radius: 320px;
+}
+ .input-group {
+	 display: flex;
+	 align-items: center;
+	 justify-content: flex-start;
+}
+ .input-group label {
+	 margin: 0;
+	 flex: 1;
+}
+
+textarea{
+     width: 100%;
+     border: none;
+    outline: none;
+    background: #e0e0e03f;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff;
+    padding: 1rem;
+    border-radius: 10px;
+
+}
+
+.sustainability-modal{
+    /* position: sticky; */
+    top: 0;
+    background: white;
+    z-index: 1050;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+  .sustainability-cards {
+    flex-wrap: nowrap !important;
+  }
+}
+.sustainability a {
+  text-decoration: none;
+}
+
+.sustainability a:hover {
+  text-decoration: none;
+}
+
+
+
+.vertical-stepper {
+    position: relative;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.vertical-stepper::before {
+    content: '';
+    position: absolute;
+    top: 27px;
+    left: 25px;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% - 32px);
+    background-color: #dee2e6;
+    z-index: 0;
+}
+
+@media (min-width: 992px) {
+  .vertical-stepper::before {
+    content: '';
+    position: absolute;
+    top: 27px;
+    left: 25px;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% - 32px);
+    background-color: #dee2e6;
+    z-index: 0;
+}
+}
+
+.step {
+    position: relative;
+    z-index: 1;
+}
+
+.circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: #fff;
+    font-size: 24px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.circle span{
+   font-size: 12px;
+   color: black;
+}
+
+.circle strong{
+   font-size: 16px;
+   color: black;
+}
+
+
+.ls-banner{
+    box-shadow: 0 1px 2px rgba(3, 54, 63, .4), 0 -1px 2px rgba(3, 54, 63, .04);
+    color: #7046d9 !important;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+}
+.ls-banner .col-4 a{
+    text-decoration: none;
+}
+.tour-detail-price-details  .top-a-tag{
+     text-decoration: none;
+}
+.tour-detail-price-details  .top-a-tag:hover{
+     text-decoration: none;
+}
+
+.fa-xmark{
+    color: red !important;
+}
+
+
+ input[type="radio"] {
+      display: none;
+    }
+    
+    .rating-label {
+      color: grey;
+      font-size: 25px;
+      text-shadow: 1px 1px 1px #c9c9c9;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .p_class {
+        direction: rtl;
+        unicode-bidi: bidi-override;
+        display: flex;      
+        justify-content: flex-start; 
+        margin-bottom: 1em;
+        
+    }
+    
+    .rating-label:hover,
+    .rating-label:hover ~ .rating-label {
+      color: orange;
+    }
+    
+    input[type="radio"]:checked ~ label {
+      color: orange;
+    }
+
+.ls-banner-a-tag{
+     text-decoration: none;
+}
+.ls-banner-a-tag:hover{
+     text-decoration: none;
+}
+
+
+
+.comments img{
+    width: 80px !important;
+    height: 80px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   TOUR DETAILS — SCOPED STYLES
+   ========================================= */
+
+/* Links */
+.tour-detail-title a,
+.tour-detail-price a,
+.tour-specification a,
+.tour-details-carousel a,
+.tours-tags a,
+#accordion a,
+#accordionIncluded a,
+#accordionNotIncluded a,
+#accordioninclude a,
+.ls-banner a {
+    text-decoration: none !important;
+}
+
+/* Icons: only apply blue to tour-detail elements */
+.tour-detail-price-details i,
+.booking-details i,
+.sustainability i,
+.place-you-see-carousel-icon i,
+.tour-details-carousel-icon i {
+    color: #7046d9 !important;
+}
+
+/* Labels: prevent global layout changes */
+.ask-a-question-form label,
+.askaquestion label,
+.input-group label {
+    display: block;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+/* Active button effect: only within tour details */
+.tour-detail-price .btn:active,
+.askaquestion button:active,
+.submit-button-tour-details:active {
+    box-shadow: inset 1px 1px 2px #babecc,
+                inset -1px -1px 2px #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   FOOTER — STYLE PROTECTION
+   ========================================= */
+
+.footer,
+.footer * {
+    box-sizing: border-box;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer i {
+    color: inherit !important;
+}
+
+.footer button:active {
+    box-shadow: none;
+}
+
+.footer label {
+    margin-bottom: 0;
+    width: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
