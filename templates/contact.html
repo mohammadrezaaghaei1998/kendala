@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Contact Ken Dala for tailored tours, booking questions and travel support.">
+  <title> Ken Dala | Contact & Travel Support</title>
+  <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+  <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+{% include 'main/loader.html' %}
+{% include 'main/header.html' %}
+<main class="kc-page">
+  <section class="kc-hero">
+    <div class="kc-hero-bg"></div>
+    <div class="kc-wrap kc-hero-content">
+      <span class="kc-eyebrow kc-light">KEN DALA / CONTACT & SUPPORT</span>
+      <h1>Every great journey<br>starts with a <em>conversation.</em></h1>
+      <p>Questions about a destination, an upcoming journey, or an existing reservation? We're here to help you find the right next step.</p>
+      <a href="#contact-options" class="kc-hero-cta">Get in touch <i class="fa-solid fa-arrow-down"></i></a>
+    </div>
+    <div class="kc-hero-caption">KAZAKHSTAN · TURKEY · OMAN · BEYOND</div>
+  </section>
+
+  <section id="contact-options" class="kc-section kc-wrap">
+    <div class="kc-section-intro"><div><span class="kc-eyebrow">LET'S CONNECT</span><h2>How can we <em style="color: #850078;">help?</em></h2></div><p>Choose the best way to reach us. Our team responds during published support hours; automated acknowledgment is available outside those hours.</p></div>
+    <div class="kc-channels">
+      <article class="kc-channel kc-channel-featured"><div class="kc-channel-icon"><i class="fa-brands fa-whatsapp"></i></div><span class="kc-tag">FASTEST WAY TO MESSAGE</span><h3>Chat on WhatsApp</h3><p>Ask about tour options, itineraries, availability, or your booking. Leave us a message anytime.</p><a href="{{ whatsapp_url|default:'#' }}" class="kc-btn kc-btn-white" target="_blank" rel="noopener noreferrer" data-whatsapp-link>Start a conversation <i class="fa-solid fa-arrow-up-right-from-square"></i></a><small>Human replies during support hours</small></article>
+      <article class="kc-channel"><div class="kc-channel-icon"><i class="fa-regular fa-envelope"></i></div><span class="kc-tag">FOR DETAILED REQUESTS</span><h3>Send an email</h3><p>Perfect for custom itineraries, documents, or questions requiring a detailed answer.</p><a href="mailto:{{ support_email|default:'hello@example.com' }}" class="kc-text-link">{{ support_email|default:'Configure your email' }} <i class="fa-solid fa-arrow-right"></i></a></article>
+      <article class="kc-channel"><div class="kc-channel-icon"><i class="fa-solid fa-suitcase-rolling"></i></div><span class="kc-tag">FOR CONFIRMED TRAVELERS</span><h3>Booking support</h3><p>Need help with an existing reservation? Include your booking reference so we can assist faster.</p><a href="#contact-form" class="kc-text-link" data-topic="existing-booking">Request booking support <i class="fa-solid fa-arrow-right"></i></a></article>
+    </div>
+  </section>
+
+  <section class="kc-section kc-form-band" id="contact-form">
+    <div class="kc-wrap kc-form-layout"><div class="kc-form-aside"><span class="kc-eyebrow">TELL US YOUR PLANS</span><h2>We're listening.</h2><p>Share a few details and we'll direct your message to the right person. You don't need to know every detail of your trip yet.</p><div class="kc-aside-image"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85" alt="Mountain landscape" loading="lazy"></div><p class="kc-fine">For urgent issues during an active tour, use the emergency contact in your booking confirmation rather than this general inquiry form.</p></div>
+      <div class="kc-form-card"><form id="kc-contact-form" method="post" action="{% url 'contact' %}">{% csrf_token %}<div class="kc-form-head"><h3>Send us a message</h3><p>Fields marked * are required.</p></div><div class="kc-field-row"><label>Full name *<input type="text" name="full_name" required maxlength="120" autocomplete="name" placeholder="Your full name"></label><label>Email address *<input type="email" name="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></label></div><div class="kc-field-row"><label>WhatsApp / phone (optional)<input type="tel" name="phone" autocomplete="tel" placeholder="+968 ..."></label><label>Destination<select name="destination"><option value="">Select destination</option><option>Kazakhstan</option><option>Turkey</option><option>Oman</option><option>Other / not sure yet</option></select></label></div><label>What can we help with? *<select name="topic" id="kc-topic" required><option value="">Choose a topic</option><option value="new-booking">New booking or tour inquiry</option><option value="existing-booking">Existing booking</option><option value="custom-trip">Custom itinerary</option><option value="partnership">Business partnership</option><option value="other">Other question</option></select></label><label class="kc-booking-ref" id="kc-booking-ref">Booking reference (if available)<input type="text" name="booking_reference" maxlength="80" placeholder="e.g. KD-12345"></label><label>Your message *<textarea name="message" rows="5" required maxlength="5000" placeholder="Tell us how we can help..."></textarea></label><label class="kc-consent"><input type="checkbox" name="privacy_consent" required><span>I agree to be contacted about my request and understand my information will be handled according to the <a href="{{ privacy_policy_url|default:'#' }}">Privacy Policy</a>.</span></label><button class="kc-btn kc-btn-purple" type="submit">Send message <i class="fa-solid fa-arrow-right"></i></button><p class="kc-fine">This form requires a Django view to receive and process submissions. Please do not enter passport or payment card details here.</p></form></div>
+    </div>
+  </section>
+
+  <section class="kc-section kc-wrap kc-support"><div class="kc-section-intro"><div><span class="kc-eyebrow">SUPPORT, CLEARLY EXPLAINED</span><h2>Support that follows<br><em>your journey.</em></h2></div><p>We're transparent about when our team is available and how to get help while you're traveling.</p></div><div class="kc-support-grid"><article><span class="kc-step">01 / BEFORE YOU BOOK</span><i class="fa-regular fa-comments"></i><h3>Planning & questions</h3><p>Message us anytime. We acknowledge messages automatically and respond personally during support hours.</p></article><article><span class="kc-step">02 / AFTER YOU BOOK</span><i class="fa-regular fa-calendar-check"></i><h3>Reservation assistance</h3><p>We coordinate booking changes and questions with your tour operator and keep you informed.</p></article><article><span class="kc-step">03 / WHILE YOU TRAVEL</span><i class="fa-solid fa-shield-heart"></i><h3>On-trip assistance</h3><p>Your booking confirmation will explain how to contact the local operator during your scheduled services and how to escalate urgent issues.</p></article></div><div class="kc-hours"><i class="fa-regular fa-clock"></i><div><strong>Human support hours</strong><p>{{ support_hours|default:'Support hours will be published here before launch.' }} <span>Messages can be sent at any time; instant human responses are not guaranteed outside these hours.</span></p></div></div></section>
+
+  <section class="kc-section kc-faq"><div class="kc-wrap kc-faq-layout"><div><span class="kc-eyebrow">HELPFUL ANSWERS</span><h2>Good to <em>know.</em></h2><p>Find quick answers to common questions before getting in touch.</p></div><div class="kc-faq-items"><details><summary>Can I contact Ken Dala outside business hours?<i class="fa-solid fa-plus"></i></summary><p>Yes. You can send a WhatsApp message or contact form request at any time. Our team responds during published human support hours.</p></details><details><summary>What if I need help during my tour?<i class="fa-solid fa-plus"></i></summary><p>Use the local operator contact supplied in your booking confirmation for immediate on-trip operational issues. You can also contact Ken Dala for escalation and follow-up. Emergency availability depends on the arrangements confirmed for your booking.</p></details><details><summary>Can you arrange a customized itinerary?<i class="fa-solid fa-plus"></i></summary><p>Yes, you can describe your preferences in the form. We'll review the request and discuss possible options with our destination partners.</p></details><details><summary>Where can I find my booking reference?<i class="fa-solid fa-plus"></i></summary><p>Check your booking confirmation email or reservation documents. If you cannot find it, include the email address used when booking.</p></details></div></div></section>
+
+  <section class="kc-last"><div class="kc-wrap"><span class="kc-eyebrow kc-light">THE WORLD IS WAITING</span><h2>Let's make your next<br>journey <em>extraordinary.</em></h2><a href="#contact-options" class="kc-btn kc-btn-white">Get in touch <i class="fa-solid fa-arrow-up"></i></a></div></section>
+  <!-- <a class="kc-floating-wa" href="{{ whatsapp_url|default:'#' }}" target="_blank" rel="noopener noreferrer" aria-label="Message Ken Dala on WhatsApp" data-whatsapp-link><i class="fa-brands fa-whatsapp"></i><span>Chat with us</span></a> -->
+</main>
+{% include 'main/footer.html' %}
+
+
+ <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+      <img
+          id="kd-chat-icon"
+          src="{% static 'images/chat-icon.png' %}"
+          alt="Chat"
+      >
+  </button>
+
+
+<script src="{% static 'js/contact.js' %}" defer></script>
+<script src="{% static 'js/navbar.js' %}" defer></script>
+
+
+
+
+
+
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        window.$crisp = window.$crisp || [];
+
+        const chatLauncher = document.getElementById("kd-chat-launcher");
+
+        if (!chatLauncher) {
+            console.error("Ken Dala chat launcher not found.");
+            return;
+        }
+
+        $crisp.push(["do", "chat:hide"]);
+
+        chatLauncher.addEventListener("click", function () {
+
+            $crisp.push(["do", "chat:show"]);
+            $crisp.push(["do", "chat:open"]);
+
+        });
+
+        $crisp.push(["on", "chat:opened", function () {
+
+            chatLauncher.classList.add("chat-open");
+
+        }]);
+
+        $crisp.push(["on", "chat:closed", function () {
+
+            chatLauncher.classList.remove("chat-open");
+
+            $crisp.push(["do", "chat:hide"]);
+
+        }]);
+
+    });
+</script>
+
+
+
+
+
+</body>
+</html>

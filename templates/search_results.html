@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ken Dala | Search</title>
+  <link rel="stylesheet" href="{% static 'css/search_results.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    {% include 'main/loader.html' %}
+     {% include 'main/header.html' %}
+
+<!-- Existing header and footer are intentionally NOT included. -->
+<main class="kd-search-page">
+  <div class="kd-search-shell" style="margin-top: 120px;">
+    <nav class="kd-search-breadcrumb" aria-label="Breadcrumb"><a href="/">Homepage</a><span aria-hidden="true">›</span><span>Search</span></nav>
+    <form class="kd-search-form" method="get" action="{% url 'search-results' %}" role="search">
+      <div class="kd-search-input-wrap"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="kd-search-query" type="search" name="q" value="{{ query|default:'' }}" placeholder="Search tours, destinations and experiences" aria-label="Search tours" required><button class="kd-clear" type="button" id="kd-clear-search">Clear</button></div>
+      <button class="kd-filter-toggle" type="button" id="kd-filter-toggle" aria-controls="kd-search-filters" aria-expanded="false"><i class="fa-solid fa-sliders" aria-hidden="true"></i> Filters</button>
+    </form>
+    <section class="kd-filter-panel" id="kd-search-filters" hidden aria-label="Search filters">
+      <div class="kd-filter-field"><label for="kd-country">Destination</label>
+
+
+        <!-- <select id="kd-country" name="country" form="kd-filter-form">
+          <option value="">All destinations</option>
+          <option value="Kazakhstan" {% if selected_country == 'Kazakhstan' %}selected{% endif %}>Kazakhstan</option>
+          <option value="Turkey" {% if selected_country == 'Turkey' %}selected{% endif %}>Turkey</option>
+          <option value="Oman" {% if selected_country == 'Oman' %}selected{% endif %}>Oman</option>
+        </select> -->
+        
+        <select id="kd-country" name="country" form="kd-filter-form">
+            <option value="">All destinations</option>
+
+            {% for country in countries %}
+                <option value="{{ country.slug }}"
+                    {% if selected_country == country.slug %}selected{% endif %}>
+                    {{ country.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+
+      </div>
+      <div class="kd-filter-field"><label for="kd-sort">Sort by</label><select id="kd-sort" name="sort" form="kd-filter-form"><option value="relevance" {% if selected_sort == 'relevance' %}selected{% endif %}>Most relevant</option><option value="name" {% if selected_sort == 'name' %}selected{% endif %}>Name A–Z</option></select></div>
+      
+      
+          
+      <form id="kd-filter-form"
+            method="get"
+            action="{% url 'search-results' %}">
+
+          <input type="hidden" name="q"
+                value="{{ query|default:'' }}">
+
+          <input type="hidden" name="type"
+                value="{{ selected_type|default:'all' }}">
+
+          <button type="submit" class="kd-apply">
+              Apply filters
+          </button>
+      </form>
+
+
+
+
+    </section>
+    <div class="kd-results-toolbar">
+      <div class="kd-results-summary">
+        {% if query %}<p>Showing <strong>{{ result_count|default:0 }}</strong> result{{ result_count|pluralize }} for <strong class="kd-query">{{ query }}</strong></p>{% else %}<p>Search tours and experiences</p>{% endif %}
+        {% if suggested_query %}<p class="kd-search-suggestion">Search instead for <a href="{% url 'search-results' %}?q={{ suggested_query|urlencode }}">{{ suggested_query }}</a></p>{% endif %}
+      </div>
+      <form class="kd-type-form" method="get" action="{% url 'search-results' %}">
+        <input type="hidden" name="sort" value="{{ selected_sort }}">
+        <input type="hidden" name="q" value="{{ query|default:'' }}">
+        <input type="hidden" name="country" value="{{ selected_country|default:'' }}">
+        <label for="kd-result-type" class="kd-sr-only">Result type</label>
+        <select id="kd-result-type" name="type" onchange="this.form.submit()">
+          <option value="all" {% if selected_type == 'all' or not selected_type %}selected{% endif %}>All Results</option>
+          <option value="tours" {% if selected_type == 'tours' %}selected{% endif %}>Tours</option>
+          <option value="destinations" {% if selected_type == 'destinations' %}selected{% endif %}>Destinations</option>
+        </select>
+      </form>
+    </div>
+    <section class="kd-results-list" aria-label="Search results">
+      {% for result in results %}
+      <article class="kd-result">
+        <a class="kd-result-image" href="{{ result.url }}" aria-label="View {{ result.title }}"><img src="{{ result.image_url }}" alt="{{ result.title }}" loading="lazy"></a>
+        <div class="kd-result-copy">
+          <div class="kd-result-meta"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>{{ result.country|default:'Experience' }}</span><span class="kd-meta-sep">|</span><span>{{ result.type_label|default:'TOURS' }}</span>{% if result.category %}<span class="kd-meta-sep">|</span><span>{{ result.category }}</span>{% endif %}</div>
+          <h2><a href="{{ result.url }}">{{ result.title }}</a></h2>
+          <p>{{ result.description|striptags|truncatewords:38 }}</p>
+          <a class="kd-result-more" href="{{ result.url }}">View experience <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </article>
+      {% empty %}
+        {% if query %}<div class="kd-no-results"><i class="fa-regular fa-compass" aria-hidden="true"></i><h2>No matching experiences found</h2><p>Try another keyword, destination, or a broader search.</p></div>{% else %}<div class="kd-no-results"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h2>Where would you like to go?</h2><p>Search for nature, adventure, Kazakhstan, Turkey, Oman, and more.</p></div>{% endif %}
+      {% endfor %}
+    </section>
+    {% if page_obj and page_obj.paginator.num_pages > 1 %}
+    <nav class="kd-pagination" aria-label="Results pagination">{% if page_obj.has_previous %}<a href="?q={{ query|urlencode }}&amp;country={{ selected_country|urlencode }}&amp;type={{ selected_type|urlencode }}&amp;sort={{ selected_sort|urlencode }}&amp;page={{ page_obj.previous_page_number }}">← Previous</a>{% endif %}<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>{% if page_obj.has_next %}<a href="?q={{ query|urlencode }}&amp;country={{ selected_country|urlencode }}&amp;type={{ selected_type|urlencode }}&amp;sort={{ selected_sort|urlencode }}&amp;page={{ page_obj.next_page_number }}">Next →</a>{% endif %}</nav>
+    {% endif %}
+    {% if query %}<p class="kd-results-end">Showing {{ results|length }} result{{ results|length|pluralize }} on this page{% if result_count %} · {{ result_count }} total{% endif %}</p>{% endif %}
+  </div>
+</main>
+
+
+  {% include 'main/footer.html' %}
+
+
+   <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+        <img
+            id="kd-chat-icon"
+            src="{% static 'images/chat-icon.png' %}"
+            alt="Chat"
+        >
+    </button>
+
+
+
+<script src="{% static 'js/search_results.js' %}" defer></script>
+<script src="{% static 'js/navbar.js' %}"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        window.$crisp = window.$crisp || [];
+
+        const chatLauncher = document.getElementById("kd-chat-launcher");
+
+        if (!chatLauncher) {
+            console.error("Ken Dala chat launcher not found.");
+            return;
+        }
+
+        $crisp.push(["do", "chat:hide"]);
+
+        chatLauncher.addEventListener("click", function () {
+
+            $crisp.push(["do", "chat:show"]);
+            $crisp.push(["do", "chat:open"]);
+
+        });
+
+        $crisp.push(["on", "chat:opened", function () {
+
+            chatLauncher.classList.add("chat-open");
+
+        }]);
+
+        $crisp.push(["on", "chat:closed", function () {
+
+            chatLauncher.classList.remove("chat-open");
+
+            $crisp.push(["do", "chat:hide"]);
+
+        }]);
+
+    });
+</script>
+</body>
+</html>

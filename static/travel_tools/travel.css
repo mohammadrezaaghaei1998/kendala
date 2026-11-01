@@ -1,0 +1,60 @@
+
+:root{--purple:#850078;--purple-deep:#57004e;--ink:#1c1930;--muted:#6d7182;--line:#e9e9f1;--shadow:0 18px 55px rgba(39,26,64,.08)}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#f8f9fd;font:14px/1.65 'DM Sans',Arial,sans-serif}a{color:var(--purple)}.travel-hero{height:435px;position:relative;background:#1a2742 url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2200&q=85') center 48%/cover no-repeat;color:white}.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,13,30,.82),rgba(15,19,37,.39) 63%,rgba(10,13,30,.08))}.hero-inner{position:relative;z-index:1;max-width:1380px;margin:auto;padding:120px 38px 45px}.eyebrow,.section-kicker,.side-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}.slash{opacity:.5;margin:0 8px}.travel-hero h1{font:600 clamp(43px,5vw,72px)/1.06 'Playfair Display',Georgia,serif;letter-spacing:-1.5px;margin:18px 0 14px;max-width:750px}.travel-hero p{font-size:17px;max-width:600px;color:#f0f1f7;margin:0}.travel-shell{max-width:1460px;margin:-45px auto 0;padding:0 28px 100px;position:relative;display:grid;grid-template-columns:265px minmax(0,1fr);gap:24px;align-items:start}.travel-sidebar{padding-top:0}.side-label{color:#fff;margin:0 0 12px 15px;text-shadow:0 1px 5px #222}.travel-nav{padding:11px;border:1px solid #e8e8f1;border-radius:17px;background:#fff;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:5px}.travel-nav a{display:flex;align-items:center;gap:12px;padding:16px 13px;border-radius:11px;text-decoration:none;color:#222;transition:.2s}.travel-nav a:hover,.travel-nav a.active{background:#f4edf7;color:var(--purple)}.nav-icon{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:10px;background:#f4f0f7;color:var(--purple);font-size:23px}.travel-nav b{display:block;font-size:13px}.travel-nav small{display:block;font-size:11px;color:#777b8d;margin-top:1px}.nav-arrow{margin-left:auto;font-size:25px;font-weight:300}.side-promo{margin-top:18px;border-radius:17px;overflow:hidden;color:#fff;padding:32px 22px;min-height:240px;background:linear-gradient(160deg,rgba(48,15,83,.32),rgba(36,7,77,.94)),url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=700&q=80') center/cover}.side-promo span{font-size:10px;letter-spacing:1.6px;font-weight:700}.side-promo h3{font:600 25px/1.2 'Playfair Display',serif;margin:16px 0 9px}.side-promo p{font-size:12px;color:#e5dff0}.side-promo a{display:inline-block;margin-top:14px;padding:10px 13px;border:1px solid #fff;border-radius:8px;color:#fff;text-decoration:none;font-weight:700;font-size:11px}.travel-main{min-width:0;padding-top:0}.panel,.intro-panel{padding:32px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:var(--shadow);margin-bottom:24px}.search-panel{padding:30px 34px}.section-kicker{color:var(--purple)}.form-head{display:flex;justify-content:space-between;align-items:center}.form-head h2,.panel h2{font-size:25px;margin:8px 0 3px;letter-spacing:-.5px}.form-head p,.panel>p{color:var(--muted);margin:0 0 22px}.form-mark{font-size:33px;color:var(--purple);opacity:.5}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.fields label,.weight-grid label{font-size:12px;font-weight:700}.field-title{display:block;margin-bottom:6px}select,input{display:block;width:100%;height:53px;padding:0 14px;margin-top:7px;border:1px solid #e2e2ec;border-radius:9px;background:#fff;color:#252139;font:inherit;outline-color:var(--purple)}.visa-button,.panel button[type=submit],.panel button[name=check]{display:inline-flex;align-items:center;justify-content:center;gap:12px;border:0;border-radius:10px;background:linear-gradient(125deg,#963087,#580052);color:#fff;font:700 13px 'DM Sans',sans-serif;padding:16px 24px;cursor:pointer;margin-top:22px;box-shadow:0 8px 20px rgba(133,0,120,.18)}.visa-button span{margin-left:12px}.results{margin-top:32px}.result-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 20px}.result-heading h2,.results>h2{font:600 clamp(24px,2.7vw,34px)/1.2 'Playfair Display',Georgia,serif;margin:10px 0}.route-arrow{color:var(--purple);padding:0 7px}.result-tag{font-size:10px;letter-spacing:1px;font-weight:700;color:#777}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{border:1px solid var(--line);border-radius:14px;padding:24px;min-width:0;min-height:210px}.card-label{font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--purple)}.card h3{font:700 25px/1.25 'DM Sans',sans-serif;margin:19px 0 12px}.card p{font-size:12px;color:#64687b}.card p strong{display:block;font-size:18px;color:#1d2332}.card a{display:block;font-weight:700;font-size:12px;margin-top:10px}.status-card{background:linear-gradient(125deg,#eaf9f1,#f7fbf9);border-color:#e0f2e7}.status-card .card-label,.status-card h3{color:#087a42}.passport-card{background:linear-gradient(125deg,#f4effc,#fbfaff)}.destination-card{background:linear-gradient(125deg,#eaf4fd,#f9fcff)}.destination-card .card-label{color:#15549a}.destination-card dl{margin:0}.destination-card dl div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #e6eaf1;padding:6px 0;font-size:12px}.destination-card dt{color:#687083}.destination-card dd{margin:0;font-weight:700;text-align:right}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.info-panel{padding:25px;border:1px solid var(--line);border-radius:14px;background:#fff}.info-panel h3{font-size:18px;margin:12px 0 6px}.info-panel p,.info-panel li{font-size:12px;color:#656b7b;line-height:1.7}.info-panel ul{padding-left:18px}.official-panel{background:#f2f5fc}.official-panel .card-label{color:#21549d}.notes-panel{background:#fff8eb}.notes-panel .card-label{color:#9c580b}.text-action{display:inline-block;margin-top:12px;padding:11px 14px;background:var(--purple);color:white;border-radius:8px;text-decoration:none;font-weight:700;font-size:12px}.detail{padding:13px 0;border-bottom:1px solid var(--line)}.detail strong{font-size:12px}.detail a{display:inline-block;margin-left:8px;font-size:12px;font-weight:700}.empty-state{color:#8a8d9c}.intro-panel{margin-top:30px;padding:45px}.intro-panel h2{font:600 29px 'Playfair Display',serif;margin:14px 0}.intro-panel p{color:var(--muted)}.notice{padding:16px 20px;border-radius:10px;background:#f4eaf4;margin:0 0 20px}.notice.error{background:#fff0f2;color:#8d1838}.disclaimer{margin-top:45px;color:#7b7e8c;font-size:11px;line-height:1.9}.weight-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.legend{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.green{background:#39a86b}.blue{background:#3c91d6}.yellow{background:#e6b44c}.red{background:#dc6470}#visa-world-map{height:470px;border-radius:15px;background:#eaf1f6;overflow:hidden}.country-grid{display:flex;flex-wrap:wrap;gap:8px}.country-chip{padding:8px 12px;border-radius:7px;text-decoration:none;color:#fff;font-size:12px}.hint{color:#666}.ranking-list{columns:2;line-height:2.5}
+@media(max-width:1050px){.travel-shell{grid-template-columns:220px minmax(0,1fr);gap:16px;padding:0 16px 70px}.cards{grid-template-columns:1fr 1fr}.destination-card{grid-column:1/-1}.side-promo{padding:22px 15px}}
+@media(max-width:760px){.travel-hero{height:375px}.hero-inner{padding:120px 23px 35px}.travel-hero h1{font-size:43px}.travel-hero p{font-size:14px}.travel-shell{display:block;margin-top:-35px;padding:0 14px 65px}.side-label{display:none}.travel-sidebar{margin-bottom:15px}.travel-nav{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:7px}.travel-nav a{padding:10px 7px;gap:6px}.travel-nav b{font-size:11px}.travel-nav small{font-size:10px}.nav-icon{width:27px;height:27px;font-size:17px}.nav-arrow,.side-promo{display:none}.search-panel,.panel{padding:21px}.fields,.cards,.info-grid,.weight-grid{grid-template-columns:1fr}.destination-card{grid-column:auto}.result-heading{align-items:flex-start;flex-direction:column}.ranking-list{columns:1}#visa-world-map{height:330px}}
+
+
+
+/* Passport Rankings */
+
+#ranking-output {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 24px;
+}
+
+.passport-ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+}
+
+.passport-ranking-table th {
+    padding: 16px 14px;
+    background: #f5eff7;
+    color: #850078;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.passport-ranking-table td {
+    padding: 17px 14px;
+    border-bottom: 1px solid #eeeeF3;
+    color: #242136;
+    white-space: nowrap;
+}
+
+.passport-ranking-table tbody tr:hover {
+    background: #faf7fc;
+}
+
+.passport-ranking-table td:first-child {
+    font-weight: 700;
+    color: #850078;
+}
+
+.passport-ranking-table td:last-child {
+    font-weight: 800;
+    color: #850078;
+}
+
+@media (max-width: 760px) {
+    .passport-ranking-table {
+        min-width: 650px;
+    }
+}

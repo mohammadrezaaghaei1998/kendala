@@ -13,6 +13,8 @@
     --max:1440px;
 }
 
+
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -30,6 +32,10 @@ img{display:block;width:100%;object-fit:cover}
     width:min(calc(100% - 48px),var(--max));
     margin:0 auto;
     margin-top: 80px;
+}
+.tl-container {
+    width: min(1450px, 89.6%);
+    margin-inline: auto;
 }
 .container-narrow{
     width:min(calc(100% - 48px),980px);
@@ -424,7 +430,7 @@ img{display:block;width:100%;object-fit:cover}
 
 /* ---------------- SECTION SYSTEM ---------------- */
 
-.section{padding:75px 0 25px}
+.section{padding:25px 0 25px}
 .section-heading{
     display:flex;
     justify-content:space-between;
@@ -515,7 +521,7 @@ img{display:block;width:100%;object-fit:cover}
 
 /* ---------------- IMAGE BANNERS ---------------- */
 
-.wide-image-section{padding:60px 0 10px}
+.wide-image-section{padding:10px 0 10px}
 .wide-image-card,.feature-card{
     height:390px;
     position:relative;
@@ -598,7 +604,7 @@ border-radius: 0 !important;
 }
 .card-arrow{
     color:var(--accent);
-    font-size:10px;
+    font-size:15px;
     font-weight:700;
 }
 .card-arrow i{margin-left:5px}
@@ -838,6 +844,11 @@ border-radius: 0 !important;
     .container-wide,.container-narrow,.hero-wrap{
         width:min(calc(100% - 28px),var(--max));
     }
+    .container-narrow,.hero-wrap{
+        width:min(calc(100% - 28px),var(--max));
+    }
+
+
     .top-nav{padding:0 14px;height:58px}
     .nav-pill,.nav-icon{display:none}
     .nav-button{padding:8px 10px}
@@ -879,7 +890,7 @@ border-radius: 0 !important;
 /* =========================================================
    ABOUT SECTION 
 ========================================================= */
-.destination-about{padding:68px 0 92px;background:#fff}
+.destination-about{padding:0 0 0;background:#fff}
 .destination-about-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(560px,1.15fr);gap:58px;align-items:start}
 .destination-about-copy{padding-top:3px}
 .about-title-row{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px}
@@ -945,12 +956,82 @@ border-radius: 0 !important;
 
 
 
+/* KEN DALA / TRAVEL ESSENTIALS — scoped styles */
+.ke-section{background:#faf9f7;padding:100px 0;color:#201b20;font-family:Arial,Helvetica,sans-serif;scroll-margin-top:100px}
+.ke-section *{box-sizing:border-box}.ke-container{width:min(1360px,calc(100% - 64px));margin:auto}.ke-section a{text-decoration:none!important}.ke-intro{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px}.ke-eyebrow,.ke-index,.ke-label,.ke-section-heading>span{font-size:10px;letter-spacing:2px;font-weight:800;color:#850078}.ke-intro h2{font-size:clamp(38px,5vw,72px);letter-spacing:-2.5px;line-height:1.05;margin:16px 0}.ke-intro h2 em{font-family:Georgia,serif;font-weight:400}.ke-intro p,.ke-copy p,.ke-feature p,.ke-connect-block>p,.ke-visa p{color:#6e666d;font-size:14px;line-height:1.85;max-width:600px}.ke-index{color:#9b9298;white-space:nowrap}.ke-nav{display:flex;gap:28px;flex-wrap:wrap;border-block:1px solid #ded9dc;padding:20px 0;margin-bottom:28px}.ke-nav a{color:#625b60;font-size:12px;font-weight:700}.ke-nav a:hover{color:#850078}.ke-feature-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px}.ke-feature{background:#fff;border:1px solid #e8e2e5;min-height:280px;padding:31px;border-radius:8px}.ke-feature-dark{background:#32122f;color:white;border-color:#32122f}.ke-feature-dark .ke-label{color:#eab5e5}.ke-feature-dark p{color:#e0cddc}.ke-label i{margin-right:8px}.ke-big{font-size:clamp(35px,4vw,60px);font-weight:800;letter-spacing:-3px;margin:22px 0 8px}.ke-big span{font-size:25px;letter-spacing:0;color:#a44c9d}.ke-feature h3{font-size:17px;margin:0 0 12px}.ke-feature p{margin:0}.ke-section-heading{display:flex;align-items:baseline;gap:25px;padding-top:80px;margin-bottom:25px;scroll-margin-top:105px}.ke-section-heading h3{font-size:clamp(26px,3vw,39px);letter-spacing:-1px;margin:0}.ke-split{display:grid;grid-template-columns:1fr 1.15fr;gap:45px;align-items:start}.ke-copy h4,.ke-connect-block h4,.ke-visa h4{font-size:24px;margin:0 0 12px}.ke-list{background:white;border:1px solid #e9e4e7;border-radius:8px;padding:10px 25px}.ke-list>div{display:flex;align-items:center;gap:20px;padding:23px 0;border-bottom:1px solid #eee9ec}.ke-list>div:last-child{border-bottom:0}.ke-list i{font-size:22px;color:#850078;width:30px}.ke-list strong,.ke-list small{display:block}.ke-list strong{font-size:14px;margin-bottom:7px}.ke-list small{font-size:12px;color:#777;line-height:1.6}.ke-airports{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.ke-airports article{background:#fff;border:1px solid #e8e2e5;padding:28px;border-radius:8px;display:flex;gap:17px}.ke-airports article>span{color:#850078;font-size:27px;font-weight:800}.ke-airports h4{font-size:15px;margin:4px 0 10px}.ke-airports p,.ke-transport p{color:#777;font-size:12px;line-height:1.75}.ke-airports a,.ke-operator a,.ke-visa a{font-size:11px;color:#850078;font-weight:800}.ke-transport{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:30px}.ke-transport>div{padding:10px 0}.ke-transport i{font-size:25px;color:#850078;display:block;margin-bottom:15px}.ke-transport strong{font-size:15px}.ke-connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.ke-connect-block{background:white;border:1px solid #e8e2e5;border-radius:8px;padding:30px}.ke-operator{display:flex;align-items:center;gap:16px;border-bottom:1px solid #eee;padding:16px 0}.ke-operator>span{color:#a49ba2;font-size:11px}.ke-operator strong{font-size:13px;flex:1}.ke-app-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}.ke-app-grid a{display:grid;grid-template-columns:42px 1fr;column-gap:12px;align-items:center;padding:15px;border:1px solid #ece8eb;border-radius:7px;color:#222}.ke-app-grid img{grid-row:span 2;width:38px;height:38px;object-fit:contain;border-radius:9px}.ke-app-grid strong{font-size:12px}.ke-app-grid small{font-size:10px;color:#888}.ke-safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.ke-emergency,.ke-visa{padding:35px;border-radius:8px}.ke-emergency{background:#850078;color:#fff}.ke-emergency .ke-label{color:#f7d5f3}.ke-emergency>a{display:flex;align-items:center;justify-content:space-between;font-size:90px;letter-spacing:-4px;font-weight:800;color:#fff;line-height:1.2;margin:18px 0}.ke-emergency>a i{font-size:32px}.ke-emergency h4{font-size:18px;margin:0 0 12px}.ke-emergency p{font-size:13px;color:#f2d9ef}.ke-visa{background:#fff;border:1px solid #e8e2e5}.ke-visa h4{margin-top:28px}.ke-links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.ke-links a{display:flex;justify-content:space-between;gap:15px;padding:20px 22px;border:1px solid #e8e2e5;border-radius:7px;background:white;color:#322b31;font-size:13px;font-weight:700}.ke-links i{color:#850078}.ke-note{margin-top:26px;color:#777;font-size:11px;line-height:1.8}.ke-note i{color:#850078;margin-right:6px}
+@media(max-width:1000px){.ke-feature-grid,.ke-airports{grid-template-columns:repeat(2,1fr)}.ke-feature-dark{grid-column:span 2}.ke-split{gap:20px}.ke-airports article:last-child{grid-column:span 2}}
+@media(max-width:700px){.ke-section{padding:60px 0}.ke-container{width:calc(100% - 32px)}.ke-intro{display:block}.ke-index{display:none}.ke-nav{gap:14px}.ke-feature-grid,.ke-split,.ke-airports,.ke-transport,.ke-connect-grid,.ke-safety-grid,.ke-links{grid-template-columns:1fr}.ke-feature-dark,.ke-airports article:last-child{grid-column:auto}.ke-feature{min-height:0}.ke-section-heading{display:block;padding-top:60px}.ke-section-heading h3{margin-top:10px}.ke-connect-block{padding:20px}.ke-emergency>a{font-size:65px}.ke-app-grid{gap:8px}.ke-app-grid a{padding:9px;grid-template-columns:30px 1fr;gap:7px}.ke-app-grid img{width:28px;height:28px}}
 
 
 
 
 
+/* ==========================================
+   KEN DALA — EVENT CARD ALIGNMENT
+   ========================================== */
 
+.eventsSwiper .event-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.eventsSwiper .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 14px 16px 10px;
+}
+
+/* Country, city and venue — same height */
+.eventsSwiper .card-body small {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+
+    line-height: 1.5;
+    min-height: 27px;
+    max-height: 27px;
+}
+
+/* Event titles — reserve two lines */
+.eventsSwiper .card-body h3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+
+    line-height: 1.4;
+    min-height: 42px;
+    max-height: 42px;
+    margin: 8px 0 10px;
+}
+
+/* Description — reserve three lines */
+.eventsSwiper .event-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+
+    font-size: 12px;
+    line-height: 1.6;
+    height: 58px;
+    margin: 0 0 12px;
+}
+
+/* Event Details stays aligned */
+.eventsSwiper .card-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 12px;
+    font-weight: 700;
+    color: #850078;
+}
 
 
 

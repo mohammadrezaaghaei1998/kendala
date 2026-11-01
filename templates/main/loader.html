@@ -1,0 +1,138 @@
+
+{% load static %}
+
+<style>
+  #kd-page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .65s ease, visibility .65s ease;
+  }
+
+  #kd-page-loader.kd-loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .kd-loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 23px;
+  }
+
+  .kd-loader-logo {
+    display: block;
+    width: clamp(180px, 27vw, 310px);
+    max-width: 80vw;
+    height: auto;
+    animation: kd-logo-reveal 1.3s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .kd-loader-line {
+    width: 110px;
+    height: 2px;
+    overflow: hidden;
+    background: #f0e5ef;
+    border-radius: 20px;
+  }
+
+  .kd-loader-line::after {
+    content: "";
+    display: block;
+    width: 42%;
+    height: 100%;
+    background: #850078;
+    border-radius: inherit;
+    animation: kd-loader-progress 1.15s ease-in-out infinite;
+  }
+
+  .kd-loader-caption {
+    font: 500 9px/1.5 Arial, sans-serif;
+    letter-spacing: 3px;
+    color: #929292;
+    text-align: center;
+  }
+
+  @keyframes kd-logo-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(.97);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes kd-loader-progress {
+    from { transform: translateX(-110%); }
+    to { transform: translateX(270%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kd-loader-logo,
+    .kd-loader-line::after {
+      animation: none;
+    }
+
+    #kd-page-loader {
+      transition: none;
+    }
+  }
+</style>
+
+<div id="kd-page-loader" role="status" aria-label="Loading page">
+  <div class="kd-loader-content">
+    <img
+      class="kd-loader-logo"
+      src="{% static 'images/logopng.png' %}"
+      alt="Ken Dala"
+      fetchpriority="high"
+    >
+
+    <div class="kd-loader-line" aria-hidden="true"></div>
+
+    <div class="kd-loader-caption">
+      DISCOVER YOUR NEXT JOURNEY
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  function hideKenDalaLoader() {
+    const loader = document.getElementById("kd-page-loader");
+    if (!loader || loader.classList.contains("kd-loader-hidden")) return;
+
+    loader.classList.add("kd-loader-hidden");
+
+    window.setTimeout(function () {
+      loader.remove();
+    }, 700);
+  }
+
+  if (document.readyState === "complete") {
+    hideKenDalaLoader();
+  } else {
+    window.addEventListener("load", hideKenDalaLoader, { once: true });
+  }
+
+  // Fallback if a third-party resource takes too long.
+  window.setTimeout(hideKenDalaLoader, 5000);
+
+  // Handle returning to a page through browser history.
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) hideKenDalaLoader();
+  });
+})();
+</script>

@@ -1,0 +1,897 @@
+
+
+    :root{
+        --kd-purple:#850078;
+        --kd-black:#101010;
+        --kd-muted:#737781;
+        --kd-border:#e5e7eb;
+        --kd-soft:#f4f5f7
+    }
+    *{
+        box-sizing:border-box
+    }
+    body{
+        margin:0;
+        background:#fff;
+        color:var(--kd-black);
+        font-family:Inter,'Helvetica Neue',Arial,sans-serif
+    }
+    .kd-checkout{
+        max-width:1460px;
+        margin:0 auto;
+        padding:45px 5% 100px
+    }
+    .kd-checkout button,.kd-checkout input,.kd-checkout textarea{
+        font:inherit
+    }
+    .kd-checkout button{
+        cursor:pointer
+    }
+    .kd-topline,.kd-head,.kd-layout,.kd-section-top,.kd-counter,.kd-subhead,.kd-form-head,.kd-form-nav,.kd-summary-line,.kd-summary-total{
+        display:flex;
+        justify-content:space-between;
+        align-items:center
+    }
+    .kd-topline{
+        border-bottom:1px solid var(--kd-border);
+        padding-bottom:18px
+    }
+    .kd-eyebrow,.kd-meta,.kd-kicker{
+        font-size:10px;
+        font-weight:800;
+        letter-spacing:2px
+    }
+    .kd-secure{
+        font-size:12px;
+        color:var(--kd-muted)
+    }
+    .kd-head{
+        gap:25px;
+        align-items:flex-end;
+        padding:45px 0 44px
+    }
+    .kd-kicker{
+        color:var(--kd-purple);
+        margin:0 0 15px
+    }
+    .kd-head h1{
+        font-size:clamp(36px,4.1vw,62px);
+        line-height:1.06;
+        letter-spacing:-2.8px;
+        font-weight:700;
+        margin:0 0 13px
+    }
+    .kd-head h1 span{
+        color:var(--kd-purple)
+    }
+    .kd-head p,.kd-section-top p,.kd-counter p,.kd-subhead p{
+        color:var(--kd-muted);
+        font-size:14px;
+        margin:6px 0 0;
+        line-height:1.6
+    }
+    .kd-steps{
+        display:flex;
+        gap:8px;
+        flex-shrink:0;
+        position: sticky;
+        top: 90px;
+        
+    }
+    .kd-steps span{
+        border-top:2px solid #dfe1e5;
+        padding:12px 10px 0;
+        min-width:77px;
+        color:#8a8d96;
+        font-size:11px;
+        font-weight:800
+    }
+    .kd-steps span.current{
+        border-color:var(--kd-purple);
+        color:var(--kd-purple)
+    }
+    .kd-steps small{
+        display:block;
+        font-weight:500;
+        margin-top:3px
+    }
+    .kd-layout{
+        display:grid;
+        grid-template-columns:minmax(0,1.72fr) minmax(300px,.85fr);
+        gap:28px;
+        align-items:start
+    }
+    .kd-main{
+        display:grid;
+        gap:20px;
+        min-width:0
+    }
+    .kd-panel,.kd-summary,.kd-help{
+        border:1px solid var(--kd-border);
+        border-radius:17px;
+        background:white
+    }
+    .kd-panel{
+        padding:32px
+    }
+    .kd-section-top{
+        justify-content:flex-start;
+        gap:18px;
+        margin-bottom:28px;
+        align-items:flex-start
+    }
+    .kd-number{
+        display:grid;
+        place-items:center;
+        min-width:42px;
+        height:42px;
+        background:var(--kd-purple);
+        color:#fff;
+        font-size:13px;
+        font-weight:800;
+        border-radius:50%
+    }
+    .kd-section-top h2,.kd-summary h2{
+        margin:0;
+        font-size:24px;
+        letter-spacing:-.7px
+    }
+    .kd-overview-grid{
+        display:grid;
+        grid-template-columns:1.5fr 1fr .7fr;
+        gap:16px
+    }
+    .kd-overview-grid>div{
+        padding:18px;
+        background:var(--kd-soft);
+        border-radius:10px;
+        min-width:0
+    }
+    .kd-meta{
+        display:block;
+        color:var(--kd-muted);
+        font-size:9px;
+        letter-spacing:1px;
+        margin-bottom:10px
+    }
+    .kd-overview-grid strong{
+        font-size:13px;
+        line-height:1.6
+    }
+    .kd-note{
+        font-size:12px;
+        line-height:1.7;
+        color:var(--kd-muted);
+        margin:18px 0 0
+    }
+    .kd-counter{
+        padding:20px 0;
+        border-block:1px solid var(--kd-border);
+        gap:15px
+    }
+    .kd-counter strong{
+        font-size:15px
+    }
+    .kd-stepper{
+        display:flex;
+        align-items:center;
+        gap:16px
+    }
+    .kd-stepper button{
+        width:39px;
+        height:39px;
+        background:white;
+        border:1px solid #d8dbe0;
+        border-radius:50%;
+        font-size:23px
+    }
+    .kd-stepper output{
+        font-weight:800;
+        font-size:21px;
+        min-width:22px;
+        text-align:center
+    }
+    .kd-stepper button:disabled{
+        opacity:.35;
+        cursor:not-allowed
+    }
+    .kd-subhead{
+        gap:15px;
+        align-items:flex-start;
+        margin:29px 0 20px
+    }
+    .kd-subhead h3,.kd-form-head h3{
+        font-size:17px;
+        margin:0
+    }
+    .kd-completed{
+        white-space:nowrap;
+        color:var(--kd-purple);
+        font-size:12px;
+        font-weight:700
+    }
+    .kd-tabs{
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+        margin-bottom:18px
+    }
+    .kd-tabs button{
+        background:white;
+        border:1px solid #e2e4e9;
+        border-radius:30px;
+        padding:11px 14px;
+        font-size:12px;
+        color:#555b66;
+        font-weight:650
+    }
+    .kd-tabs button.selected{
+        background:var(--kd-purple);
+        border-color:var(--kd-purple);
+        color:#fff
+    }
+    .kd-tick{
+        margin-right:5px
+    }
+    .kd-traveler-form{
+        background:#f8f9fa;
+        border:1px solid #eceef1;
+        border-radius:13px;
+        padding:23px
+    }
+    .kd-form-head{
+        margin-bottom:22px
+    }
+    .kd-form-head span{
+        color:var(--kd-purple);
+        font-size:10px;
+        font-weight:800;
+        letter-spacing:1px
+    }
+    .kd-fields{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:18px
+    }
+    .kd-fields label,.kd-full{
+        display:flex;
+        flex-direction:column;
+        gap:9px;
+        font-size:12px;
+        font-weight:700
+    }
+    .kd-fields label span{
+        color:var(--kd-purple)
+    }
+    .kd-fields input,.kd-fields textarea,.kd-request textarea{
+        width:100%;
+        min-width:0;
+        background:white;
+        border:1px solid #dfe2e8;
+        border-radius:8px;
+        padding:14px;
+        color:#181818;
+        outline:none
+    }
+    .kd-fields input:focus,.kd-fields textarea:focus,.kd-request textarea:focus{
+        border-color:var(--kd-purple);
+        box-shadow:0 0 0 3px rgba(133,0,120,.09)
+    }
+    .kd-full{
+        grid-column:1/-1
+    }
+    .kd-form-nav{
+        margin-top:25px;
+        gap:10px
+    }
+    .kd-primary,.kd-submit{
+        background:var(--kd-purple);
+        color:white;
+        border:1px solid var(--kd-purple);
+        border-radius:8px;
+        padding:14px 20px;
+        font-size:13px;
+        font-weight:800
+    }
+    .kd-ghost{
+        border:1px solid #dce0e5;
+        border-radius:8px;
+        padding:14px 17px;
+        background:white;
+        color:#222;
+        font-size:13px
+    }
+    .kd-ghost:disabled{
+        opacity:.35;
+        cursor:not-allowed
+    }
+    .kd-room-options{
+        display:grid;
+        gap:12px
+    }
+    .kd-choice{
+        display:flex;
+        gap:14px;
+        align-items:flex-start;
+        border:1px solid var(--kd-border);
+        border-radius:11px;
+        padding:20px;
+        cursor:pointer
+    }
+    .kd-choice:has(input:checked){
+        border-color:var(--kd-purple);
+        background:#fdf7fc
+    }
+    .kd-choice input{
+        accent-color:var(--kd-purple);
+        margin-top:3px
+    }
+    .kd-choice strong,.kd-choice small{
+        display:block
+    }
+    .kd-choice strong{
+        font-size:14px
+    }
+    .kd-choice small{
+        color:var(--kd-muted);
+        font-size:12px;
+        line-height:1.6;
+        margin-top:6px
+    }
+    .kd-request{
+        margin-top:18px
+    }
+    .kd-checkrow{
+        display:flex;
+        align-items:flex-start;
+        gap:12px;
+        margin-top:26px
+    }
+    .kd-checkrow input{
+        accent-color:var(--kd-purple);
+        margin-top:3px
+    }
+    .kd-checkrow label{
+        font-size:12px;
+        line-height:1.8;
+        color:#525760
+    }
+    .kd-checkrow a,.kd-help a{
+        color:var(--kd-purple)
+    }
+    .kd-submit{
+        width:100%;
+        margin-top:22px;
+        padding:19px;
+        display:flex;
+        justify-content:space-between
+    }
+    .kd-sidebar{
+        position:sticky;
+        top:195px;
+        display:grid;
+        gap:16px
+    }
+    .kd-summary{
+        overflow:hidden
+    }
+    .kd-summary-head{
+        padding:24px 24px 18px
+    }
+    .kd-summary-head .kd-eyebrow{
+        color:var(--kd-purple)
+    }
+    .kd-summary-head h2{
+        font-size:23px;
+        margin-top:9px
+    }
+    .kd-summary-photo{
+        height:180px;
+        background:var(--kd-soft)
+    }
+    .kd-summary-photo img{
+        width:100%;
+        height:100%;
+        object-fit:cover
+    }
+    .kd-summary-body{
+        padding:24px
+    }
+    .kd-summary-body>strong{
+        font-size:17px;
+        line-height:1.5
+    }
+    .kd-summary-body>p{
+        font-size:12px;
+        color:var(--kd-muted);
+        margin:8px 0 22px
+    }
+    .kd-summary-line{
+        font-size:13px;
+        margin:18px 0;
+        gap:10px
+    }
+    .kd-summary-line span{
+        color:var(--kd-muted)
+    }
+    .kd-summary-line b{
+        font-size:12px;
+        text-align:right
+    }
+    .kd-summary-total{
+        border-top:1px solid var(--kd-border);
+        padding-top:21px;
+        margin-top:22px;
+        gap:10px
+    }
+    .kd-summary-total span{
+        font-size:13px
+    }
+    .kd-summary-total strong{
+        font-size:23px;
+        color:var(--kd-purple)
+    }
+    .kd-summary-body .kd-small{
+        line-height:1.6;
+        font-size:11px;
+        margin:16px 0 0
+    }
+    .kd-help{
+        padding:23px
+    }
+    .kd-help strong{
+        font-size:14px
+    }
+    .kd-help p{
+        font-size:12px;
+        line-height:1.6;
+        color:var(--kd-muted)
+    }
+    .kd-help a{
+        font-size:12px;
+        font-weight:700;
+        text-decoration:none
+    }
+    #kd-errors{
+        background:#fff4f4;
+        border:1px solid #f2b9b9;
+        border-radius:8px;
+        color:#8b1515;
+        font-size:12px;
+        line-height:1.7;
+        padding:14px;
+        margin-top:18px
+    }
+    .kd-modal[hidden],[hidden]{
+        display:none!important
+    }
+    .kd-modal{
+        position:fixed;
+        inset:0;
+        z-index:999999;
+        display:grid;
+        place-items:center;
+        padding:18px
+    }
+    .kd-modal-shade{
+        position:absolute;
+        inset:0;
+        background:rgba(0,0,0,.65)
+    }
+    .kd-modal-dialog{
+        position:relative;
+        background:white;
+        border-radius:18px;
+        padding:35px;
+        max-width:540px;
+        width:100%;
+        max-height:85vh;
+        overflow:auto
+    }
+    .kd-modal-dialog h2{
+        font-size:30px;
+        letter-spacing:-1px
+    }
+    .kd-modal-close{
+        position:absolute;
+        right:20px;
+        top:15px;
+        border:0;
+        background:none;
+        font-size:30px
+    }
+    .kd-review-list{
+        padding:0;
+        list-style:none
+    }
+    .kd-review-list li{
+        padding:12px 0;
+        border-bottom:1px solid var(--kd-border);
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        font-size:13px
+    }
+    .kd-review-list span{
+        color:var(--kd-muted)
+    }
+    .kd-modal-open{
+        overflow:hidden
+    }
+    @media(max-width:1000px){
+        .kd-layout{
+            grid-template-columns:minmax(0,1fr)
+        }
+        .kd-sidebar{
+            position:static;
+            grid-row:1
+        }
+        .kd-summary-photo{
+            height:130px
+        }
+        .kd-head{
+            display:block
+        }
+        .kd-steps{
+            margin-top:28px
+        }
+    }
+    @media(max-width:650px){
+        .kd-checkout{
+            padding:110px 16px 60px
+        }
+        .kd-head{
+            padding:35px 0
+        }
+        .kd-head h1{
+            letter-spacing:-1.5px
+        }
+        .kd-panel{
+            padding:20px
+        }
+        .kd-section-top h2{
+            font-size:20px
+        }
+        .kd-overview-grid,.kd-fields{
+            grid-template-columns:1fr
+        }
+        .kd-steps{
+            overflow:auto
+        }
+        .kd-steps span{
+            min-width:70px
+        }
+        .kd-subhead{
+            display:block
+        }
+        .kd-completed{
+            display:block;
+            margin-top:10px
+        }
+        .kd-traveler-form{
+            padding:16px
+        }
+        .kd-form-nav{
+            flex-wrap:wrap
+        }
+        .kd-summary-body{
+            padding:18px
+        }
+        .kd-topline{
+            gap:12px
+        }
+        .kd-secure{
+            white-space:nowrap
+        }
+    }
+
+/* REVIEW MODAL PAYMENT BUTTONS */
+
+.kd-payment-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.kd-pay-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: #850078;
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.kd-pay-button:hover {
+    background: #65005c;
+}
+
+.kd-payment-actions .kd-ghost {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   BOOKING PROGRESS STEPS
+========================================= */
+
+.kd-steps {
+    position: sticky;
+    top: 82px; /* Adjust to your navbar height */
+    z-index: 950;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    width: 100%;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.kd-steps span {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+
+    border-top: 3px solid #dfe1e5;
+
+    color: #8a8d96;
+    font-size: 12px;
+    font-weight: 800;
+
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.kd-steps small {
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ACTIVE STEP */
+
+.kd-steps span.current {
+    border-color: #850078;
+    color: #850078;
+}
+
+/* COMPLETED STEPS */
+
+.kd-steps span.completed {
+    border-color: #850078;
+    color: #850078;
+}
+
+/* MEDIUM SCREENS */
+
+@media (min-width: 651px) and (max-width: 1000px) {
+    .kd-steps {
+        top: 72px;
+        padding: 14px;
+        gap: 8px;
+    }
+
+    .kd-steps span {
+        padding: 10px;
+    }
+}
+
+/* MOBILE — NOT STICKY */
+
+/* @media (max-width: 650px) {
+    .kd-steps {
+        position: static;
+        padding: 12px;
+        overflow-x: auto;
+        gap: 6px;
+    }
+
+    .kd-steps span {
+        min-width: 65px;
+        padding: 10px 6px;
+    }
+} */
+
+
+
+
+
+
+
+
+
+.kd-coupon-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eaeaea;
+}
+
+.kd-coupon-section > label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.kd-coupon-control {
+    display: flex;
+    gap: 8px;
+}
+
+.kd-coupon-control input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid #dedee3;
+    border-radius: 9px;
+    outline: none;
+    font-size: 13px;
+}
+
+.kd-coupon-control input:focus {
+    border-color: #850078;
+}
+
+.kd-coupon-control button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 88px;
+    padding: 12px;
+    border: 0;
+    border-radius: 9px;
+    background: #850078;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.kd-coupon-control button:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
+.kd-coupon-spinner {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ffffff60;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: kdCouponSpin .7s linear infinite;
+}
+
+.kd-coupon-spinner[hidden],
+.kd-coupon-discount[hidden],
+.kd-coupon-final[hidden] {
+    display: none !important;
+}
+
+@keyframes kdCouponSpin {
+    to { transform: rotate(360deg); }
+}
+
+#kd-coupon-message {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 9px 0 0;
+}
+
+#kd-coupon-message.success { color: #15803d; }
+#kd-coupon-message.error { color: #dc2626; }
+
+.kd-coupon-discount,
+.kd-coupon-final {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+.kd-coupon-discount {
+    color: #15803d;
+}
+
+.kd-coupon-final {
+    border-top: 1px solid #eaeaea;
+    padding-top: 15px;
+    align-items: center;
+    font-weight: 700;
+}
+
+.kd-coupon-final strong {
+    color: #850078;
+    font-size: 20px;
+}
+
+
+
+
+#kd-apply-coupon {
+    position: relative;
+    min-width: 88px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#kd-apply-coupon.is-loading {
+    cursor: wait;
+    opacity: 0.85;
+}
+
+#kd-coupon-button-text[hidden],
+#kd-coupon-spinner[hidden] {
+    display: none !important;
+}
+
+#kd-coupon-spinner:not([hidden]) {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: kdCouponSpin 0.7s linear infinite;
+}
+
+@keyframes kdCouponSpin {
+    to { transform: rotate(360deg); }
+}
+
+
+
+
+
+
+.kd-summary-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+}
+
+.kd-summary-total span {
+    flex: 1;
+}
+
+.kd-summary-total strong {
+    flex-shrink: 0;
+    white-space: nowrap;
+    color: #850078;
+}
+
+.kd-coupon-section {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #eaeaea;
+}

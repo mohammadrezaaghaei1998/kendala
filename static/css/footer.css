@@ -11,8 +11,8 @@
     gap:60px;
 }
 .footer-brand img{
-    width:100px;
-    filter:invert(15%) sepia(80%) saturate(3500%) hue-rotate(280deg) brightness(75%);
+    width:170px;
+    /* filter:invert(15%) sepia(80%) saturate(3500%) hue-rotate(280deg) brightness(75%); */
 }
 .footer-brand small{
     display:block;

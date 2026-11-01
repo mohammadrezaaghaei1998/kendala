@@ -1,0 +1,129 @@
+
+{% extends 'travel_tools/base.html' %}
+
+{% block title %}Passport Rankings{% endblock %}
+{% block heading %}Global Passport Rankings{% endblock %}
+{% block subheading %}Compare international travel access using customizable passport scores.{% endblock %}
+
+{% block content %}
+
+<form class="panel" method="get">
+    <h2>Customize the scoring system</h2>
+    <p>
+        Assign points to each visa access category.
+        Higher values reward easier travel access.
+    </p>
+
+    <div class="weight-grid">
+        {% for name, value in weights %}
+        <label>
+            {{ name }}
+            <input
+                type="number"
+                name="{{ name }}"
+                min="-10"
+                max="10"
+                step="0.5"
+                value="{{ value }}"
+            >
+        </label>
+        {% endfor %}
+    </div>
+
+    <button type="submit" name="check" value="1">
+        Calculate Rankings →
+    </button>
+</form>
+
+{% if ranking %}
+<section class="panel results">
+
+    <h2>Passport Rankings</h2>
+    <p>
+        Rankings are calculated using your selected weights.
+        These are custom scores, not an official government ranking.
+    </p>
+
+    <div class="notice">
+        Your current Travel Buddy BASIC subscription returns
+        only the top 10 passports.
+    </div>
+
+    <div id="ranking-output"></div>
+
+</section>
+
+{{ ranking|json_script:'ranking-data' }}
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const data = JSON.parse(
+        document.getElementById('ranking-data').textContent
+    );
+
+    const container = document.getElementById('ranking-output');
+
+    const rows = Array.isArray(data)
+        ? data
+        : Array.isArray(data.data)
+            ? data.data
+            : [];
+
+    if (!rows.length) {
+        container.textContent = 'No rankings were returned.';
+        return;
+    }
+
+    const table = document.createElement('table');
+    table.className = 'passport-ranking-table';
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+
+    ['Rank', 'Passport', 'Visa-free', 'On arrival', 'eVisa', 'Score']
+        .forEach(label => {
+            const th = document.createElement('th');
+            th.textContent = label;
+            headerRow.appendChild(th);
+        });
+
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    rows.forEach(item => {
+
+        const tr = document.createElement('tr');
+
+        const passport = item.passport || {};
+        const categories = item.categories || {};
+
+        const values = [
+            item.rank ?? '—',
+            passport.name || passport.code || 'Unknown',
+            categories['Visa-free'] ?? 0,
+            categories['Visa on arrival'] ?? 0,
+            categories['eVisa'] ?? 0,
+            item.score ?? '—'
+        ];
+
+        values.forEach(value => {
+            const td = document.createElement('td');
+            td.textContent = String(value);
+            tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+});
+</script>
+
+{% endif %}
+
+{% endblock %}

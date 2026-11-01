@@ -1,0 +1,109 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Explore Events | Ken Dala</title>
+  <link rel="stylesheet" href="{% static 'css/events.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="kd-events-page">
+  {% include 'main/loader.html' %}
+   {% include 'main/header.html' %}
+  <main>
+    <section class="kd-hero" aria-label="Türkiye events highlights" data-hero>
+      <div class="kd-hero-slide is-active" data-slide>
+        <video class="kd-hero-media" autoplay muted playsinline loop preload="metadata" poster="{% static 'images/turkiye-events-poster.jpg' %}">
+          <source src="{% static 'videos/turkiye-events.mp4' %}" type="video/mp4">
+        </video>
+      </div>
+      {% for event in featured|slice:':3' %}
+        {% if event.source_image_url or event.image %}
+        <div class="kd-hero-slide" data-slide>
+          {% if event.source_image_url %}<img class="kd-hero-media" src="{{ event.source_image_url }}" alt="{{ event.title }}" referrerpolicy="no-referrer">
+          {% else %}<img class="kd-hero-media" src="{{ event.image.url }}" alt="{{ event.title }}">{% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+      <div class="kd-hero-shade"></div>
+      <div class="kd-shell kd-hero-inner"><div><p class="kd-eyebrow">KEN DALA / DISCOVER</p><h1>Explore <em>Events</em></h1><p class="kd-hero-subtitle"> Discover unforgettable experiences across Kazakhstan, Türkiye and Oman.</p></div></div>
+      <div class="kd-hero-controls" aria-label="Hero navigation"><button type="button" data-hero-prev aria-label="Previous slide">‹</button><div class="kd-hero-dots" data-hero-dots></div><button type="button" data-hero-next aria-label="Next slide">›</button></div>
+    </section>
+
+    <section class="kd-section kd-featured" aria-labelledby="featured-heading">
+      <div class="kd-shell kd-section-heading"><div><h2 id="featured-heading">Featured <span>Events</span></h2><p>Discover cultural highlights and extraordinary experiences.</p></div><div class="kd-arrows"><button type="button" data-scroll-prev="featured-track" aria-label="Previous featured events">←</button><button type="button" data-scroll-next="featured-track" aria-label="Next featured events">→</button></div></div>
+      <div class="kd-track kd-featured-track" id="featured-track">
+        {% for event in featured %}{% include 'partials/event_card.html' with event=event %}
+        {% empty %}<p class="kd-empty">Featured events will appear here once events are available.</p>{% endfor %}
+      </div>
+    </section>
+
+    <section class="kd-section kd-soon" aria-labelledby="soon-heading">
+      <div class="kd-shell kd-soon-layout"><div class="kd-soon-intro"><p class="kd-eyebrow">COMING UP</p><h2 id="soon-heading">Happening <span>Soon</span></h2><p>Find inspiring experiences for your upcoming trip.</p><div class="kd-arrows"><button type="button" data-scroll-prev="soon-track" aria-label="Previous upcoming events">←</button><button type="button" data-scroll-next="soon-track" aria-label="Next upcoming events">→</button></div></div><div class="kd-track kd-soon-track" id="soon-track">{% for event in happening_soon %}{% include 'partials/event_card.html' with event=event %}{% empty %}<p class="kd-empty">No upcoming events available yet.</p>{% endfor %}</div></div>
+    </section>
+
+    <section class="kd-section kd-all" aria-labelledby="all-heading">
+      <div class="kd-shell"><div class="kd-section-heading"><div><h2 id="all-heading">Explore <span>Events</span></h2><p>Find your next experience by city, date, category or venue.</p></div></div>
+      <form class="kd-filters" method="get" action="" role="search">
+        <label>
+            <span>Country</span>
+            <select name="country" id="kd-country-filter">
+                <option value="">All countries</option>
+
+                {% for country in countries %}
+                <option
+                    value="{{ country.slug }}"
+                    {% if filters.country == country.slug %}selected{% endif %}
+                >
+                    {{ country.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>
+            <span>City</span>
+            <select name="city" id="kd-city-filter">
+                <option value="">All cities</option>
+
+                {% for city in cities %}
+                {% with city_id=city.pk|stringformat:"s" %}
+                <option
+                    value="{{ city.pk }}"
+                    data-country="{{ city.country.slug }}"
+                    {% if filters.city == city_id %}selected{% endif %}
+                >
+                    {{ city.name }} — {{ city.country.name }}
+                </option>
+                {% endwith %}
+                {% endfor %}
+            </select>
+        </label>        
+        <label><span>From</span><input type="date" name="from" value="{{ filters.from_date }}"></label>
+        <label><span>Category</span><select name="category"><option value="">All categories</option>{% for category in categories %}<option value="{{ category }}" {% if filters.category == category %}selected{% endif %}>{{ category }}</option>{% endfor %}</select></label>
+        <label><span>Venue</span><select name="venue"><option value="">All venues</option>{% for venue in venues %}<option value="{{ venue }}" {% if filters.venue == venue %}selected{% endif %}>{{ venue }}</option>{% endfor %}</select></label>
+        <label class="kd-search"><span>Search</span><input type="search" name="q" placeholder="Search events" value="{{ filters.q }}"></label>
+        <button class="kd-filter-submit" type="submit">Find Events</button><a class="kd-reset" href="{% url 'events' %}">Reset</a>
+      </form>
+      <div class="kd-event-grid">{% for event in events_page %}{% include 'partials/event_card.html' with event=event %}{% empty %}<p class="kd-empty">No events match your filters.</p>{% endfor %}</div>
+      {% if events_page.has_other_pages %}<nav class="kd-pagination" aria-label="Event pages">{% if events_page.has_previous %}<a href="?{{ filter_query }}&page={{ events_page.previous_page_number }}">Previous</a>{% endif %}<span>Page {{ events_page.number }} of {{ events_page.paginator.num_pages }}</span>{% if events_page.has_next %}<a href="?{{ filter_query }}&page={{ events_page.next_page_number }}">Load More →</a>{% endif %}</nav>{% endif %}
+      </div>
+    </section>
+
+    <section class="kd-section kd-venues" aria-labelledby="venues-heading"><div class="kd-shell"><h2 id="venues-heading">Iconic <span>Stages</span></h2><p>Explore places where unforgettable experiences happen.</p><div class="kd-venue-grid">{% for venue in venue_cards %}<a class="kd-venue-card" href="?venue={{ venue.name|urlencode }}#all-heading"><div class="kd-venue-art">{% if venue.image_url %}<img src="{{ venue.image_url }}" alt="" loading="lazy">{% endif %}</div><div><h3>{{ venue.name }}</h3><p>{{ venue.city }}</p><small>{{ venue.count }} event{{ venue.count|pluralize }}</small></div></a>{% empty %}<p class="kd-empty">Venues will appear as events are added.</p>{% endfor %}</div></div></section>
+  </main>
+  <footer class="kd-source"><div class="kd-shell">Event listings are provided for travel discovery. Check the original event page for current details.</div></footer>
+
+       {% include 'main/footer.html' %}
+
+
+
+
+
+  <script src="{% static 'js/events.js' %}" defer></script>
+  <script src="{% static 'js/navbar.js' %}" defer></script>
+
+
+</body></html>

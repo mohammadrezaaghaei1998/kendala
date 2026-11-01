@@ -6,35 +6,151 @@ document.addEventListener('DOMContentLoaded',()=>{
   addEventListener('scroll',()=>header.classList.toggle('compact',scrollY>20));
 
   // Hero: the reference keeps one campaign's text on screen while its background behaves like a video.
-  const heroSlides=[
-    {title:'Gulf Cup 27 in Jeddah',text:'Catch every moment of the tournament from September 23 to October 6, follow every match, and back your team alongside fans from across the Gulf.',cta:'Plan Your Visit',images:['https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=2400&q=90','https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=2400&q=90']},
-    {title:'AFC Asian Cup Saudi 2027™',text:'Get ready for the AFC Asian Cup with exclusive packages combining match access and exciting journeys across Saudi.',cta:'Book Now',images:['https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=2400&q=90']},
-    {title:'Water fun awaits!',text:'Largest water theme park in the region, bringing world-breaking aquatic experiences at the heart of Qiddiya City.',cta:'Explore Now',images:['https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2400&q=90']},
-    {title:'Join and Enjoy Saudi Rewards',text:'Enjoy tailored offers and earn more points!',cta:'Earn rewards',images:['https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=2400&q=90']}
-  ];
-  let heroIndex=0, heroFrame=0, heroTimer=null, heroPlaying=true;
-  const media=$('#heroMedia'), title=$('#heroTitle'), text=$('#heroText'), cta=$('#heroCta');
-  function renderHeroText(i){
-    heroIndex=i; heroFrame=0;
-    const s=heroSlides[i];
-    title.textContent=s.title;text.textContent=s.text;cta.textContent=s.cta;
-    media.style.backgroundImage=`url("${s.images[0]}")`;
-    $$('.hero-tab').forEach((b,j)=>b.classList.toggle('active',j===i));
+  // const heroSlides=[
+  //   {title:'Gulf Cup 27 in Jeddah',text:'Catch every moment of the tournament from September 23 to October 6, follow every match, and back your team alongside fans from across the Gulf.',cta:'Plan Your Visit',images:['https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=2400&q=90','https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=2400&q=90']},
+  //   {title:'AFC Asian Cup Saudi 2027™',text:'Get ready for the AFC Asian Cup with exclusive packages combining match access and exciting journeys across Saudi.',cta:'Book Now',images:['https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=2400&q=90']},
+  //   {title:'Water fun awaits!',text:'Largest water theme park in the region, bringing world-breaking aquatic experiences at the heart of Qiddiya City.',cta:'Explore Now',images:['https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2400&q=90']},
+  //   {title:'Join and Enjoy Saudi Rewards',text:'Enjoy tailored offers and earn more points!',cta:'Earn rewards',images:['https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=2400&q=90']}
+  // ];
+  // let heroIndex=0, heroFrame=0, heroTimer=null, heroPlaying=true;
+  // const media=$('#heroMedia'), title=$('#heroTitle'), text=$('#heroText'), cta=$('#heroCta');
+  // function renderHeroText(i){
+  //   heroIndex=i; heroFrame=0;
+  //   const s=heroSlides[i];
+  //   title.textContent=s.title;text.textContent=s.text;cta.textContent=s.cta;
+  //   media.style.backgroundImage=`url("${s.images[0]}")`;
+  //   $$('.hero-tab').forEach((b,j)=>b.classList.toggle('active',j===i));
+  // }
+  // function startHero(){
+  //   clearInterval(heroTimer);
+  //   heroTimer=setInterval(()=>{
+  //     const imgs=heroSlides[heroIndex].images;
+  //     if(imgs.length>1){heroFrame=(heroFrame+1)%imgs.length;media.style.backgroundImage=`url("${imgs[heroFrame]}")`;}
+  //   },3200);
+  // }
+  // $$('.hero-tab').forEach(b=>b.onclick=()=>{renderHeroText(+b.dataset.index);if(heroPlaying)startHero()});
+  // $('#heroPause').onclick=()=>{
+  //   heroPlaying=!heroPlaying;
+  //   $('#heroPause i').className=heroPlaying?'fa-solid fa-pause':'fa-solid fa-play';
+  //   heroPlaying?startHero():clearInterval(heroTimer);
+  // };
+  // renderHeroText(0);startHero();
+
+
+
+
+
+
+
+
+  // HERO - DYNAMIC CONTENT FROM DJANGO ADMIN
+
+  const heroDataElement = document.getElementById(
+      "homepage-hero-data"
+  );
+
+  const heroSlides = heroDataElement
+      ? JSON.parse(heroDataElement.textContent)
+      : [];
+
+  const media = document.querySelector("#heroMedia");
+  const title = document.querySelector("#heroTitle");
+  const heroText = document.querySelector("#heroText");
+  const cta = document.querySelector("#heroCta");
+  const heroTabs = document.querySelectorAll(".hero-tab");
+
+  let heroIndex = 0;
+  let heroFrame = 0;
+  let heroTimer = null;
+  let heroPlaying = true;
+
+  function renderHeroText(index) {
+      if (!heroSlides.length) return;
+
+      heroIndex = index;
+      heroFrame = 0;
+
+      const slide = heroSlides[index];
+
+      title.textContent = slide.title;
+      heroText.textContent = slide.text;
+      cta.textContent = slide.cta;
+      cta.href = slide.url;
+
+      if (slide.images.length) {
+          media.style.backgroundImage =
+              `url("${slide.images[0]}")`;
+      } else {
+          media.style.backgroundImage = "none";
+      }
+
+      heroTabs.forEach((tab, i) => {
+          tab.classList.toggle("active", i === index);
+      });
   }
-  function startHero(){
-    clearInterval(heroTimer);
-    heroTimer=setInterval(()=>{
-      const imgs=heroSlides[heroIndex].images;
-      if(imgs.length>1){heroFrame=(heroFrame+1)%imgs.length;media.style.backgroundImage=`url("${imgs[heroFrame]}")`;}
-    },3200);
+
+  function startHero() {
+      clearInterval(heroTimer);
+
+      if (!heroSlides.length) return;
+
+      heroTimer = setInterval(() => {
+          const images = heroSlides[heroIndex].images;
+
+          if (images.length > 1) {
+              heroFrame = (heroFrame + 1) % images.length;
+
+              media.style.backgroundImage =
+                  `url("${images[heroFrame]}")`;
+          }
+      }, 3200);
   }
-  $$('.hero-tab').forEach(b=>b.onclick=()=>{renderHeroText(+b.dataset.index);if(heroPlaying)startHero()});
-  $('#heroPause').onclick=()=>{
-    heroPlaying=!heroPlaying;
-    $('#heroPause i').className=heroPlaying?'fa-solid fa-pause':'fa-solid fa-play';
-    heroPlaying?startHero():clearInterval(heroTimer);
-  };
-  renderHeroText(0);startHero();
+
+  heroTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+          const index = Number(tab.dataset.index);
+
+          renderHeroText(index);
+
+          if (heroPlaying) {
+              startHero();
+          }
+      });
+  });
+
+  const heroPause = document.querySelector("#heroPause");
+
+  if (heroPause) {
+      heroPause.addEventListener("click", () => {
+          heroPlaying = !heroPlaying;
+
+          const icon = heroPause.querySelector("i");
+
+          if (icon) {
+              icon.className = heroPlaying
+                  ? "fa-solid fa-pause"
+                  : "fa-solid fa-play";
+          }
+
+          if (heroPlaying) {
+              startHero();
+          } else {
+              clearInterval(heroTimer);
+          }
+      });
+  }
+
+  if (heroSlides.length) {
+      renderHeroText(0);
+      startHero();
+  }
+
+
+
+
+
+
+
 
   // Generic horizontal carousels
   $$('.carousel-arrow').forEach(btn=>btn.onclick=()=>{
@@ -98,4 +214,76 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   if(window.AOS)AOS.init({offset:70,duration:700,once:true});
   if(window.Splitting)Splitting();
+});
+
+
+
+
+
+
+
+
+
+
+
+const toursSwiper = new Swiper(".toursSwiper", {
+    slidesPerView: 1.2,
+    spaceBetween: 20,
+
+    navigation: {
+        nextEl: ".tour-next",
+        prevEl: ".tour-prev",
+    },
+
+    scrollbar: {
+        el: ".toursSwiper .swiper-scrollbar",
+        draggable: true,
+    },
+
+    breakpoints: {
+        640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+        },
+        1024: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+        },
+        1400: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+        },
+    },
+});
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cards = document.querySelectorAll(".before-grid article");
+
+    cards.forEach(card => {
+
+        const video = card.querySelector("video");
+
+        if (!video) return;
+
+        card.addEventListener("mouseenter", () => {
+            video.play().catch(() => {});
+        });
+
+        card.addEventListener("mouseleave", () => {
+            video.pause();
+            video.currentTime = 0;
+        });
+
+    });
+
 });

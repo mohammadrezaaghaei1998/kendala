@@ -7,18 +7,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>WSI | Login</title>
+    <title>Ken Dala | Login</title>
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ken-dala-toast.css' %}">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel="icon" type="image/png" href="{% static 'images/logopngdark.png' %}">
 
+
     
 </head>
 
 <body>
+    {% include 'main/loader.html' %}
 
     <main class="login-page">
 
@@ -47,7 +51,7 @@
             <a href="{% url 'index' %}" class="brand-logo"
                aria-label="WSI home">
 
-                <img src="{% static 'images/logopng.png' %}" alt="WSI">
+                <img src="{% static 'images/logowhite.png' %}" alt="WSI">
 
             </a>
 
@@ -86,11 +90,13 @@
                     Sign in to continue your journey with us.
                 </p>
 
-                <form id="loginForm" action="#" method="post">
+                <form id="loginForm" action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ auth_next }}">
 
                     <div class="form-group">
 
-                        <label for="username" class="form-label">
+                        <label for="username" name="username" class="form-label" required>
                             Username or Email
                         </label>
 
@@ -107,7 +113,7 @@
 
                     <div class="form-group">
 
-                        <label for="password" class="form-label">
+                        <label for="password" class="form-label" name="password" required>
                             Password
                         </label>
 
@@ -157,8 +163,12 @@
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
 
-                    <p class="form-message" id="formMessage"
-                       role="alert"></p>
+                    <p class="form-message {% if error %}visible{% endif %}"
+                        id="formMessage"
+                        role="alert"
+                        {% if error %}data-login-error="true"{% endif %}>
+                            {% if error %}{{ error }}{% endif %}
+                    </p>
 
                 </form>
 
@@ -178,7 +188,8 @@
 
                 <p class="signup-text">
                     Don't have an account?
-                    <a href="{% url 'signup' %}" class="form-link">
+                   <a href="{% url 'signup' %}?next={{ auth_next|urlencode }}"
+                    class="form-link">
                         Create an account
                     </a>
                 </p>
@@ -196,7 +207,84 @@
 
     </main>
 
-    
-    <script src="{% static 'js/login.js' %}"></script>
+     <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+        <img
+            id="kd-chat-icon"
+            src="{% static 'images/chat-icon.png' %}"
+            alt="Chat"
+        >
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/ken-dala-toast.js' %}?v=1"></script>
+    <script src="{% static 'js/login.js' %}?v=2"></script>
+       
+
+
+
+
+
+
+
+        
+    <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            window.$crisp = window.$crisp || [];
+
+            const chatLauncher = document.getElementById("kd-chat-launcher");
+
+            if (!chatLauncher) {
+                console.error("Ken Dala chat launcher not found.");
+                return;
+            }
+
+            $crisp.push(["do", "chat:hide"]);
+
+            chatLauncher.addEventListener("click", function () {
+
+                $crisp.push(["do", "chat:show"]);
+                $crisp.push(["do", "chat:open"]);
+
+            });
+
+            $crisp.push(["on", "chat:opened", function () {
+
+                chatLauncher.classList.add("chat-open");
+
+            }]);
+
+            $crisp.push(["on", "chat:closed", function () {
+
+                chatLauncher.classList.remove("chat-open");
+
+                $crisp.push(["do", "chat:hide"]);
+
+            }]);
+
+        });
+    </script>
+
+
+
+
+    {% if messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                {% for message in messages %}
+                    showToast(
+                        "{{ message|escapejs }}",
+                        "{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}error{% elif 'warning' in message.tags %}warning{% else %}info{% endif %}",
+                        "{% if 'success' in message.tags %}Welcome to Ken Dala!{% else %}Ken Dala{% endif %}"
+                    );
+                {% endfor %}
+            });
+        </script>
+    {% endif %}
+
 </body>
 </html>

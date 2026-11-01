@@ -5,9 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WSI | SignUp</title>
+    <title>Ken Dala | SignUp</title>
 
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ken-dala-toast.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +25,7 @@
 </head>
 
 <body>
+    {% include 'main/loader.html' %}
 
 <main class="register-page">
 
@@ -42,7 +45,7 @@
     <section class="register-content">
 
         <a href="{% url 'index' %}" class="brand" aria-label="Back to home">
-            <img src="{% static 'images/logopng.png' %}"
+            <img src="{% static 'images/logowhite.png' %}"
                  alt="Website logo"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
 
@@ -101,9 +104,29 @@
             <p>Join us today. It only takes a minute.</p>
         </div>
 
-        <form id="registerForm" action="#" method="post">
+        <form id="registerForm" action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
 
-            <!-- Add your server-side CSRF token here if required. -->
+
+            <input type="hidden" name="next" value="{{ auth_next }}">
+
+
+            {% if form.errors %}
+                <div id="signupErrors" hidden style="display:none !important;">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+                        
+         
+
 
             <div class="form-group">
                 <label for="fullName">Full name</label>
@@ -113,6 +136,7 @@
                         type="text"
                         id="fullName"
                         name="full_name"
+                        value="{{ form.full_name.value|default_if_none:'' }}"
                         placeholder="Enter your full name"
                         autocomplete="name"
                         required>
@@ -127,6 +151,7 @@
                         type="text"
                         id="username"
                         name="username"
+                        value="{{ form.username.value|default_if_none:'' }}"
                         placeholder="Choose a username"
                         autocomplete="username"
                         minlength="3"
@@ -155,7 +180,7 @@
                     <input
                         type="password"
                         id="password"
-                        name="password"
+                        name="password1"
                         placeholder="Create a strong password"
                         autocomplete="new-password"
                         minlength="8"
@@ -177,7 +202,7 @@
                     <input
                         type="password"
                         id="confirmPassword"
-                        name="confirm_password"
+                        name="password2"
                         placeholder="Enter your password again"
                         autocomplete="new-password"
                         required>
@@ -192,7 +217,7 @@
             </div>
 
             <label class="terms-row">
-                <input type="checkbox" id="acceptTerms" required>
+               <input type="checkbox" id="acceptTerms" name="accept_terms" required>
                 <span>
                     I agree to the
                     <a href="terms.html">Terms of Service</a>
@@ -200,6 +225,9 @@
                     <a href="privacy.html">Privacy Policy</a>.
                 </span>
             </label>
+
+       
+
 
             <button type="submit" class="submit-button">
                 Create Account
@@ -220,7 +248,9 @@
 
             <p class="signin-prompt">
                 Already have an account?
-                <a href="{% url 'login' %}" class="signin-link">Sign in</a>
+                <a href="{% url 'login' %}?next={{ auth_next|urlencode }}" class="signin-link">
+                    Sign in
+                </a>
             </p>
 
         </form>
@@ -233,7 +263,84 @@
 
 </main>
 
-<script src="{% static 'js/signup.js' %}"></script>
+
+     <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+        <img
+            id="kd-chat-icon"
+            src="{% static 'images/chat-icon.png' %}"
+            alt="Chat"
+        >
+    </button>
+
+
+
+    <script src="{% static 'js/ken-dala-toast.js' %}?v=1"></script>
+    <script src="{% static 'js/signup.js' %}?v=4"></script>
+
+
+
+
+
+
+    <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            window.$crisp = window.$crisp || [];
+
+            const chatLauncher = document.getElementById("kd-chat-launcher");
+
+            if (!chatLauncher) {
+                console.error("Ken Dala chat launcher not found.");
+                return;
+            }
+
+            $crisp.push(["do", "chat:hide"]);
+
+            chatLauncher.addEventListener("click", function () {
+
+                $crisp.push(["do", "chat:show"]);
+                $crisp.push(["do", "chat:open"]);
+
+            });
+
+            $crisp.push(["on", "chat:opened", function () {
+
+                chatLauncher.classList.add("chat-open");
+
+            }]);
+
+            $crisp.push(["on", "chat:closed", function () {
+
+                chatLauncher.classList.remove("chat-open");
+
+                $crisp.push(["do", "chat:hide"]);
+
+            }]);
+
+        });
+    </script>
+
+    {% if form.errors %}
+        <script id="kd-signup-error-data" type="application/json">
+            {
+                "errors": [
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            "{{ error|escapejs }}",
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        "{{ error|escapejs }}",
+                    {% endfor %}
+                    ""
+                ]
+            }
+        </script>
+    {% endif %}
 
 </body>
 </html>

@@ -1,0 +1,609 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ken Dala | Things to Do</title>
+
+  <link rel="stylesheet" href="{% static 'css/tour-packages.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    .kd-original-price {
+      font-size: .72em;
+      color: #888;
+      text-decoration: line-through;
+      font-weight: 400;
+      margin-right: 8px;
+    }
+
+    .kd-no-tours {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 55px 20px;
+      color: #777;
+    }
+
+    /* Destination filter inside the existing sidebar */
+    .kd-filters .kd-city-heading {
+      cursor: default;
+    }
+
+    .kd-filters .kd-city-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 0 12px 15px;
+    }
+
+    .kd-filters .kd-city-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 7px;
+      color: #333;
+      text-decoration: none;
+      font-size: 12px;
+      transition: background .2s, color .2s;
+    }
+
+    .kd-filters .kd-city-option span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .kd-filters .kd-city-option small {
+      font-size: 10px;
+      color: #999;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .kd-filters .kd-city-option:hover {
+      background: #f6f0f6;
+      color: #850078;
+    }
+
+    .kd-filters .kd-city-option.is-active {
+      background: #850078;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .kd-filters .kd-city-option.is-active small {
+      color: rgba(255,255,255,.85);
+    }
+
+    .kd-filters .kd-city-option.is-unavailable {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .kd-filters .kd-city-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .kd-filters .kd-city-list::-webkit-scrollbar-thumb {
+      background: #ddd;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  {% include 'main/loader.html' %}
+  {% include 'main/header.html' %}
+
+  <main class="kd-packs" id="kd-packages">
+    <div class="kd-shell">
+
+      <!-- BREADCRUMB -->
+      <nav class="kd-crumb" aria-label="Breadcrumb">
+        <a href="{% url 'index' %}">Homepage</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Things to Do</span>
+      </nav>
+
+      <!-- PAGE INTRODUCTION -->
+      <div class="kd-intro">
+        <div>
+          <span class="kd-eyebrow">EXPLORE WITH KEN DALA</span>
+
+          <h1>
+            Real experiences,
+            <em>extraordinary places.</em>
+          </h1>
+
+          <p>
+            {% if selected_city %}
+              Discover adventures, water sports, nature and guided experiences in {{ city_name }}.
+            {% else %}
+              Explore extraordinary adventures, water sports, nature and guided experiences across our destinations.
+            {% endif %}
+          </p>
+        </div>
+
+        <div class="kd-intro-aside">
+          <span>
+            {% if selected_city %}
+              {{ city_name|upper }} / EXPERIENCES
+            {% else %}
+              ALL DESTINATIONS / EXPERIENCES
+            {% endif %}
+          </span>
+          <span class="kd-intro-line"></span>
+        </div>
+      </div>
+
+      <!-- FILTER TOOLBAR -->
+      <div class="kd-topline">
+
+        <div class="kd-topline-left">
+          <strong>FILTERS</strong>
+
+          <button type="button"
+                  id="kd-clear-all"
+                  class="kd-text-btn">
+            Clear All
+          </button>
+
+          <button type="button"
+                  class="kd-toggle-btn"
+                  id="kd-toggle-filters">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Hide Filters</span>
+          </button>
+        </div>
+
+        <div class="kd-topline-right">
+          <span id="kd-result-count"
+                data-total="{{ selected_city_count|default_if_none:'' }}">
+              {% if selected_city_count is not None %}
+                  {{ selected_city_count }} experience{{ selected_city_count|pluralize }} found
+              {% else %}
+                  Explore experiences
+              {% endif %}
+          </span>
+
+          <label class="kd-sort-wrap">
+            <span class="sr-only">Sort experiences</span>
+
+            <select id="kd-sort">
+              <option value="recommended">Recommended</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name">Name A–Z</option>
+            </select>
+
+            <i class="fa-solid fa-chevron-down"></i>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- MAIN LAYOUT -->
+      <div class="kd-layout" id="kd-layout">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="kd-filters"
+               id="kd-filters"
+               aria-label="Filter experiences">
+
+          <!-- DESTINATIONS -->
+          <div class="kd-filter-card kd-city-filter">
+
+            <div class="kd-filter-head kd-city-heading">
+              <span>DESTINATIONS</span>
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div class="kd-filter-body kd-city-list">
+
+              <a href="{% url 'viator-things-to-do' %}"
+                 class="kd-city-option {% if not selected_city %}is-active{% endif %}"
+                 {% if not selected_city %}aria-current="page"{% endif %}>
+                <span>All Destinations
+                  <small>
+                  {% if total_experiences is not None %}
+                    {{ total_experiences }}
+                  {% else %}
+                    —
+                  {% endif %}
+                </small>
+
+                </span>
+                
+                <i class="fa-solid fa-globe"></i>
+              </a>
+
+              {% for city in cities %}
+
+                {% if city.slug in available_city_slugs %}
+
+                  <a href="{% url 'viator-things-to-do' %}?city={{ city.slug|urlencode }}"
+                     class="kd-city-option {% if selected_city == city.slug %}is-active{% endif %}"
+                     {% if selected_city == city.slug %}aria-current="page"{% endif %}>
+
+                    <span>{{ city.name }}</span>
+                    <small>{{ city.country.name }}</small>
+
+                  </a>
+
+                {% else %}
+
+                  <div class="kd-city-option is-unavailable"
+                       title="Viator experiences are not configured for this city">
+
+                    <span>{{ city.name }}</span>
+                    <small>Coming soon</small>
+
+                  </div>
+
+                {% endif %}
+
+              {% empty %}
+
+                <p>No destinations available.</p>
+
+              {% endfor %}
+
+            </div>
+          </div>
+
+          <!-- EXPERIENCE FILTER -->
+          <div class="kd-filter-card">
+
+            <button class="kd-filter-head"
+                    type="button"
+                    aria-expanded="true">
+
+              <span>
+                EXPERIENCE
+                <small id="kd-type-count"></small>
+              </span>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="kd-filter-body">
+
+              <label>
+                <input type="checkbox" name="experience" value="Adventure">
+                <span>Adventure &amp; Safaris</span>
+              </label>
+
+              <label>
+                <input type="checkbox" name="experience" value="Water sports">
+                <span>Water Sports</span>
+              </label>
+
+              <label>
+                <input type="checkbox" name="experience" value="Boat trips">
+                <span>Boat Trips</span>
+              </label>
+
+              <label>
+                <input type="checkbox" name="experience" value="Nature">
+                <span>Nature &amp; Hiking</span>
+              </label>
+
+              <label>
+                <input type="checkbox" name="experience" value="City tours">
+                <span>City Tours</span>
+              </label>
+
+              <label>
+                <input type="checkbox" name="experience" value="Food">
+                <span>Food Experiences</span>
+              </label>
+
+              <label>
+                <input type="checkbox" name="experience" value="Experiences">
+                <span>Other Experiences</span>
+              </label>
+
+            </div>
+          </div>
+
+          <!-- PRICE FILTER -->
+          <div class="kd-filter-card">
+
+            <button class="kd-filter-head"
+                    type="button"
+                    aria-expanded="true">
+
+              <span>
+                PRICE RANGE
+                <small>USD</small>
+              </span>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="kd-filter-body">
+
+              <div class="kd-price-label">
+                Up to
+                <strong id="kd-price-label">$5,000+</strong>
+              </div>
+
+              <input id="kd-max-price"
+                     type="range"
+                     min="0"
+                     max="5000"
+                     step="50"
+                     value="5000">
+
+              <div class="kd-range-ends">
+                <span>$0</span>
+                <span>$5,000+</span>
+              </div>
+
+            </div>
+          </div>
+
+          <button class="kd-mobile-apply"
+                  type="button"
+                  id="kd-mobile-apply">
+            Show results
+          </button>
+
+        </aside>
+
+        <!-- RIGHT CONTENT -->
+        <section class="kd-results" aria-label="Experiences">
+
+          <div class="kd-active-filters"
+               id="kd-active-filters"
+               hidden></div>
+
+          {% if error %}
+            <p class="kd-no-tours">{{ error }}</p>
+          {% endif %}
+
+
+
+
+          <div class="kd-grid-loader" id="kd-grid-loader" hidden>
+              <div class="kd-spinner"></div>
+              <span>Discovering experiences...</span>
+          </div>
+
+          <!-- EXPERIENCE CARDS -->
+          <div class="kd-card-grid" id="kd-card-grid">
+
+            {% for tour in products %}
+
+              <article class="kd-tour-card"
+                       data-type="{{ tour.category }}"
+                       data-price="{{ tour.price|default_if_none:'' }}"
+                       data-title="{{ tour.title }}"
+                       data-description="{{ tour.description|striptags|truncatewords:45 }}"
+                       data-image="{{ tour.image }}"
+                       data-detail-url="{{ tour.detail_url }}">
+
+                <!-- IMAGE -->
+                <div class="kd-card-media">
+
+                  {% if tour.image %}
+                    <img src="{{ tour.image }}"
+                         alt="{{ tour.title }}"
+                         loading="lazy">
+                  {% endif %}
+
+                  <span class="kd-card-destination">
+                    <i class="fa-solid fa-location-dot"></i>
+                    {{ tour.city }}
+                  </span>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="kd-card-content">
+
+                  <div class="kd-card-meta">
+                    <span>{{ tour.category }}</span>
+                    <span>VIATOR EXPERIENCE</span>
+                  </div>
+
+                  <h3>{{ tour.title }}</h3>
+
+                  <p>
+                    {{ tour.description|striptags|truncatewords:17|default:"Explore this experience and discover what is included." }}
+                  </p>
+
+                  <div class="kd-card-price">
+
+                    <span>STARTING FROM</span>
+
+                    <strong>
+                      {% if tour.price is not None %}
+                        ${{ tour.price|floatformat:2 }}
+                        <small>/ person</small>
+                      {% else %}
+                        <small>Check current price</small>
+                      {% endif %}
+                    </strong>
+
+                  </div>
+                </div>
+
+                <!-- VIEW DETAILS -->
+                <button class="kd-card-action" type="button">
+                  <span>View Details</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+
+              </article>
+
+            {% empty %}
+
+              {% if not error %}
+                <p class="kd-no-tours">
+                  No experiences found for this destination.
+                </p>
+              {% endif %}
+
+            {% endfor %}
+
+          </div>
+
+          <!-- NO FILTER MATCHES -->
+          <div class="kd-empty" id="kd-empty" hidden>
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <h3>No matching experiences</h3>
+
+            <p>
+              Try removing a filter to discover more experiences.
+            </p>
+
+            <button type="button" id="kd-empty-clear">
+              Clear all filters
+            </button>
+
+          </div>
+
+          <p class="kd-results-foot" id="kd-results-foot"></p>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- DRAWER OVERLAY -->
+  <div class="kd-overlay" id="kd-overlay" hidden></div>
+
+  <!-- EXPERIENCE DETAILS DRAWER -->
+  <aside class="kd-drawer"
+         id="kd-drawer"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="kd-drawer-title"
+         aria-hidden="true"
+         tabindex="-1">
+
+    <div class="kd-drawer-scroll">
+
+      <button class="kd-drawer-close"
+              id="kd-drawer-close"
+              aria-label="Close tour summary">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="kd-drawer-eyebrow">
+        KEN DALA / EXPERIENCES
+      </div>
+
+      <h2 id="kd-drawer-title"></h2>
+
+      <div class="kd-drawer-meta" id="kd-drawer-meta"></div>
+
+      <div class="kd-drawer-accent"></div>
+
+      <img id="kd-drawer-image" src="" alt="">
+
+      <div class="kd-drawer-body">
+
+        <span class="kd-eyebrow">YOUR EXPERIENCE</span>
+
+        <h3 id="kd-drawer-subtitle"></h3>
+
+        <p id="kd-drawer-description"></p>
+
+        <div class="kd-drawer-price">
+          <span>Starting from</span>
+          <strong id="kd-drawer-price"></strong>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="kd-drawer-bottom">
+
+      <button type="button" id="kd-drawer-view">
+        View Details
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+
+    </div>
+  </aside>
+
+  {% include 'main/footer.html' %}
+
+  <!-- CHAT BUTTON -->
+  <button id="kd-chat-launcher"
+          type="button"
+          aria-label="Open chat">
+
+    <img id="kd-chat-icon"
+         src="{% static 'images/chat-icon.png' %}"
+         alt="Chat">
+
+  </button>
+
+  <!-- JAVASCRIPT -->
+  <script src="{% static 'js/viator-things-to-do.js' %}" defer></script>
+  <script src="{% static 'js/navbar.js' %}" defer></script>
+
+  <!-- CRISP -->
+  <script type="text/javascript">
+    window.$crisp = [];
+    window.CRISP_WEBSITE_ID = "dcc5cb29-4c61-4714-a4ea-7ee6b4722986";
+
+    (function () {
+      var d = document;
+      var s = d.createElement("script");
+
+      s.src = "https://client.crisp.chat/l.js";
+      s.async = true;
+
+      d.getElementsByTagName("head")[0].appendChild(s);
+    })();
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      window.$crisp = window.$crisp || [];
+
+      const chatLauncher = document.getElementById("kd-chat-launcher");
+
+      if (!chatLauncher) {
+        console.error("Ken Dala chat launcher not found.");
+        return;
+      }
+
+      $crisp.push(["do", "chat:hide"]);
+
+      chatLauncher.addEventListener("click", function () {
+        $crisp.push(["do", "chat:show"]);
+        $crisp.push(["do", "chat:open"]);
+      });
+
+      $crisp.push(["on", "chat:opened", function () {
+        chatLauncher.classList.add("chat-open");
+      }]);
+
+      $crisp.push(["on", "chat:closed", function () {
+        chatLauncher.classList.remove("chat-open");
+        $crisp.push(["do", "chat:hide"]);
+      }]);
+
+    });
+  </script>
+
+</body>
+</html>

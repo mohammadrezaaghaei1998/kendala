@@ -12,16 +12,24 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+from decimal import Decimal
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
+load_dotenv(BASE_DIR / ".env")
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7k-r)y5n-_q0!i(5tror$2%z0zil-&4f=2axc)ala@5#w-@$$-'
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,21 +90,37 @@ DATABASES = {
 }
 
 
+
+
+
+AUTHENTICATION_BACKENDS = [
+    "core.auth_backends.UsernameOrEmailBackend",
+]
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "user-dashboard"
+LOGOUT_REDIRECT_URL = "index"
+
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
+
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {"min_length": 8},
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -132,3 +156,62 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+
+
+
+
+load_dotenv(BASE_DIR / ".env")
+
+THAWANI_SECRET_KEY = os.environ["THAWANI_SECRET_KEY"]
+THAWANI_PUBLIC_KEY = os.environ["THAWANI_PUBLIC_KEY"]
+THAWANI_BASE_URL = os.getenv(
+    "THAWANI_BASE_URL",
+    "https://uatcheckout.thawani.om",
+)
+
+
+
+
+# USD amount equivalent to 1 OMR
+KD_USD_PER_OMR = "2.2000"
+
+# Additional percentage to cover estimated payment costs
+KD_PAYMENT_BUFFER_PERCENT = "0"
+
+
+
+
+
+
+
+
+TICKETMASTER_API_KEY = os.environ.get("TICKETMASTER_API_KEY", "")
+
+
+
+
+
+
+
+# VIATOR_API_KEY = os.getenv("VIATOR_API_KEY", "")
+# VIATOR_API_URL = os.getenv(
+#     "VIATOR_API_URL",
+#     "https://api.viator.com/partner"
+# )
+
+
+VIATOR_API_KEY = os.getenv('VIATOR_API_KEY', '')
+VIATOR_CITY_IDS = {
+    # Populate using: python manage.py viator_destinations --query Antalya
+    'antalya': '586',
+    'istanbul': '585',
+    'almaty': '32977',
+    'muscat': '4389',
+}
+
+
+
+
+TRAVEL_BUDDY_API_KEY = os.getenv('TRAVEL_BUDDY_API_KEY', '')

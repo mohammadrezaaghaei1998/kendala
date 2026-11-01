@@ -1,0 +1,330 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="Discover curated travel offers and exceptional journeys with Ken Dala.">
+        <title>
+            Ken Dala | Offers
+        </title>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+        <link rel="stylesheet" href="{% static 'css/offers.css' %}">
+        <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    </head>
+    <body>
+        {% include 'main/loader.html' %}
+        {% include 'main/header.html' %}
+        <main class="ko-page ">
+            <section class="ko-hero">
+                <div class="ko-hero-photo">
+                </div>
+                <div class="ko-hero-shade">
+                </div>
+                <div class="ko-container ko-hero-inner tl-container">
+                    <span class="ko-kicker ko-white">
+                        KEN DALA / THE PRIVATE COLLECTION
+                        <span class="ko-rule">
+                        </span>
+                        LIMITED OPPORTUNITIES
+                    </span>
+                    <h1>
+                        Extraordinary places.
+                        <br>
+                        <em>
+                            Exceptional moments.
+                        </em>
+                    </h1>
+                    <p>
+                        Thoughtfully selected journeys, with special privileges for a limited time.
+                    </p>
+                    <a href="#offers" class="ko-hero-cta">
+                        Discover the offers
+                        <i class="fa-solid fa-arrow-down">
+                        </i>
+                    </a>
+                </div>
+                <div class="ko-hero-bottom">
+                    KAZAKHSTAN &nbsp; / &nbsp; TURKEY &nbsp; / &nbsp; OMAN
+                    <span>
+                        CURATED FOR THE CURIOUS
+                    </span>
+                </div>
+            </section>
+            <section class="ko-intro ko-container" id="offers">
+                <div class="tl-container">
+                    <span class="ko-kicker">
+                        01 / THE CURRENT COLLECTION
+                    </span>
+                    <h2>
+                        A little more
+                        <br>
+                        to
+                        <em>
+                            look forward to.
+                        </em>
+                    </h2>
+                </div>
+                <p>
+                    Discover our current selection of thoughtfully priced journeys. The experiences remain extraordinary; the opportunity is simply too good to miss.
+                </p>
+            </section>
+            <section class="ko-container ko-offers-section tl-container">
+                <div class="ko-toolbar ">
+                    <div class="ko-filters" role="group" aria-label="Filter offers ">
+                        <button class="active" data-filter="all" aria-pressed="true">
+                            All offers
+                        </button>
+                        <button data-filter="kazakhstan" aria-pressed="false">
+                            Kazakhstan
+                        </button>
+                        <button data-filter="turkey" aria-pressed="false">
+                            Turkey
+                        </button>
+                        <button data-filter="oman" aria-pressed="false">
+                            Oman
+                        </button>
+                    </div>
+                    <span class="ko-results" id="offerCount">
+                        00 OFFERS AVAILABLE
+                    </span>
+                </div>
+                <div class="ko-offer-grid" id="offerGrid">
+                    {% for tour in offer_tours %}
+                        <article class="ko-offer-card {% if forloop.first %}ko-featured{% endif %}" data-country="{{ tour.country.slug }}">
+                            <div class="ko-offer-image">
+                                {% if tour.image %}
+                                <img src="{{ tour.image.url }}" alt="{{ tour.title }}" loading="lazy">
+                                {% endif %}
+                                <span class="ko-offer-tag">
+                                    EXCLUSIVE OFFER
+                                </span>
+                                {% if tour.offer_percentage %}
+                                    <span class="ko-saving">
+                                        SAVE {{ tour.offer_percentage }}%
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <div class="ko-offer-content">
+                                <span class="ko-card-meta">
+                                    {{ tour.country|upper }}
+                                    {% if tour.duration_days %}
+                                        / {{ tour.duration_days }} DAYS
+                                    {% endif %}
+                                </span>
+                                <h3>
+                                    {{ tour.title }}
+                                </h3>
+                                <p>
+                                    {{ tour.tagline|default:'Discover a beautifully considered journey with Ken Dala.' }}
+                                </p>
+                                <div class="ko-offer-bottom">
+                                    <div class="ko-price">
+                                        <small>
+                                            FROM / PER PERSON
+                                        </small>
+                                        <div>
+                                            {% if tour.price %}
+                                                <del>
+                                                    {{ tour.price }} {{ tour.currency|default:'USD' }}
+                                                </del>
+                                            {% endif %}
+                                            <strong>
+                                                {{ tour.discounted_price }} {{ tour.currency|default:'USD' }}
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <a class="ko-card-link" href="{{ tour.get_absolute_url }}" aria-label="Explore {{ tour.title }}">
+                                        Explore offer
+                                        <i class="fa-solid fa-arrow-up-right-from-square">
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+                <div class="ko-empty" id="emptyOffers" hidden>
+                    <h3>
+                        No offers in this destination right now.
+                    </h3>
+                    <p>
+                        Explore another destination or discover our full collection below.
+                    </p>
+                    <button id="resetOffers">
+                        View all offers
+                        <i class="fa-solid fa-arrow-right">
+                        </i>
+                    </button>
+                </div>
+                <p class="ko-disclaimer">
+                    Offer availability, dates and prices are subject to confirmation.
+                </p>
+            </section>
+            <section class="ko-editorial">
+                <div class="ko-editorial-photo">
+                </div>
+                <div class="ko-editorial-copy">
+                    <span class="ko-kicker ko-white">
+                        BEYOND THE OFFER
+                    </span>
+                    <h2>
+                        The best journeys
+                        <br>
+                        are worth
+                        <em>
+                            discovering.
+                        </em>
+                    </h2>
+                    <p>
+                        Not every remarkable experience needs a special price. Explore the rest of our collection, selected with the same care and attention to detail.
+                    </p>
+                    <a href="#journeys">
+                        Explore more journeys
+                        <i class="fa-solid fa-arrow-right">
+                        </i>
+                    </a>
+                </div>
+            </section>
+            <section class="ko-container ko-journeys" id="journeys">
+                <div class="ko-section-heading">
+                    <div>
+                        <span class="ko-kicker">
+                            02 / MORE TO EXPLORE
+                        </span>
+                        <h2>
+                            More journeys.
+                            <br>
+                            <em>
+                                Endless possibilities.
+                            </em>
+                        </h2>
+                    </div>
+                    <p>
+                        Go beyond the offers and find a destination that speaks to you.
+                    </p>
+                </div>
+                <div class="ko-destination-grid">
+                    <a class="ko-destination" href="{% url 'destination-detail' country_slug='kazakhstan' %}">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=950&q=85" alt="Kazakhstan mountains" loading="lazy">
+                        <span>
+                            01 / CENTRAL ASIA
+                        </span>
+                        <strong>
+                            Kazakhstan
+                        </strong>
+                        <i class="fa-solid fa-arrow-up-right-from-square">
+                        </i>
+                    </a>
+                    <a class="ko-destination" href="{% url 'destination-detail' country_slug='turkey' %}">
+                        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=950&q=85" alt="Istanbul skyline" loading="lazy">
+                        <span>
+                            02 / EAST MEETS WEST
+                        </span>
+                        <strong>
+                            Turkey
+                        </strong>
+                        <i class="fa-solid fa-arrow-up-right-from-square">
+                        </i>
+                    </a>
+                    <a class="ko-destination" href="{% url 'destination-detail' country_slug='oman' %}">
+                        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=950&q=85" alt="Oman desert" loading="lazy">
+                        <span>
+                            03 / ARABIAN ESCAPES
+                        </span>
+                        <strong>
+                            Oman
+                        </strong>
+                        <i class="fa-solid fa-arrow-up-right-from-square">
+                        </i>
+                    </a>
+                </div>
+            </section>
+            <section class="ko-ending">
+                <div class="ko-container">
+                    <span class="ko-kicker ko-white">
+                        KEN DALA / TRAVEL WITH INTENTION
+                    </span>
+                    <h2>
+                        Your next story
+                        <br>
+                        <em>
+                            starts somewhere.
+                        </em>
+                    </h2>
+                    <p>
+                        Wherever you dream of going, let the journey be extraordinary.
+                    </p>
+                </div>
+            </section>
+        </main>
+        {% include 'main/footer.html' %}
+
+         <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+            <img
+                id="kd-chat-icon"
+                src="{% static 'images/chat-icon.png' %}"
+                alt="Chat"
+            >
+        </button>
+
+
+
+
+
+
+        <script src="{% static 'js/navbar.js' %}" defer>
+        </script>
+        <script src="{% static 'js/offers.js' %}" defer>
+        </script>
+
+
+
+
+
+        <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                window.$crisp = window.$crisp || [];
+
+                const chatLauncher = document.getElementById("kd-chat-launcher");
+
+                if (!chatLauncher) {
+                    console.error("Ken Dala chat launcher not found.");
+                    return;
+                }
+
+                $crisp.push(["do", "chat:hide"]);
+
+                chatLauncher.addEventListener("click", function () {
+
+                    $crisp.push(["do", "chat:show"]);
+                    $crisp.push(["do", "chat:open"]);
+
+                });
+
+                $crisp.push(["on", "chat:opened", function () {
+
+                    chatLauncher.classList.add("chat-open");
+
+                }]);
+
+                $crisp.push(["on", "chat:closed", function () {
+
+                    chatLauncher.classList.remove("chat-open");
+
+                    $crisp.push(["do", "chat:hide"]);
+
+                }]);
+
+            });
+        </script>
+    </body>
+</html>

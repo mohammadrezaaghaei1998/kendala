@@ -1,0 +1,60 @@
+100 event(s) returned for Turkey. Mode: APPLY
+  2026-10-25 | Antalya Kum Heykel Müzesi - 2026 | Antalya | Antalya Kum Heykel Müzesi | https://s1.ticketm.net/dam/c/03e/e15ef00f-2c87-4421-ae61-d740851a703e_105891_TABLET_LANDSC
+Traceback (most recent call last):
+  File "C:\Users\Zhazira\Desktop\Tourism\tourism\manage.py", line 22, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Zhazira\Desktop\Tourism\tourism\manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\__init__.py", line 443, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\__init__.py", line 437, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\base.py", line 422, in run_from_argv
+    self.execute(*args, **cmd_options)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\base.py", line 466, in execute
+    output = self.handle(*args, **options)
+  File "C:\Users\Zhazira\Desktop\Tourism\tourism\core\management\commands\sync_events.py", line 38, in handle
+    self.stdout.write(f'  {e["start_date"]} | {e["title"]} | {e["city"]} | {e["venue"]} | {e["source_image_url"][:90]}')
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\base.py", line 187, in write
+    self._out.write(style_func(msg))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Zhazira\AppData\Local\Python\pythoncore-3.14-64\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u011f' in position 25: character maps to <undefined>
+100 event(s) returned for Turkey. Mode: APPLY
+  2026-10-25 | Antalya Kum Heykel Müzesi - 2026 | Antalya | Antalya Kum Heykel Müzesi | https://s1.ticketm.net/dam/c/03e/e15ef00f-2c87-4421-ae61-d740851a703e_105891_TABLET_LANDSC
+Traceback (most recent call last):
+  File "C:\Users\Zhazira\Desktop\Tourism\tourism\manage.py", line 22, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Zhazira\Desktop\Tourism\tourism\manage.py", line 18, in main
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\__init__.py", line 443, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\__init__.py", line 437, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\base.py", line 422, in run_from_argv
+    self.execute(*args, **cmd_options)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\base.py", line 466, in execute
+    output = self.handle(*args, **options)
+  File "C:\Users\Zhazira\Desktop\Tourism\tourism\core\management\commands\sync_events.py", line 38, in handle
+    self.stdout.write(f'  {e["start_date"]} | {e["title"]} | {e["city"]} | {e["venue"]} | {e["source_image_url"][:90]}')
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Zhazira\Desktop\Tourism\venv\Lib\site-packages\django\core\management\base.py", line 187, in write
+    self._out.write(style_func(msg))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Zhazira\AppData\Local\Python\pythoncore-3.14-64\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u011f' in position 25: character maps to <undefined>

@@ -1,462 +1,199 @@
-   document.addEventListener("DOMContentLoaded", function () {
 
-        const wsiNavbar = document.querySelector(".wsi-navbar");
+document.addEventListener("DOMContentLoaded", () => {
 
-        if (!wsiNavbar) return;
+    const navbar = document.getElementById("kd-nav");
+    if (!navbar) return;
 
+    const menuToggle = navbar.querySelector(".kd-nav-toggle");
+    const menuPanel = navbar.querySelector(".kd-nav-panel");
 
-        const wsiTriggers = wsiNavbar.querySelectorAll(
-            ".wsi-navbar-dropdown-trigger"
-        );
+    const searchTrigger = navbar.querySelector(".kd-nav-search-trigger");
+    const searchPanel = navbar.querySelector(".kd-nav-search-panel");
+    const searchClose = navbar.querySelector(".kd-nav-search-close");
+    const searchInput = navbar.querySelector("#kd-nav-search-input");
+    const searchForm = navbar.querySelector(".kd-nav-search-form");
 
-        const wsiPanels = wsiNavbar.querySelectorAll(
-            "[data-wsi-navbar-panel]"
-        );
+    const backdrop = document.getElementById("kd-nav-backdrop");
 
-        const wsiMobileButton = wsiNavbar.querySelector(
-            ".wsi-navbar-mobile-button"
-        );
+    let lastFocusedElement = null;
 
-        const wsiMobileClose = wsiNavbar.querySelector(
-            ".wsi-navbar-mobile-close"
-        );
+    function syncBackdrop() {
+        const isActive =
+            navbar.classList.contains("is-open") ||
+            navbar.classList.contains("is-search-open");
 
-        let wsiCloseTimer;
+        document.body.classList.toggle("kd-nav-active", isActive);
+    }
 
+    function closeMenu() {
+        navbar.classList.remove("is-open");
 
-        /* =====================================================
-        DESKTOP DROPDOWN
-        ===================================================== */
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
 
-        function wsiNavbarOpen(menuName) {
+        menuPanel.setAttribute("aria-hidden", "true");
+        menuPanel.inert = true;
 
-            clearTimeout(wsiCloseTimer);
+        syncBackdrop();
+    }
 
-            wsiNavbar.classList.add("wsi-navbar-open");
+    function openMenu() {
+        closeSearch();
 
+        lastFocusedElement = document.activeElement;
 
-            wsiTriggers.forEach(function (trigger) {
+        navbar.classList.add("is-open");
 
-                const triggerButton =
-                    trigger.querySelector("[data-wsi-navbar-menu]");
+        menuToggle.setAttribute("aria-expanded", "true");
+        menuToggle.setAttribute("aria-label", "Close navigation");
 
-                if (!triggerButton) return;
+        menuPanel.setAttribute("aria-hidden", "false");
+        menuPanel.inert = false;
 
-                if (
-                    triggerButton.dataset.wsiNavbarMenu === menuName
-                ) {
-                    trigger.classList.add("wsi-navbar-active");
-                } else {
-                    trigger.classList.remove("wsi-navbar-active");
-                }
+        syncBackdrop();
+    }
 
-            });
+    function closeSearch() {
+        navbar.classList.remove("is-search-open");
 
+        searchTrigger.setAttribute("aria-expanded", "false");
+        searchPanel.setAttribute("aria-hidden", "true");
+        searchPanel.inert = true;
 
-            wsiPanels.forEach(function (panel) {
+        syncBackdrop();
+    }
 
-                if (
-                    panel.dataset.wsiNavbarPanel === menuName
-                ) {
-                    panel.classList.add(
-                        "wsi-navbar-panel-active"
-                    );
-                } else {
-                    panel.classList.remove(
-                        "wsi-navbar-panel-active"
-                    );
-                }
+    function openSearch() {
+        closeMenu();
 
-            });
+        lastFocusedElement = document.activeElement;
 
+        navbar.classList.add("is-search-open");
+
+        searchTrigger.setAttribute("aria-expanded", "true");
+        searchPanel.setAttribute("aria-hidden", "false");
+        searchPanel.inert = false;
+
+        syncBackdrop();
+
+        window.setTimeout(() => {
+            searchInput.focus();
+        }, 500);
+    }
+
+    function closeAll() {
+        closeMenu();
+        closeSearch();
+
+        if (
+            lastFocusedElement &&
+            document.contains(lastFocusedElement)
+        ) {
+            lastFocusedElement.focus();
         }
+    }
 
-
-        function wsiNavbarClose() {
-
-            wsiCloseTimer = setTimeout(function () {
-
-                wsiNavbar.classList.remove(
-                    "wsi-navbar-open"
-                );
-
-                wsiTriggers.forEach(function (trigger) {
-                    trigger.classList.remove(
-                        "wsi-navbar-active"
-                    );
-                });
-
-            }, 100);
-
+    menuToggle.addEventListener("click", () => {
+        if (navbar.classList.contains("is-open")) {
+            closeAll();
+        } else {
+            openMenu();
         }
+    });
 
-
-        /* =====================================================
-        HOVER — DESKTOP
-        ===================================================== */
-
-        wsiTriggers.forEach(function (trigger) {
-
-            trigger.addEventListener(
-                "mouseenter",
-                function () {
-
-                    if (window.innerWidth <= 1100) return;
-
-                    const button =
-                        trigger.querySelector(
-                            "[data-wsi-navbar-menu]"
-                        );
-
-                    if (!button) return;
-
-                    wsiNavbarOpen(
-                        button.dataset.wsiNavbarMenu
-                    );
-
-                }
-            );
-
-
-            trigger.addEventListener(
-                "mouseleave",
-                function () {
-
-                    if (window.innerWidth <= 1100) return;
-
-                    wsiNavbarClose();
-
-                }
-            );
-
-        });
-
-
-        /*
-        Keep mega menu open when mouse enters it.
-        */
-
-        const wsiMegaWrapper =
-            wsiNavbar.querySelector(
-                ".wsi-navbar-mega-wrapper"
-            );
-
-
-        if (wsiMegaWrapper) {
-
-            wsiMegaWrapper.addEventListener(
-                "mouseenter",
-                function () {
-
-                    if (window.innerWidth <= 1100) return;
-
-                    clearTimeout(wsiCloseTimer);
-
-                }
-            );
-
-
-            wsiMegaWrapper.addEventListener(
-                "mouseleave",
-                function () {
-
-                    if (window.innerWidth <= 1100) return;
-
-                    wsiNavbarClose();
-
-                }
-            );
-
+    searchTrigger.addEventListener("click", () => {
+        if (navbar.classList.contains("is-search-open")) {
+            closeAll();
+        } else {
+            openSearch();
         }
+    });
 
+    searchClose.addEventListener("click", closeAll);
+    backdrop.addEventListener("click", closeAll);
 
-        /* =====================================================
-        DESTINATION IMAGE SWITCHING
-        ===================================================== */
-
-        const wsiImageLinks =
-            wsiNavbar.querySelectorAll(
-                "[data-wsi-navbar-image]"
-            );
-
-
-        const wsiImages =
-            wsiNavbar.querySelectorAll(
-                "[data-wsi-navbar-image-target]"
-            );
-
-
-        wsiImageLinks.forEach(function (link) {
-
-            link.addEventListener(
-                "mouseenter",
-                function () {
-
-                    if (window.innerWidth <= 1100) return;
-
-                    const imageName =
-                        link.dataset.wsiNavbarImage;
-
-
-                    wsiImages.forEach(function (image) {
-
-                        if (
-                            image.dataset
-                                .wsiNavbarImageTarget === imageName
-                        ) {
-
-                            image.classList.add(
-                                "wsi-navbar-image-active"
-                            );
-
-                        } else {
-
-                            image.classList.remove(
-                                "wsi-navbar-image-active"
-                            );
-
-                        }
-
-                    });
-
-                }
-            );
-
-        });
-
-
-        /* =====================================================
-        MOBILE MENU
-        ===================================================== */
-
-        function wsiNavbarOpenMobile() {
-
-            wsiNavbar.classList.add(
-                "wsi-navbar-mobile-open"
-            );
-
-            document.body.style.overflow = "hidden";
-
-            if (wsiMobileButton) {
-
-                wsiMobileButton.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-            }
-
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeAll();
         }
-
-
-        // function wsiNavbarCloseMobile() {
-
-        //     wsiNavbar.classList.remove(
-        //         "wsi-navbar-mobile-open"
-        //     );
-
-        //     document.body.style.overflow = "";
-
-        //     if (wsiMobileButton) {
-
-        //         wsiMobileButton.setAttribute(
-        //             "aria-expanded",
-        //             "false"
-        //         );
-
-        //     }
-
-        // }
-
-
-        if (wsiMobileButton) {
-
-            wsiMobileButton.addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        wsiNavbar.classList.contains(
-                            "wsi-navbar-mobile-open"
-                        )
-                    ) {
-
-                        wsiNavbarCloseMobile();
-
-                    } else {
-
-                        wsiNavbarOpenMobile();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        if (wsiMobileClose) {
-
-            wsiMobileClose.addEventListener(
-                "click",
-                function () {
-
-                    wsiNavbarCloseMobile();
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-        ESCAPE
-        ===================================================== */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key !== "Escape") return;
-
-                wsiNavbarCloseMobile();
-                wsiNavbar.classList.remove(
-                    "wsi-navbar-open"
-                );
-
-            }
-        );
-
-
-        /* =====================================================
-        CLOSE MOBILE MENU AFTER CLICKING LINK
-        ===================================================== */
-
-        const wsiMobileLinks =
-            wsiNavbar.querySelectorAll(
-                ".wsi-navbar-mobile-link, " +
-                ".wsi-navbar-mobile-action, " +
-                ".wsi-navbar-mobile-visa, " +
-                ".wsi-navbar-mobile-login"
-            );
-
-
-        wsiMobileLinks.forEach(function (link) {
-
-            link.addEventListener(
-                "click",
-                function () {
-
-                    wsiNavbarCloseMobile();
-
-                }
-            );
-
-        });
-
-
-        /* =====================================================
-        RESIZE SAFETY
-        ===================================================== */
-
-        window.addEventListener(
-            "resize",
-            function () {
-
-                if (window.innerWidth > 1100) {
-
-                    wsiNavbarCloseMobile();
-
-                }
-
-            }
-        );
-
     });
 
 
+/* =========================================
+   SEARCH SUGGESTIONS
+========================================= */
+
+navbar.querySelectorAll("[data-search]").forEach((button) => {
+    button.addEventListener("click", () => {
+
+        const query = button.dataset.search.trim();
+
+        if (!query) return;
+
+        // Fill the search input without submitting
+        searchInput.value = query;
+
+        // Keep the panel open and focus the input
+        searchInput.focus();
+    });
+});
 
 
+/* =========================================
+   SEARCH SUBMISSION
+========================================= */
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const navbar = document.querySelector(".wsi-navbar");
-        if (!navbar) return;
+searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-        const hamburger = navbar.querySelector(".wsi-navbar-mobile-button");
-        const mobileMenu = navbar.querySelector(".wsi-navbar-mobile-menu");
-        const mobileClose = navbar.querySelector(".wsi-navbar-mobile-close");
-        const mobileBack = navbar.querySelector(".wsi-navbar-mobile-back");
-        const mobilePages = navbar.querySelectorAll(".wsi-navbar-mobile-page");
-        const mobileTriggers = navbar.querySelectorAll("[data-wsi-mobile-menu]");
-        const desktopTriggers = navbar.querySelectorAll("[data-wsi-navbar-menu]");
-        const desktopPanels = navbar.querySelectorAll(".wsi-navbar-reference-panel");
-        const desktopClose = navbar.querySelector(".wsi-navbar-mega-close");
+    const query = searchInput.value.trim();
 
-        function openMobile() {
-            navbar.classList.add("wsi-navbar-mobile-open");
-            hamburger?.setAttribute("aria-expanded", "true");
-            showMobileMain();
-            document.body.classList.add("wsi-navbar-no-scroll");
-        }
+    if (!query) {
+        searchInput.focus();
+        return;
+    }
 
-        function closeMobile() {
-            navbar.classList.remove("wsi-navbar-mobile-open");
-            hamburger?.setAttribute("aria-expanded", "false");
-            showMobileMain();
-            document.body.classList.remove("wsi-navbar-no-scroll");
-        }
+    const url = new URL(searchForm.action, window.location.origin);
+    url.searchParams.set("q", query);
 
-        function showMobileMain() {
-            mobilePages.forEach(page => page.classList.remove("is-active"));
-            navbar.querySelector(".wsi-navbar-mobile-main-page")?.classList.add("is-active");
-            mobileBack?.classList.remove("is-visible");
-        }
+    window.location.assign(url.toString());
+});
+    /* =========================================
+       CLOSE ON NAVIGATION
+    ========================================= */
 
-        function showMobileSubmenu(name) {
-            mobilePages.forEach(page => page.classList.remove("is-active"));
-            navbar.querySelector(`[data-wsi-mobile-page="${name}"]`)?.classList.add("is-active");
-            mobileBack?.classList.add("is-visible");
-        }
-
-        hamburger?.addEventListener("click", openMobile);
-        mobileClose?.addEventListener("click", closeMobile);
-        mobileBack?.addEventListener("click", showMobileMain);
-
-        mobileTriggers.forEach(trigger => {
-            trigger.addEventListener("click", () => {
-                showMobileSubmenu(trigger.dataset.wsiMobileMenu);
-            });
-        });
-
-        desktopTriggers.forEach(trigger => {
-            trigger.addEventListener("click", () => {
-                const name = trigger.dataset.wsiNavbarMenu;
-                const alreadyOpen = navbar.classList.contains("wsi-navbar-open") &&
-                    navbar.dataset.wsiOpenPanel === name;
-
-                navbar.classList.toggle("wsi-navbar-open", !alreadyOpen);
-                navbar.dataset.wsiOpenPanel = alreadyOpen ? "" : name;
-
-                desktopPanels.forEach(panel => {
-                    panel.classList.toggle(
-                        "wsi-navbar-panel-active",
-                        !alreadyOpen && panel.dataset.wsiNavbarPanel === name
-                    );
-                });
-            });
-        });
-
-        desktopClose?.addEventListener("click", () => {
-            navbar.classList.remove("wsi-navbar-open");
-            navbar.dataset.wsiOpenPanel = "";
-            desktopPanels.forEach(panel => panel.classList.remove("wsi-navbar-panel-active"));
-        });
-
-        document.addEventListener("click", event => {
-            if (!navbar.contains(event.target)) {
-                navbar.classList.remove("wsi-navbar-open");
-                navbar.dataset.wsiOpenPanel = "";
-                desktopPanels.forEach(panel => panel.classList.remove("wsi-navbar-panel-active"));
-            }
+    menuPanel.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+            closeMenu();
         });
     });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+const kdNavbar = document.getElementById('kd-nav');
+
+function updateNavbarScroll() {
+    if (!kdNavbar) return;
+
+    kdNavbar.classList.toggle(
+        'is-scrolled',
+        window.scrollY > 60
+    );
+}
+
+window.addEventListener('scroll', updateNavbarScroll, {
+    passive: true
+});
+
+updateNavbarScroll();

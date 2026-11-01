@@ -1,0 +1,495 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ken Dala | {{ country.page_title|default:country.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/destinations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/travel_essentials.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="icon" type="image/png" href="{% static 'images/logopngdark.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     TOP NAVIGATION — dark, compact, 
+========================================================= -->
+<!-- <header class="site-header">
+    <div class="top-nav">
+        <a class="brand" href="#">
+            <span class="brand-mark">W</span>
+            <span>WIDE SKY</span>
+        </a>
+
+        <nav class="main-nav">
+            <a href="#about">About</a>
+            <a href="#events">Things to do</a>
+            <a href="#tours">Tours</a>
+            <a href="#areas">Explore</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="nav-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="nav-pill">EN <i class="fa-solid fa-chevron-down"></i></button>
+            <a class="nav-button" href="#tours">Book Now</a>
+            <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+
+    <div class="mobile-nav">
+        <a href="#about">About</a>
+        <a href="#events">Things to do</a>
+        <a href="#tours">Tours</a>
+        <a href="#areas">Explore</a>
+        <a href="#faq">FAQ</a>
+    </div>
+</header> -->
+
+
+
+
+<!-- =========================================================
+     WSI NAVBAR
+========================================================= -->
+{% include 'main/loader.html' %}
+{% include 'main/header.html' %}
+
+
+
+
+<main>
+
+    <!-- =====================================================
+         BREADCRUMB
+    ====================================================== -->
+    <div class="container-wide breadcrumb-row">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/all-destinations">Destinations</a>
+        <span>/</span>
+        <strong>{{ country.name }}</strong>
+    </div>
+
+    <!-- =====================================================
+         HERO
+        ====================================================== -->
+    <section class="hero-wrap">
+
+        <div class="hero-media-destinations">
+            <img
+                src="{% if country.hero_image %}{{ country.hero_image.url }}{% endif %}"
+                alt="Destination hero">
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <div class="eyebrow">{{ country.hero_eyebrow }}</div>
+
+                <h1>{{ country.name }}</h1>
+
+                <p>
+                    {{ country.hero_description|default:country.tagline }}
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="{{ country.hero_primary_url|default:'#tours' }}" class="btn-primary">
+                        {{ country.hero_primary_label }}
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <a href="{{ country.hero_secondary_url|default:'#about' }}" class="btn-ghost">
+                        {{ country.hero_secondary_label }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-controls">
+                <button>
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+
+                <button>
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- STICKY NAV MUST BE OUTSIDE HERO -->
+    <div class="destination-tabs-wrap">
+
+      <div class="container">
+          <div class="destination-tabs">
+
+            <a href="#about" class="active">
+                About {{ country.name }}
+            </a>
+
+            <a href="#events">
+                Current Events
+            </a>
+
+            <a href="#tours">
+                Tours To Discover
+            </a>
+
+            <a href="#areas">
+                Distinctive Areas
+            </a>
+
+
+
+            <a href="#essentials">
+                Travel Essentials
+            </a>
+
+            <a href="#faq">
+                FAQ
+            </a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+         ABOUT + WEATHER / QUICK INFO
+    ====================================================== -->
+    <section id="about" class="destination-about" data-aos="fade-up">
+        <div class="container-wide">
+            <div class="destination-about-grid">
+                <div class="destination-about-copy">
+                    <div class="about-title-row">
+                        <h2>{{ country.about_heading|default:country.name }}</h2>
+                        <button class="about-share" aria-label="Share"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                    </div>
+
+                    <p>{{ country.about_intro|linebreaksbr }}</p>
+                    {% if country.about_extra %}<p>{{ country.about_extra|linebreaksbr }}</p>{% endif %}
+
+                    {% if country.about_extra %}<a class="about-read-more" href="#essentials">{{ country.about_read_more_label }}</a>{% endif %}
+
+                    <div class="about-tags">
+                        {% for tag in tags %}<span>{% if tag.icon_class %}<i class="{{ tag.icon_class }}"></i>{% endif %} {{ tag.title }}</span>{% endfor %}
+                    </div>
+                </div>
+
+                <div class="destination-about-info">
+                    <div class="about-info-tabs" role="tablist">
+                        <button class="about-info-tab" data-tab="weather" role="tab">
+                            <i class="fa-solid fa-sun"></i>
+                            <span>Weather</span>
+                        </button>
+                        <button class="about-info-tab" data-tab="best-time" role="tab">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>Best Time to Visit</span>
+                        </button>
+                        <button class="about-info-tab active" data-tab="transportation" role="tab">
+                            <i class="fa-solid fa-car"></i>
+                            <span>Transportation</span>
+                        </button>
+                    </div>
+
+                    <div class="about-info-card">
+                        <div class="about-panel" data-panel="weather">
+                            <div class="weather-main">
+                                <span class="panel-label">TODAY</span>
+                                <div class="weather-degree"><i class="fa-solid fa-cloud"></i><strong id="kd-weather-temperature">—</strong><sup>°C</sup></div>
+                                <span class="weather-status" id="kd-weather-status">Weather data pending</span>
+                            </div>
+                            <div class="weather-stats">
+                                <div><small>Humidity</small><strong> — </strong></div>
+                                <div><small>Wind</small><strong> — </strong></div>
+                                <div><small>High</small><strong> — </strong></div>
+                                <div><small>Low</small><strong> — </strong></div>
+                            </div>
+                        </div>
+
+                        <div class="about-panel" data-panel="best-time">
+                        {% for item in best_time_items %}<div class="simple-info-item">{% if item.icon_class %}<i class="{{ item.icon_class }}"></i>{% endif %}<strong>{{ item.title }}</strong><span>{{ item.subtitle|default:item.description }}</span></div>{% endfor %}
+                    </div>
+                    <div class="about-panel active" data-panel="transportation">
+                        {% for item in transport_options %}<div class="transport-item">{% if item.icon_class %}<i class="{{ item.icon_class }}"></i>{% endif %}<strong>{{ item.title }}</strong></div>{% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WIDE IMAGE BANNER -->
+    {% if country.wide_banner_image %}
+    <section class="wide-image-section" data-aos="fade-up"><div class="container-wide"><div class="wide-image-card">
+      <img src="{{ country.wide_banner_image.url }}" alt="{{ country.wide_banner_title }}"><div class="wide-image-overlay"></div>
+      <div class="wide-image-content"><span>{{ country.wide_banner_eyebrow }}</span><h3>{{ country.wide_banner_title }}</h3>
+      {% if country.wide_banner_button_url %}<a href="{{ country.wide_banner_button_url }}" class="btn-primary">{{ country.wide_banner_button_label }}</a>{% endif %}
+      </div></div></div></section>{% endif %}
+
+    <!-- EVENTS -->
+   <!-- EVENTS -->
+<section id="events" class="section section-slider" data-aos="fade-up">
+    <div class="container-wide">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">
+                    {% for section in country.sections.all %}
+                        {% if section.section_key == 'events' %}
+                            {{ section.eyebrow }}
+                        {% endif %}
+                    {% endfor %}
+                </span>
+
+                <h2>
+                    {% for section in country.sections.all %}
+                        {% if section.section_key == 'events' %}
+                            {{ section.heading }}
+                        {% endif %}
+                    {% endfor %}
+                </h2>
+            </div>
+        </div>
+
+        <div class="swiper eventsSwiper">
+            <div class="swiper-wrapper">
+
+                {% for event in events %}
+
+                <article class="swiper-slide event-card">
+
+                    <div class="card-image">
+
+                        {% if event.source_image_url %}
+                            <img
+                                src="{{ event.source_image_url }}"
+                                alt="{{ event.title }}"
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                            >
+
+                        {% elif event.image %}
+                            <img
+                                src="{{ event.image.url }}"
+                                alt="{{ event.title }}"
+                                loading="lazy"
+                            >
+                        {% endif %}
+
+                        <span class="date-badge">
+                            <b>{{ event.start_date|date:"d" }}</b>
+                            <small>{{ event.start_date|date:"M"|upper }}</small>
+                        </span>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <small>
+                            {{ event.city.name|default:country.name }}
+                            {% if event.venue %}
+                                · {{ event.venue }}
+                            {% endif %}
+                        </small>
+
+                        <h3>{{ event.title }}</h3>
+
+                        
+
+                        {% if event.external_url %}
+                            <a href="{{ event.external_url }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="card-arrow">
+                                Event Details
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+                {% empty %}
+                    <p>No upcoming events available.</p>
+                {% endfor %}
+
+            </div>
+
+            <div class="slider-bottom">
+                <div class="swiper-scrollbar"></div>
+
+                <div class="slider-buttons">
+                    <button class="event-prev">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                    <button class="event-next">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+    <!-- TOURS -->
+    <section id="tours" class="section section-tours" data-aos="fade-up"><div class="container-wide">
+      <div class="section-heading"><div><span class="section-kicker">{% for section in country.sections.all %}{% if section.section_key == 'tours' %}{{ section.eyebrow }}{% endif %}{% endfor %}</span><h2>{% for section in country.sections.all %}{% if section.section_key == 'tours' %}{{ section.heading }}{% endif %}{% endfor %}</h2></div></div>
+      <div class="swiper toursSwiper"><div class="swiper-wrapper">
+      {% for tour in tours %}<article class="swiper-slide tour-card"><div class="tour-image">
+        {% if tour.image %}<img src="{{ tour.image.url }}" alt="{{ tour.title }}">{% endif %}<span class="tour-duration">{{ tour.duration_days }} DAYS</span></div>
+        <div class="tour-content"><span>{{ country.name }}{% if tour.category %} • {{ tour.category }}{% endif %}</span><h3>{{ tour.title }}</h3><p>{{ tour.description|truncatewords:20 }}</p>
+        <div class="tour-footer"><strong>From {{ tour.price }} {{ tour.currency }}</strong><a href="{{ tour.get_absolute_url }}">View Tour <i class="fa-solid fa-arrow-right"></i></a></div></div></article>{% endfor %}
+      </div><div class="slider-bottom"><div class="swiper-scrollbar"></div><div class="slider-buttons"><button class="tour-prev"><i class="fa-solid fa-arrow-left"></i></button><button class="tour-next"><i class="fa-solid fa-arrow-right"></i></button></div></div></div>
+    </div></section>
+
+    <!-- FEATURED CINEMATIC BANNER -->
+    {% if country.feature_banner_image %}<section class="feature-section" data-aos="fade-up"><div class="container-wide"><div class="feature-card">
+      <img src="{{ country.feature_banner_image.url }}" alt="{{ country.feature_banner_title }}"><div class="feature-overlay"></div>
+      <div class="feature-content"><span>{{ country.feature_banner_eyebrow }}</span><h2>{{ country.feature_banner_title }}</h2><p>{{ country.feature_banner_description }}</p>
+      {% if country.feature_banner_button_url %}<a href="{{ country.feature_banner_button_url }}" class="btn-primary">{{ country.feature_banner_button_label }}</a>{% endif %}</div>
+    </div></div></section>{% endif %}
+
+    <!-- DISTINCTIVE AREAS -->
+    <section id="areas" class="section" data-aos="fade-up"><div class="container-wide">
+      <div class="section-heading"><div><span class="section-kicker">EXPLORE MORE</span><h2>Distinctive {{ country.name }} Areas</h2></div></div>
+      <div class="area-grid">{% for area in areas %}<a href="{{ area.url|default:'#areas' }}" class="area-card">
+        {% if area.image %}<img src="{{ area.image.url }}" alt="{{ area.title }}">{% endif %}<div><span>{{ forloop.counter|stringformat:'02d' }}</span><h3>{{ area.title }}</h3></div>
+      </a>{% endfor %}</div>
+    </div></section>
+
+    <!-- TRAVEL ESSENTIALS -->
+    <section class="ke-section" id="essentials" aria-labelledby="ke-title"><div class="ke-container">
+      <div class="ke-intro"><div><span class="ke-eyebrow">{{ country.travel_essentials_eyebrow }}</span><h2 id="ke-title">{{ country.name }} made<em style="color: rgb(133, 0, 120);"> simple.</em></h2><p>{{ country.travel_essentials_description }}</p></div><span class="ke-index">{{ country.travel_essentials_index }}</span></div>
+      <nav class="ke-nav" aria-label="Travel essentials topics"><a href="#ke-money">Money & banks</a><a href="#ke-arrival">Arrival & transport</a><a href="#ke-connect">Connectivity & apps</a><a href="#ke-safety">Safety & visas</a><a href="#ke-links">Useful Links</a></nav>
+      <div class="ke-feature-grid">
+        <article class="ke-feature ke-feature-dark"><span class="ke-label"><i class="fa-solid fa-wallet"></i> LOCAL CURRENCY</span><div class="ke-big">{{ country.currency_code }} <span>{{ country.currency_symbol }}</span></div><h3>{{ country.currency_display_name }}</h3><p>{{ country.currency_description }}</p></article>
+        <article class="ke-feature"><span class="ke-label"><i class="fa-solid fa-language"></i> LANGUAGES</span><div class="ke-big">{{ country.language_code }}<span class="ml-5">→ EN</span></div><h3>{{ country.language_display_name }}</h3><p>{{ country.language_description }}</p></article>
+        <article class="ke-feature"><span class="ke-label"><i class="fa-solid fa-plug"></i> ELECTRICITY</span><div class="ke-big">{{ country.electricity_voltage }} <span>V</span></div> <h3>{{ country.electricity_plugs }}</h3><p>{{ country.electricity_description }}</p></article>
+      </div>
+      <div class="mt-5 mb-5" id="ke-money"><span class="section-kicker">01 / MONEY MATTERS</span><h2>{{ country.money_heading }}</h2></div>
+      <div class="ke-split"><div class="ke-copy"><h4>{{ country.money_subheading }}</h4><p>{{ country.money_description|linebreaksbr }}</p><p>{{ country.money_extra_description|linebreaksbr }}</p></div>
+      <div class="ke-list">{% for item in money_items %}<div>{% if item.icon_class %}<i class="{{ item.icon_class }}"></i>{% endif %}<span><strong>{{ item.title }}</strong><small>{{ item.subtitle|default:item.description }}</small></span></div>{% endfor %}</div></div>
+      <div class="mt-5 mb-5" id="ke-arrival"><span class="section-kicker">02 / ARRIVAL & MOVEMENT</span><h2>{{ country.arrival_heading }}</h2></div>
+      <div class="ke-airports">{% for airport in airports %}<article><span>{{ airport.code }}</span><div><h4>{{ airport.name }}</h4><p>{{ airport.description }}</p>{% if airport.website %}<a href="{{ airport.website }}" target="_blank" rel="noopener noreferrer">{{ airport.link_label }} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>{% endif %}</div></article>{% endfor %}</div>
+      <div class="ke-transport">{% for item in arrival_transport_options %}<div>{% if item.icon_class %}<i class="{{ item.icon_class }}"></i>{% endif %}<strong>{{ item.title }}</strong><p>{{ item.description|default:item.subtitle }}</p></div>{% endfor %}</div>
+      <div class="mt-5 mb-5" id="ke-connect"><span class="section-kicker">03 / STAY CONNECTED</span><h2>{{ country.connectivity_heading }}</h2></div>
+      <div class="ke-connect-grid"><div class="ke-connect-block"><h4>Mobile networks</h4><p>{{ country.mobile_networks_intro }}</p>
+      {% for operator in mobile_operators %}<div class="ke-operator"><span>{{ forloop.counter|stringformat:'02d' }}</span><strong>{{ operator.name }}</strong>{% if operator.website %}<a href="{{ operator.website }}" target="_blank" rel="noopener noreferrer">Website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>{% endif %}</div>{% endfor %}</div>
+      <div class="ke-connect-block"><h4>Apps to have ready</h4><p>{{ country.useful_apps_intro }}</p><div class="ke-app-grid">{% for app in useful_apps %}<a href="{{ app.website|default:'#ke-connect' }}" target="_blank" rel="noopener noreferrer">{% if app.logo %}<img src="{{ app.logo.url }}" alt="{{ app.name }} logo" loading="lazy">{% endif %}<strong>{{ app.name }}</strong><small>{{ app.category }}</small></a>{% endfor %}</div></div></div>
+      <div class="mt-5 mb-5" id="ke-safety"><span class="section-kicker">04 / TRAVEL WITH CONFIDENCE</span><h2>{{ country.safety_heading }}</h2></div>
+      <div class="ke-safety-grid"><div class="ke-emergency"><span class="ke-label">EMERGENCY SERVICES</span>{% for contact in emergency_contacts %}<a href="tel:{{ contact.phone_number|cut:' ' }}">{{ contact.phone_number }} <i class="fa-solid fa-phone"></i></a><h4>{{ contact.title }}</h4><p>{{ contact.description }}</p>{% endfor %}</div>
+      <div class="ke-visa"><span class="ke-label">ENTRY REQUIREMENTS</span><h4>{{ country.visa_heading }}</h4><p>{{ country.visa_description }}</p>{% if country.visa_link_url %}<a href="{{ country.visa_link_url }}" target="_blank" rel="noopener noreferrer">{{ country.visa_link_label }} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>{% endif %}</div></div>
+      <div class="mt-5 mb-5" id="ke-links"><span class="section-kicker">05 / BOOKMARK THESE</span><h2>{{ country.useful_links_heading }}</h2></div>
+      <div class="ke-links">{% for link in useful_links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.title }} <i class="{{ link.icon_class|default:'fa-solid fa-arrow-up-right-from-square' }}"></i></a>{% endfor %}</div>
+      <p class="ke-note"><i class="fa-solid fa-circle-info"></i> {{ country.travel_essentials_note }}</p>
+    </div></section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section faq-section" data-aos="fade-up"><div class="container-narrow"><div class="section-heading"><div><span class="section-kicker">NEED TO KNOW</span><h2>{{ country.faq_heading|default:'FAQs' }}</h2></div></div>
+      <div class="faq-list">{% for faq in faqs %}<div class="faq-item"><button class="faq-question">{{ faq.question }} <i class="fa-solid fa-plus"></i></button><div class="faq-answer">{{ faq.answer|linebreaksbr }}</div></div>{% endfor %}</div>
+    </div></section>
+
+</main>
+
+    <!-- =========================================================
+        FOOTER
+    ========================================================= -->
+   {% include 'main/footer.html' %}
+
+
+    <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+    <img
+        id="kd-chat-icon"
+        src="{% static 'images/chat-icon.png' %}"
+        alt="Chat"
+    >
+    </button>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script src="{% static 'js/scroll_destinations.js' %}"></script>
+<script src="{% static 'js/slider_destinations.js' %}"></script>
+<script src="{% static 'js/navbar.js' %}"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        window.$crisp = window.$crisp || [];
+
+        const chatLauncher = document.getElementById("kd-chat-launcher");
+
+        if (!chatLauncher) {
+            console.error("Ken Dala chat launcher not found.");
+            return;
+        }
+
+        $crisp.push(["do", "chat:hide"]);
+
+        chatLauncher.addEventListener("click", function () {
+
+            $crisp.push(["do", "chat:show"]);
+            $crisp.push(["do", "chat:open"]);
+
+        });
+
+        $crisp.push(["on", "chat:opened", function () {
+
+            chatLauncher.classList.add("chat-open");
+
+        }]);
+
+        $crisp.push(["on", "chat:closed", function () {
+
+            chatLauncher.classList.remove("chat-open");
+
+            $crisp.push(["do", "chat:hide"]);
+
+        }]);
+
+    });
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

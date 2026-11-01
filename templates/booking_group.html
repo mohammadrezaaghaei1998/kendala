@@ -1,0 +1,588 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   Ken Dala | Complete your booking
+  </title>
+
+
+
+  <!-- Custom Css -->
+    <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking_group.css' %}">
+    <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+
+
+
+ </head>
+ <body>
+<div id="kd-csrf-token" hidden>
+    {% csrf_token %}
+</div>
+{% include 'main/loader.html' %}
+ {% include 'main/header.html' %}
+
+
+  <header style="margin-top: 120px; padding:22px 5%;border-bottom:1px solid #eee;background:white;font-weight:800;letter-spacing:.12em;color:#850078" >
+  
+   <span style="float:right;font-size:12px;color:#555;letter-spacing:0">
+    Booking Preview
+   </span>
+  </header>
+
+
+
+
+
+
+   <main
+    class="kd-checkout"
+        id="kd-checkout"
+        data-booking-url="{% url 'create-group-booking' %}"
+        data-base-price="{{ booking_price }}"
+        data-currency="{{ booking_currency }}"
+        data-tour-title="{{ tour.title }}"
+        data-tour-id="{{ tour.pk }}"
+        data-coupon-url="{% url 'validate-booking-coupon' %}"
+    >
+   <div class="kd-topline">
+    <span class="kd-eyebrow">
+     KEN DALA / PRIVATE & GROUP TRAVEL
+    </span>
+    <span class="kd-secure">
+     ♧   Booking request
+    </span>
+   </div>
+   <div class="kd-head">
+    <div>
+     <p class="kd-kicker">
+      YOUR NEXT JOURNEY STARTS HERE
+     </p>
+     <h1>
+      Complete your booking
+      <span>
+       .
+      </span>
+     </h1>
+     <p>
+      One reservation for your entire group. Simple, secure and thoughtfully organized.
+     </p>
+    </div>
+   <!-- BOOKING PROGRESS STEPS -->
+
+   </div>
+   <div class="kd-steps" id="kd-booking-steps">
+
+    <span class="current" data-step="1">
+        01
+        <small>Travelers</small>
+    </span>
+
+    <span data-step="2">
+        02
+        <small>Rooms</small>
+    </span>
+
+    <span data-step="3">
+        03
+        <small>Details</small>
+    </span>
+
+    <span data-step="4">
+        04
+        <small>Review</small>
+    </span>
+
+</div>
+   <div class="kd-layout">
+    <div class="kd-main">
+     <section class="kd-panel kd-overview">
+      <div class="kd-section-top">
+       <span class="kd-number">
+        01
+       </span>
+       <div>
+        <h2>
+         Your adventure
+        </h2>
+        <p>
+         Review the journey before you continue.
+        </p>
+       </div>
+      </div>
+      <div class="kd-overview-grid">
+       <div>
+        <span class="kd-meta">
+         EXPERIENCE
+        </span>
+        <strong>
+        {{ tour.title }}
+        </strong>
+       </div>
+       
+       <div>
+        <span class="kd-meta">
+         DEPARTURE
+        </span>
+        <strong>
+         <label for="kd-departure-date" class="kd-meta">Choose departure date</label>
+          <input id="kd-departure-date" name="departure_date" type="date"
+                 min="{{ booking_today|date:'Y-m-d' }}" required
+                 style="display:block;width:100%;max-width:230px;padding:10px;border:1px solid #ddd;border-radius:8px;" />
+        </strong>
+       </div>
+       <div>
+        <span class="kd-meta">
+         DURATION
+        </span>
+        <strong>
+        {{ tour.duration_days }} days
+        </strong>
+       </div>
+      </div>
+      <p class="kd-note">
+       Availability and the final booking amount must be confirmed by Ken Dala or the tour operator before payment is requested.
+      </p>
+     </section>
+     <section class="kd-panel" id="traveler-section">
+      <div class="kd-section-top">
+       <span class="kd-number">
+        02
+       </span>
+       <div>
+        <h2>
+         Who's coming along?
+        </h2>
+        <p>
+         Add everyone under one booking reference.
+        </p>
+       </div>
+      </div>
+      <div class="kd-counter">
+       <div>
+        <strong>
+         Number of travelers
+        </strong>
+        <p>
+         All travelers are booked together.
+        </p>
+       </div>
+       <div class="kd-stepper">
+        <button aria-label="Remove one traveler" id="kd-minus" type="button">
+         −
+        </button>
+        <output aria-live="polite" id="kd-count">
+         5
+        </output>
+        <button aria-label="Add one traveler" id="kd-plus" type="button">
+         +
+        </button>
+       </div>
+      </div>
+      <div class="kd-subhead">
+       <div>
+        <h3>
+         Traveler profiles
+        </h3>
+        <p>
+         Enter the details for each guest. The first traveler is the primary contact.
+        </p>
+       </div>
+       <span class="kd-completed" id="kd-completed">
+        0 of 5 complete
+       </span>
+      </div>
+      <div aria-label="Select traveler" class="kd-tabs" id="kd-traveler-tabs" role="tablist">
+      </div>
+      <div class="kd-traveler-form">
+       <div class="kd-form-head">
+        <h3 id="kd-form-heading">
+         Lead traveler
+        </h3>
+        <span id="kd-lead-pill">
+         PRIMARY CONTACT
+        </span>
+       </div>
+       <div class="kd-fields">
+        <label>
+         First name *
+        
+         <input autocomplete="given-name" data-field="first" placeholder="First name" required=""/>
+        </label>
+        <label>
+         Last name *
+         
+         <input autocomplete="family-name" data-field="last" placeholder="Last name" required=""/>
+        </label>
+        <label>
+         Date of birth *
+        
+         <input data-field="dob" required="" type="date"/>
+        </label>
+        <label>
+         Nationality *
+        
+         <input data-field="nationality" placeholder="Country of nationality" required=""/>
+        </label>
+        <label class="kd-email-field">
+         Email address *
+         
+         <input autocomplete="email" data-field="email" placeholder="name@example.com" type="email"/>
+        </label>
+       </div>
+       <div class="kd-form-nav">
+        <button class="kd-ghost" id="kd-prev" type="button">
+         ← Previous traveler
+        </button>
+        <button class="kd-primary" id="kd-next" type="button">
+         Next traveler →
+        </button>
+       </div>
+      </div>
+     </section>
+     <section class="kd-panel" id="rooms-section">
+      <div class="kd-section-top">
+       <span class="kd-number">
+        03
+       </span>
+       <div>
+        <h2>
+         Stay your way
+        </h2>
+        <p>
+         Tell us how your group would like to share rooms.
+        </p>
+       </div>
+      </div>
+      <div class="kd-room-options">
+       <label class="kd-choice">
+        <input checked="" name="room_preference" type="radio" value="recommended"/>
+        <span>
+         <strong>
+          Find the best room combination
+         </strong>
+         <small>
+          We recommend rooms based on your group size and availability.
+         </small>
+        </span>
+       </label>
+       <label class="kd-choice">
+        <input name="room_preference" type="radio" value="together"/>
+        <span>
+         <strong>
+          Keep our group together
+         </strong>
+         <small>
+          Prioritize connecting or nearby rooms, where available.
+         </small>
+        </span>
+       </label>
+       <label class="kd-choice">
+        <input name="room_preference" type="radio" value="custom"/>
+        <span>
+         <strong>
+          I have specific room requirements
+         </strong>
+         <small>
+          Tell us your preferred room types and allocations.
+         </small>
+        </span>
+       </label>
+      </div>
+      <label class="kd-full kd-request" hidden="" id="kd-room-notes-wrap">
+       Room preferences
+       <textarea id="kd-room-notes" placeholder="For example: two twin rooms and one single room" rows="3"></textarea>
+      </label>
+      <p class="kd-note">
+       Room arrangements and any supplements are subject to availability. Preferences are not confirmed until accepted by the operator.
+      </p>
+     </section>
+     <section class="kd-panel" id="contact-section">
+      <div class="kd-section-top">
+       <span class="kd-number">
+        04
+       </span>
+       <div>
+        <h2>
+         A few final details
+        </h2>
+        <p>
+         One point of contact keeps your group's plans together.
+        </p>
+       </div>
+      </div>
+      <div class="kd-fields">
+       <label>
+        Lead contact phone  *
+       
+        <input autocomplete="tel" id="kd-phone" placeholder="Include country code" type="tel"/>
+       </label>
+       <label>
+        Country of residence
+        <input autocomplete="country-name" id="kd-country" placeholder="Country"/>
+       </label>
+       <label class="kd-full">
+        Special requests (optional)
+        <textarea id="kd-special" placeholder="Accessibility, dietary needs, or anything we should know" rows="3"></textarea>
+       </label>
+      </div>
+      <div class="kd-checkrow">
+       <input id="kd-terms" type="checkbox"/>
+       <label for="kd-terms">
+        I agree to the
+        <a href="#" rel="noopener" target="_blank">
+         Terms & Conditions
+        </a>
+        and
+        <a href="#" rel="noopener" target="_blank">
+         Privacy Policy
+        </a>
+        , including the applicable operator's cancellation terms.
+       </label>
+      </div>
+      <p class="kd-note">
+       Replace the policy URLs before publishing. Do not collect card numbers or CVV in this form.
+      </p>
+      <div aria-live="polite" hidden="" id="kd-errors" role="alert">
+      </div>
+      <button class="kd-submit" id="kd-submit" type="button">
+       Review group booking
+       <span>
+        ↗
+       </span>
+      </button>
+     </section>
+    </div>
+    <aside class="kd-sidebar">
+     <div class="kd-summary">
+      <div class="kd-summary-head">
+       <span class="kd-eyebrow">
+        YOUR JOURNEY
+       </span>
+       <h2>
+        Booking overview
+       </h2>
+      </div>
+      <div class="kd-summary-body">
+       <strong>
+       {{ tour.title }}
+       </strong>
+       <p>
+        {{ tour.duration_days }} days ·
+        {{ tour.travel_style|default:"Group experience" }}
+       </p>
+       <div class="kd-summary-line">
+        <span>
+         Travelers
+        </span>
+        <b id="kd-summary-count">
+         5 people
+        </b>
+       </div>
+       <div class="kd-summary-line">
+        <span>
+         Room preferences
+        </span>
+        <b id="kd-summary-room">
+         Best available
+        </b>
+       </div>
+       <div class="kd-summary-line">
+        <span>
+         Indicative tour price
+        </span>
+        <b id="kd-price">
+         —
+        </b>
+       </div>
+
+
+       <div class="kd-summary-total">
+            <span>Estimated group total</span>
+            <strong id="kd-total">—</strong>
+        </div>
+
+        <div class="kd-coupon-section">
+            <label for="kd-coupon-input">Have a coupon?</label>
+
+            <div class="kd-coupon-control">
+                <input
+                    id="kd-coupon-input"
+                    type="text"
+                    placeholder="Enter coupon code"
+                    maxlength="25"
+                    autocomplete="off"
+                >
+
+                <button id="kd-apply-coupon" type="button">
+                    <span id="kd-coupon-button-text">Apply</span>
+                    <span
+                        id="kd-coupon-spinner"
+                        class="kd-coupon-spinner"
+                        hidden
+                    ></span>
+                </button>
+            </div>
+
+            <p id="kd-coupon-message" role="status" aria-live="polite"></p>
+
+            <div id="kd-coupon-discount" class="kd-coupon-discount" hidden>
+                <span>
+                    Coupon discount (<span id="kd-coupon-percent">0</span>%)
+                </span>
+                <strong id="kd-coupon-saving">—</strong>
+            </div>
+        </div>
+
+
+
+        <p class="kd-small">
+            Illustrative base pricing only. Room supplements, taxes and confirmed availability are not included until verified.
+        </p>
+        </div>
+        </div>
+     <div class="kd-help">
+      <strong>
+       Need a little assistance?
+      </strong>
+      <p>
+       Our team can help with group arrangements and special requests.
+      </p>
+      <a href="#">
+       Contact Ken Dala ↗
+      </a>
+     </div>
+    </aside>
+   </div>
+   <div class="kd-modal" hidden="" id="kd-review-modal">
+    <div class="kd-modal-shade" data-close="">
+    </div>
+    <div aria-labelledby="kd-review-title" aria-modal="true" class="kd-modal-dialog" role="dialog">
+     <button aria-label="Close review" class="kd-modal-close" data-close="" type="button">
+      ×
+     </button>
+     <span class="kd-eyebrow">
+      FINAL REVIEW
+     </span>
+     <h2 id="kd-review-title">
+      Your group, one journey.
+     </h2>
+     <div id="kd-review-content">
+     </div>
+     <p class="kd-note">
+      This preview does not submit a booking or take payment. Connect it to a Django POST endpoint and verified pricing before enabling real reservations.
+     </p>
+     <div class="kd-payment-actions">
+
+    
+
+    <button id="kd-continue-payment" type="button" class="kd-primary kd-pay-button">
+        {% if request.user.is_authenticated %}
+            <span>Continue to Secure Payment</span>
+             <span>→</span>
+        {% else %}
+           
+            <span> Login to Continue to Payment</span>
+             <span>→</span>
+        {% endif %}
+    </button>
+
+
+
+    <button
+        type="button"
+        class="kd-ghost"
+        data-close
+    >
+        ← Edit Booking Details
+    </button>
+
+</div>
+     
+    </div>
+   </div>
+  </main>
+    <!-- =====================================================
+            Footer —  Start
+    ===================================================== -->
+
+     {% include 'main/footer.html' %}
+
+    <!-- =====================================================
+            Footer —  End
+    ===================================================== -->
+
+
+  
+    <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+        <img
+            id="kd-chat-icon"
+            src="{% static 'images/chat-icon.png' %}"
+            alt="Chat"
+        >
+    </button>
+
+
+
+    <script src="{% static 'js/navbar.js' %}"></script>
+    {{ booking_draft|json_script:"kd-saved-booking-draft" }}
+    <script src="{% static 'js/booking_group.js' %}?v=5"></script>
+
+
+
+
+
+
+    
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        window.$crisp = window.$crisp || [];
+
+        const chatLauncher = document.getElementById("kd-chat-launcher");
+
+        if (!chatLauncher) {
+            console.error("Ken Dala chat launcher not found.");
+            return;
+        }
+
+        $crisp.push(["do", "chat:hide"]);
+
+        chatLauncher.addEventListener("click", function () {
+
+            $crisp.push(["do", "chat:show"]);
+            $crisp.push(["do", "chat:open"]);
+
+        });
+
+        $crisp.push(["on", "chat:opened", function () {
+
+            chatLauncher.classList.add("chat-open");
+
+        }]);
+
+        $crisp.push(["on", "chat:closed", function () {
+
+            chatLauncher.classList.remove("chat-open");
+
+            $crisp.push(["do", "chat:hide"]);
+
+        }]);
+
+    });
+</script>
+
+ </body>
+</html>

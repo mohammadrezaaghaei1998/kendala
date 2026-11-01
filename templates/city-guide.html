@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ken Dala | City Guide </title>
+  <link rel="stylesheet" href="{% static 'css/city-guide.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    {% include 'main/loader.html' %}
+    {% include 'main/header.html' %}
+
+
+  <main class="cg-page">
+    <section class="cg-hero" style="--cg-hero-image:url('{% if city.hero_image %}{{ city.hero_image.url }}{% else %}https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2200&q=85{% endif %}')">
+      <div class="cg-hero-shade"></div>
+      <div class="cg-hero-inner">
+        <nav class="cg-crumb" aria-label="Breadcrumb"><a href="#">Destinations</a><i class="fa-solid fa-chevron-right"></i><a href="#">{{ city.country.name|default:'Oman' }}</a><i class="fa-solid fa-chevron-right"></i><span>{{ city.name|default:'Muscat' }}</span></nav>
+        <div class="cg-hero-copy"><span class="cg-overline">KEN DALA · CITY GUIDE</span><h1>{{ city.name|default:'Muscat' }}</h1><p>{{ city.tagline|default:'Where the mountains meet the sea, and centuries of culture meet the spirit of discovery.' }}</p><a class="cg-hero-link" href="#city-tours">Explore tours <i class="fa-solid fa-arrow-down"></i></a></div>
+        <div class="cg-hero-bottom"><span><i class="fa-solid fa-location-dot"></i> {{ city.country.name|default:'Oman' }}</span><span>SCROLL TO DISCOVER <i class="fa-solid fa-arrow-down"></i></span></div>
+      </div>
+    </section>
+
+    <nav class="cg-sticky-nav" aria-label="City sections"><div class="cg-container cg-nav-inner"><a href="#overview" class="is-active">Overview</a><a href="#highlights">Highlights</a><a href="#essentials">Travel essentials</a><a href="#city-tours">Tours in {{ city.name|default:'Muscat' }}</a><a href="#more-tours">Explore {{ city.country.name|default:'Oman' }}</a></div></nav>
+
+    <section class="cg-section cg-overview cg-container" id="overview"><div class="cg-overview-head"><div><span class="cg-kicker">THE CITY AT A GLANCE</span><h2>Discover <em>{{ city.name|default:'Muscat' }}</em></h2></div><p>{{ city.introduction|default:'Set between rugged mountains and the Arabian Sea, Muscat is a city of contrasts: elegant architecture, lively traditional souqs, peaceful coastlines and welcoming Omani hospitality. Explore its neighborhoods, cultural landmarks and experiences at your own pace.' }}</p></div><div class="cg-facts"><div><i class="fa-regular fa-calendar"></i><span>BEST TIME TO VISIT</span><strong>{{ city.best_time|default:'October – April' }}</strong></div><div><i class="fa-solid fa-language"></i><span>LANGUAGE</span><strong>{{ city.language|default:'Arabic' }}</strong></div><div><i class="fa-solid fa-coins"></i><span>CURRENCY</span><strong>{{ city.currency|default:'Omani Rial (OMR)' }}</strong></div><div><i class="fa-solid fa-plane-arrival"></i><span>MAIN AIRPORT</span><strong>{{ city.airport|default:'Muscat International' }}</strong></div></div></section>
+
+
+<section class="cg-section cg-highlights" id="highlights">
+    <div class="cg-container">
+
+        <div class="cg-heading">
+            <div>
+                <span class="cg-kicker">
+                    {{ city.highlights_eyebrow|default:"THE EXPERIENCES" }}
+                </span>
+
+                <h2>
+                    {{ city.highlights_heading|default:"What makes this city special" }}
+                </h2>
+            </div>
+
+            <p>
+                {{ city.highlights_description|default:"Discover the places and moments that define your journey." }}
+            </p>
+        </div>
+
+        <div class="cg-feature-grid">
+
+            {% for highlight in highlights %}
+
+                <article class="cg-feature {% if forloop.first %}cg-feature-large{% endif %}">
+
+                    {% if highlight.image %}
+                        <img
+                            src="{{ highlight.image.url }}"
+                            alt="{{ highlight.title }}"
+                            loading="lazy"
+                        >
+                    {% endif %}
+
+                    <div>
+                        <span>
+                            {{ forloop.counter|stringformat:"02d" }}
+                            /
+                            {{ highlight.category|upper }}
+                        </span>
+
+                        <h3>{{ highlight.title }}</h3>
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <p class="cg-no-highlights">
+                    No highlights have been added for this city yet.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+    <section class="cg-section cg-container cg-essentials" id="essentials"><div class="cg-heading"><div><span class="cg-kicker">BEFORE YOU GO</span><h2>Good to <em>know</em></h2></div></div><div class="cg-essential-grid"><article><i class="fa-solid fa-sun"></i><h3>Weather & seasons</h3><p>{{ city.weather_info|default:'The cooler months are ideal for walking, sightseeing and outdoor adventures. Summer can be very hot.' }}</p></article><article><i class="fa-solid fa-car-side"></i><h3>Getting around</h3><p>{{ city.transport_info|default:'Taxis, rental cars and organized tours make exploring the city and nearby attractions convenient.' }}</p></article><article><i class="fa-solid fa-shirt"></i><h3>Local etiquette</h3><p>{{ city.etiquette_info|default:'Dress respectfully at cultural and religious sites and check visiting hours before you go.' }}</p></article></div></section>
+
+    <section class="cg-section cg-tours" id="city-tours"><div class="cg-container"><div class="cg-heading cg-heading-split"><div><span class="cg-kicker">CURATED FOR YOUR JOURNEY</span><h2>Tours in <em>{{ city.name|default:'Muscat' }}</em></h2><p>Discover experiences departing from or visiting this city.</p></div><div class="cg-tour-controls"><label for="cg-tour-sort">Sort by</label><select id="cg-tour-sort"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="duration">Duration</option></select></div></div><div class="cg-tour-grid" id="cg-city-tour-grid">
+      {% for tour in city_tours %}
+      <article class="cg-tour-card" data-price="{{ tour.price|default:0 }}" data-days="{{ tour.duration_days|default:1 }}" data-order="{{ forloop.counter }}"><div class="cg-tour-image">{% if tour.image %}<img src="{{ tour.image.url }}" alt="{{ tour.title }}" loading="lazy">{% else %}<img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80" alt="Tour landscape" loading="lazy">{% endif %}<span>{{ tour.category|default:'Experience' }}</span></div><div class="cg-tour-body"><small><i class="fa-solid fa-location-dot"></i> {{ tour.city.name|default:city.name|default:'Muscat' }} <b>·</b> {{ tour.duration_days|default:'1' }} day{{ tour.duration_days|pluralize }}</small><h3>{{ tour.title }}</h3><p>{{ tour.description|striptags|truncatewords:20 }}</p><div class="cg-tour-footer"><div><span>FROM</span><strong>{% if tour.price %}{{ tour.price }} $ {% else %}Price on request{% endif %}</strong></div><a href="#" aria-label="View tour details for {{ tour.title }}">View tour <i class="fa-solid fa-arrow-right"></i></a></div></div></article>
+      {% empty %}
+      <div class="cg-no-tours"><i class="fa-solid fa-compass"></i><h3>No city tours listed yet</h3><p>When tours are linked to this city in Django, they'll appear here automatically.</p></div>
+      {% endfor %}
+    </div></div></section>
+
+    <section class="cg-section cg-container cg-related" id="more-tours"><div class="cg-heading cg-heading-split"><div><span class="cg-kicker">CONTINUE EXPLORING</span><h2>More of <em>{{ city.country.name|default:'Oman' }}</em></h2><p>Discover other unforgettable experiences across the country.</p></div><a href="#" class="cg-outline-link">All country tours <i class="fa-solid fa-arrow-right"></i></a></div><div class="cg-related-grid">{% for tour in related_tours %}<article class="cg-related-card"><div class="cg-related-image">{% if tour.image %}<img src="{{ tour.image.url }}" alt="{{ tour.title }}" loading="lazy">{% else %}<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Related tour" loading="lazy">{% endif %}</div><div><small>{{ tour.city.name|default:city.country.name|default:'Oman' }}</small><h3>{{ tour.title }}</h3><a href="#">Explore experience <i class="fa-solid fa-arrow-right"></i></a></div></article>{% empty %}<p class="cg-no-related">Related country tours will appear here when available.</p>{% endfor %}</div></section>
+  </main>
+
+
+    {% include 'main/footer.html' %}
+
+    
+    <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+        <img
+            id="kd-chat-icon"
+            src="{% static 'images/chat-icon.png' %}"
+            alt="Chat"
+        >
+    </button>
+
+
+
+  <script src="{% static 'js/city-guide.js' %}" defer></script>
+  <script src="{% static 'js/navbar.js' %}" defer></script>
+
+
+
+  
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        window.$crisp = window.$crisp || [];
+
+        const chatLauncher = document.getElementById("kd-chat-launcher");
+
+        if (!chatLauncher) {
+            console.error("Ken Dala chat launcher not found.");
+            return;
+        }
+
+        $crisp.push(["do", "chat:hide"]);
+
+        chatLauncher.addEventListener("click", function () {
+
+            $crisp.push(["do", "chat:show"]);
+            $crisp.push(["do", "chat:open"]);
+
+        });
+
+        $crisp.push(["on", "chat:opened", function () {
+
+            chatLauncher.classList.add("chat-open");
+
+        }]);
+
+        $crisp.push(["on", "chat:closed", function () {
+
+            chatLauncher.classList.remove("chat-open");
+
+            $crisp.push(["do", "chat:hide"]);
+
+        }]);
+
+    });
+</script>
+</body>
+</html>

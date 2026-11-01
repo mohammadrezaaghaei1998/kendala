@@ -1,0 +1,217 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   Ken Dala | Travel Guides &amp; Journals
+  </title>
+  <link href="{% static 'css/index.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/navbar_main.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/footer.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/travel_guide.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/support-button.css' %}" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+ </head>
+ <body>
+    {% include 'main/loader.html' %}
+    {% include 'main/header.html' %}
+  <main class="tl-page">
+   <section class="tl-hero">
+    <div class="tl-hero-image">
+    </div>
+    <div class="tl-hero-content tl-container">
+     <span class="tl-eyebrow tl-light">
+      THE KEN DALA COLLECTION
+      <span class="tl-line">
+      </span>
+      TRAVEL RESOURCES
+     </span>
+     <h1>
+      Travel beautifully.
+      <br/>
+      <em>
+       Arrive prepared.
+      </em>
+     </h1>
+     <p>
+      Curated destination journals and practical travel guides for journeys worth remembering.
+     </p>
+     <a class="tl-hero-link" href="#collection">
+      Explore the collection
+      <i class="fa-solid fa-arrow-down">
+      </i>
+     </a>
+    </div>
+    <div class="tl-hero-index">
+     THE KEN DALA TRAVEL COLLECTION
+    </div>
+   </section>
+   <section class="tl-intro tl-container" id="collection">
+    <div>
+     <span class="tl-eyebrow">
+      DISCOVER MORE, TRAVEL BETTER
+     </span>
+     <h2>
+      Your journey starts
+      <br/>
+      with a little
+      <em>
+       inspiration.
+      </em>
+     </h2>
+    </div>
+    <p>
+     Everything you need before you go, beautifully collected in one place. Discover extraordinary places in our travel journals, then plan confidently with our essential country guides.
+    </p>
+   </section>
+   <section class="tl-collection tl-container">
+     <div class="tl-toolbar">
+      <div aria-label="Filter destinations" class="tl-tabs" role="group">
+       <button type="button" aria-pressed="true" class="active" data-country="all">All destinations</button>
+       {% for country in guide_countries %}
+       <button type="button" aria-pressed="false" data-country="{{ country.slug }}">{{ country.name }}</button>
+       {% endfor %}
+      </div>
+      <span class="tl-count" id="countryCount">{{ guide_countries|length|stringformat:'02d' }} DESTINATIONS</span>
+     </div>
+     <div class="tl-destinations" id="destinations">
+      {% for country in guide_countries %}
+      <article class="tl-destination" data-country="{{ country.slug }}">
+       <div class="tl-country-heading">
+        <div>
+         <span class="tl-index">{{ forloop.counter|stringformat:'02d' }} — {{ country.hero_eyebrow|default:'EXPLORE THE WORLD' }}</span>
+         <h3>{{ country.name }}<span class="tl-dot">.</span></h3>
+         <p>{{ country.tagline|default:country.description }}</p>
+        </div>
+        <span class="tl-country-code">{{ country.currency_code|default:country.name|slice:':2'|upper }} <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+       </div>
+       <div class="tl-publications">
+        {% for publication in country.published_travel_publications %}
+        <div class="tl-publication {% if publication.publication_type == 'journal' %}tl-journal{% else %}tl-guide{% endif %}">
+         <div class="tl-cover {% if publication.publication_type == 'guide' %}tl-guide-cover{% endif %}">
+          {% if publication.cover_image %}
+           <img src="{{ publication.cover_image.url }}" alt="{{ country.name }} {{ publication.get_publication_type_display }} cover" loading="lazy">
+          {% elif publication.publication_type == 'journal' and country.hero_image %}
+           <img src="{{ country.hero_image.url }}" alt="{{ country.name }}" loading="lazy">
+          {% endif %}
+          {% if publication.publication_type == 'guide' %}
+          <div class="tl-guide-art"><span class="tl-ring"></span><span class="tl-guide-mark">{{  publication.travel_mark|default:country.name|slice:":2"|upper }}</span></div>
+          {% endif %}
+          <div class="tl-cover-label">
+           <small>{% if publication.publication_type == 'journal' %}KEN DALA / THE DESTINATION SERIES{% else %}KEN DALA / TRAVEL ESSENTIALS{% endif %}</small>
+           <strong>{{ country.name|upper }}</strong>
+           <span>{{ publication.cover_subtitle|default:publication.get_publication_type_display|upper }}</span>
+          </div>
+          <span class="tl-cover-number">{{ publication.edition_label|default:'KEN DALA' }}</span>
+         </div>
+         <div class="tl-publication-info">
+          <span class="tl-type">{% if publication.publication_type == 'journal' %}01 / DISCOVER{% else %}02 / PREPARE{% endif %}</span>
+          <h4>{{ publication.title|default:publication.get_publication_type_display }}</h4>
+          <p>{{ publication.description }}</p>
+          <div class="tl-actions">
+           <a class="tl-download" href="{{ publication.pdf_file.url }}" download>Download PDF <i class="fa-solid fa-arrow-down-to-line"></i></a>
+           <a class="tl-preview" href="{{ publication.pdf_file.url }}" target="_blank" rel="noopener" aria-label="Preview {{ country.name }} {{ publication.get_publication_type_display }}"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+         </div>
+        </div>
+        {% endfor %}
+       </div>
+      </article>
+      {% empty %}
+      <p>No travel publications are available yet.</p>
+      {% endfor %}
+     </div>
+   </section>
+   <section class="tl-outro">
+    <div class="tl-container tl-outro-inner">
+     <div>
+      <span class="tl-eyebrow tl-light">
+       THE WORLD IS WAITING
+      </span>
+      <h2>
+       Read the story.
+       <br/>
+       <em>
+        Live the journey.
+       </em>
+      </h2>
+     </div>
+     <p>
+      Inspiration is only the beginning. Discover the places that make every journey unforgettable.
+     </p>
+    </div>
+   </section>
+  </main>
+  {% include 'main/footer.html' %}
+
+
+   <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+        <img
+            id="kd-chat-icon"
+            src="{% static 'images/chat-icon.png' %}"
+            alt="Chat"
+        >
+    </button>
+
+
+
+
+
+
+  <script defer="" src="{% static 'js/navbar.js' %}">
+  </script>
+  <script defer="" src="{% static 'js/travel_guide.js' %}">
+  </script>
+
+
+
+
+
+
+
+
+    <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            window.$crisp = window.$crisp || [];
+
+            const chatLauncher = document.getElementById("kd-chat-launcher");
+
+            if (!chatLauncher) {
+                console.error("Ken Dala chat launcher not found.");
+                return;
+            }
+
+            $crisp.push(["do", "chat:hide"]);
+
+            chatLauncher.addEventListener("click", function () {
+
+                $crisp.push(["do", "chat:show"]);
+                $crisp.push(["do", "chat:open"]);
+
+            });
+
+            $crisp.push(["on", "chat:opened", function () {
+
+                chatLauncher.classList.add("chat-open");
+
+            }]);
+
+            $crisp.push(["on", "chat:closed", function () {
+
+                chatLauncher.classList.remove("chat-open");
+
+                $crisp.push(["do", "chat:hide"]);
+
+            }]);
+
+        });
+    </script>
+ </body>
+</html>

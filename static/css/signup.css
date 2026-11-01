@@ -532,3 +532,59 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+
+
+
+
+
+
+
+    /* Signup validation errors */
+
+    .kd-signup-errors {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+
+        padding: 15px 18px;
+        margin-bottom: 22px;
+
+        background: rgba(220, 38, 38, 0.08);
+        border: 1px solid rgba(220, 38, 38, 0.25);
+        border-radius: 10px;
+
+        color: #dc2626;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .kd-signup-errors i {
+        font-size: 17px;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    .kd-signup-errors p {
+        margin: 0 0 5px;
+    }
+
+    .kd-signup-errors p:last-child {
+        margin-bottom: 0;
+    }
+
+
+
+    /* Smoothly hide validation errors */
+
+    .kd-signup-errors {
+        transition:
+            opacity 0.4s ease,
+            transform 0.4s ease;
+    }
+
+    .kd-signup-errors.hide {
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+    }

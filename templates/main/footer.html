@@ -1,13 +1,122 @@
+
 {% load static %}
 
-
 <footer class="footer">
-        <div class="footer-main">
-            <div class="footer-brand"><img src="{% static 'images/logopngdark.png' %}"><small>Powered by Saudi Tourism Authority</small></div>
-            <div><b>Discover Saudi</b><a>Saudi Rewards</a><a>Destinations</a><a>Things To Do</a><a>Plan Your Trip</a><a>Saudi Calendar</a><a>Saudi Map</a></div>
-            <div><b>Saudi Partner</b><a>Content Hub</a><a>Partner Tools</a><a>Tourism Exchange</a></div>
-            <div><b>Related Links</b><a>About VisitSaudi</a><a>FAQs</a><a>Open Data</a><a>Istitlaa Platform</a><a>Tafaul Platform</a></div>
-            <div><b>Call Center</b><div class="socials"><i class="fa-brands fa-whatsapp"></i><i class="fa-brands fa-facebook"></i><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-x-twitter"></i><i class="fa-brands fa-youtube"></i></div><button class="contact-btn">◉ Contact Us</button></div>
+    <div class="footer-main">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+            <a href="{% url 'index' %}" aria-label="Ken Dala Home">
+                <img
+                    src="{% static 'images/logopng.png' %}"
+                    alt="Ken Dala"
+                >
+            </a>
+            <small>Explore. Discover. Belong.</small>
         </div>
-    <div class="footer-bottom">© 2026 WSI — close design recreation <span>Privacy · Terms · Accessibility</span></div>
+
+        <!-- EXPLORE -->
+        <div>
+            <b>Explore Ken Dala</b>
+
+            <a href="{% url 'all-destinations' %}">
+                Destinations
+            </a>
+
+            <a href="{% url 'tour-packages' %}">
+                Tour Packages
+            </a>
+
+            <a href="{% url 'offers' %}">
+                Special Offers
+            </a>
+
+            <a href="{% url 'events' %}">
+                Events
+            </a>
+
+            <a href="{% url 'search-results' %}">
+                Search Experiences
+            </a>
+        </div>
+
+        <!-- TRAVEL ESSENTIALS -->
+        <div>
+            <b>Travel Essentials</b>
+
+            <a href="{% url 'travel-guide' %}">
+                Travel Guides & Journals
+            </a>
+
+            <a href="{% url 'visa_regulations' %}">
+                Visa & Entry Regulations
+            </a>
+
+            <a href="{% url 'visa_map' %}">
+                World Visa Map
+            </a>
+
+            <a href="{% url 'passport_rankings' %}">
+                Passport Rankings
+            </a>
+
+            <a href="{% url 'visa_history' %}">
+                Visa Regulation History
+            </a>
+        </div>
+
+        <!-- COMPANY -->
+        <div>
+            <b>Company</b>
+
+            <a href="{% url 'index' %}">
+                Home
+            </a>
+
+            <a href="{% url 'partnership' %}">
+                Become a Partner
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact Us
+            </a>
+
+            <a href="{% url 'signup' %}">
+                Create an Account
+            </a>
+
+            <a href="{% url 'user-dashboard' %}">
+                My Dashboard
+            </a>
+        </div>
+
+        <!-- CONTACT -->
+        <div>
+            <b>Connect With Us</b>
+
+            <div class="socials">
+                <i class="fa-brands fa-whatsapp"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+
+            <a href="{% url 'contact' %}" class="contact-btn">
+                ◉ Contact Us
+            </a>
+        </div>
+
+    </div>
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+        <span>
+            © {% now "Y" %} Ken Dala. All rights reserved.
+        </span>
+
+        <span>
+            Privacy Policy · Terms & Conditions · Accessibility
+        </span>
+    </div>
 </footer>

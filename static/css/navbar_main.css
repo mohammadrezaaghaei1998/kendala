@@ -1,1084 +1,914 @@
+/* =========================================
+   KEN DALA — CINEMATIC NAVIGATION
+========================================= */
+:root {
+    --kd-purple: #850078;
+    --kd-deep: #230038;
+    --kd-plum: #4b005d;
+    --kd-nav-ease: cubic-bezier(.76, 0, .24, 1);
+}
+.kd-nav,
+.kd-nav * {
+    box-sizing: border-box;
+}
+.kd-nav {
+    position: fixed;
+    inset: 0 0 auto;
+    height: 0;
+    z-index: 99999;
+    font-family: inherit;
+}
+/* =========================================
+   LOGO
+========================================= */
+.kd-nav-logo {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    width: 165px;
+    z-index: 100;
+    display: block;
+    transition: opacity .35s ease;
+}
+.kd-nav-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.kd-nav-logo:hover {
+    opacity: .75;
+}
+/* =========================================
+   TOP ACTIONS
+========================================= */
+.kd-nav-actions {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 105;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+.kd-nav-search-trigger {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 50px;
+    padding: 13px 19px;
+    color: #fff;
+    background: rgba(20,0,30,.16);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 12px;
+    transition: background .3s, transform .3s;
+}
+.kd-nav-search-trigger:hover {
+    background: rgba(255,255,255,.15);
+    transform: translateY(-2px);
+}
+.kd-nav-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 23px;
+    border-radius: 50px;
+    color: #fff;
+    /* background: linear-gradient(115deg, #a400b5, #7800df); */
+    background: #850078;;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .3s, box-shadow .3s;&#x20;
+}
+.kd-nav-login:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(133,0,120,.35);
+}
+/* =========================================
+   CIRCULAR HAMBURGER
+========================================= */
+.kd-nav-toggle {
+    position: relative;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    transition: transform .4s, background .3s;
+}
+.kd-nav-toggle:hover {
+    transform: scale(1.07);
+}
+.kd-nav-toggle span {
+    position: absolute;
+    left: 15px;
+    width: 16px;
+    height: 1.5px;
+    background: #430050;
+    transition: transform .45s var(--kd-nav-ease);
+}
+.kd-nav-toggle span:first-child {
+    top: 20px;
+}
+.kd-nav-toggle span:last-child {
+    top: 26px;
+}
+.kd-nav.is-open .kd-nav-toggle span:first-child {
+    transform: translateY(3px) rotate(45deg);
+}
+.kd-nav.is-open .kd-nav-toggle span:last-child {
+    transform: translateY(-3px) rotate(-45deg);
+}
+/* =========================================
+   LARGE ROUNDED PANEL
+========================================= */
+.kd-nav-panel {
+    position: fixed;
+    top: 2.2vh;
+    right: 1.3vw;
+    width: 74%;
+    height: 65.6dvh;
+    border-radius: 29px;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(
+            ellipse at 14% 95%,
+            rgba(155,0,159,.53),
+            transparent 58%
+        ),
+        linear-gradient(
+            125deg,
+            #350045 0%,
+            #25003c 47%,
+            #210039 100%
+        );
+    box-shadow: 0 35px 100px rgba(15,0,25,.2);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(50px) scale(.97);
+    transition:
+        transform .85s var(--kd-nav-ease),
+        opacity .55s ease,
+        visibility .85s;
+}
+.kd-nav.is-open .kd-nav-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0) scale(1);
+}
+/* =========================================
+   PANEL INNER LAYOUT
+========================================= */
+.kd-nav-panel-inner {
+    width: 100%;
+    height: 100%;
+    padding: 0 10% 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow-y: auto;
+}
+.kd-nav-columns {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr .8fr;
+    column-gap: 7%;
+    margin-bottom: 2vh;
+}
+.kd-nav-column {
+    min-width: 0;
+}
+.kd-nav-heading {
+    display: block;
+    margin-bottom: 35px;
+    color: #ad74ba;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .32em;
+}
+.kd-nav-heading-account{
+    margin-top: 35px;
+}
 
-/* =========================================================
-   WSI NAVBAR
-   ========================================================= */
+.kd-nav-column nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 23px;
+}
+/* =========================================
+   NAVIGATION LINKS
+========================================= */
+.kd-nav-link {
+    position: relative;
+    display: inline-block;
+    color: rgba(255,255,255,.89);
+    font-size: clamp(15px, 1.5vw, 25px);
+    font-weight: 400;
+    line-height: 1.35;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        color .35s ease,
+        transform .45s cubic-bezier(.22,1,.36,1);
+    font-family:Georgia,'Times New Roman',serif;
+}
+.kd-nav-link::before {
+    content: "›";
+    position: absolute;
+    left: -25px;
+    top: 0;
+    color: #ef60f2;
+    opacity: 0;
+    transform: translateX(-7px);
+    transition: opacity .3s, transform .4s;
+}
+.kd-nav-link:hover,
+.kd-nav-link:focus-visible {
+    color: #ee7cf2;
+    transform: translateX(6px);
+}
+.kd-nav-link:hover::before,
+.kd-nav-link:focus-visible::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+/* =========================================
+   STAGGERED ENTRANCE
+========================================= */
+.kd-nav-heading,
+.kd-nav-link,
+.kd-nav-panel-footer {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity .55s ease,
+        transform .7s cubic-bezier(.22,1,.36,1),
+        color .3s ease;
+}
+.kd-nav.is-open .kd-nav-heading,
+.kd-nav.is-open .kd-nav-link,
+.kd-nav.is-open .kd-nav-panel-footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+.kd-nav.is-open .kd-nav-heading {
+    transition-delay: .28s;
+}
+.kd-nav.is-open .kd-nav-link:nth-child(1) {
+    transition-delay: .34s;
+}
+.kd-nav.is-open .kd-nav-link:nth-child(2) {
+    transition-delay: .40s;
+}
+.kd-nav.is-open .kd-nav-link:nth-child(3) {
+    transition-delay: .46s;
+}
+.kd-nav.is-open .kd-nav-link:nth-child(4) {
+    transition-delay: .52s;
+}
+.kd-nav.is-open .kd-nav-panel-footer {
+    transition-delay: .58s;
+    border-top: 1px dotted rgba(255, 255, 255, .18);
+}
+/* Hover should still work after entrance */
+.kd-nav.is-open .kd-nav-link:hover {
+    transform: translateX(6px);
+}
+/* =========================================
+   BOTTOM FOOTER
+========================================= */
+.kd-nav-panel-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+}
+.kd-nav-social {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    padding-top: 24px;
+   
+}
+.kd-nav-social a {
+    color: rgba(255,255,255,.5);
+    font-size: 16px;
+    transition: color .3s, transform .3s;
+}
+.kd-nav-social a:hover {
+    color: #fff;
+    transform: translateY(-3px);
+}
+.kd-nav-footer-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding-top: 24px;
+}
+.kd-nav-footer-links a,
+.kd-nav-footer-links span {
+    color: rgba(255,255,255,.55);
+    text-decoration: none;
+    font-size: 11px;
+}
+.kd-nav-footer-links a:hover {
+    color: #fff;
+}
+/* =========================================
+   SEARCH — SMOOTH TOP-DOWN REVEAL
+========================================= */
+.kd-nav-search-panel {
+    position: fixed;
+    top: 2.2vh;
+    right: 1.3vw;
+    width: 74%;
+    z-index: 103;
+    border-radius: 29px;
+    background: #fff;
+    color: #161616;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-55px);
+    clip-path: inset(0 0 100% 0 round 29px);
+    box-shadow: 0 30px 90px rgba(0,0,0,.2);
+    transition:
+        opacity .35s ease,
+        transform .75s var(--kd-nav-ease),
+        clip-path .75s var(--kd-nav-ease),
+        visibility .75s;
+}
+.kd-nav.is-search-open .kd-nav-search-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0 round 29px);
+}
+.kd-nav-search-inner {
+    padding: 120px 9% 65px;
+}
+.kd-nav-search-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+.kd-nav-search-top > span {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .25em;
+    color: var(--kd-purple);
+}
+.kd-nav-search-close {
+    border: 0;
+    background: transparent;
+    color: #333;
+    font-size: 22px;
+    cursor: pointer;
+}
+.kd-nav-search-form {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #bbb;
+}
+.kd-nav-search-form > i {
+    font-size: 23px;
+    color: var(--kd-purple);
+}
+.kd-nav-search-form input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #171717;
+    font-family: inherit;
+    font-size: clamp(20px, 3vw, 42px);
+}
+.kd-nav-search-form input::placeholder {
+    color: #aaa;
+}
+.kd-nav-search-form button {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--kd-purple);
+    color: #fff;
+    cursor: pointer;
+}
+.kd-nav-search-suggestions {
+    margin-top: 45px;
+}
+.kd-nav-search-suggestions > span {
+    display: block;
+    margin-bottom: 20px;
+    color: #888;
+    font-size: 10px;
+    letter-spacing: .2em;
+}
+.kd-nav-search-suggestions > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.kd-nav-search-suggestions button {
+    padding: 12px 18px;
+    border: 1px solid #e1dbe1;
+    border-radius: 30px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background .3s, color .3s;
+}
+.kd-nav-search-suggestions button:hover {
+    background: var(--kd-purple);
+    color: #fff;
+}
+/* =========================================
+   BACKDROP
+========================================= */
+.kd-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 99998;
+    background: rgba(10,0,20,.38);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .5s ease, visibility .5s;
+}
+body.kd-nav-active .kd-nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+body.kd-nav-active {
+    overflow: hidden;
+}
+/* =========================================
+   TABLET
+========================================= */
+@media (max-width: 1100px) {
+    .kd-nav-panel,
+    .kd-nav-search-panel {
+        width: 85%;
+    }
+    .kd-nav-panel-inner {
+        padding-left: 9%;
+        padding-right: 7%;
+    }
+    .kd-nav-columns {
+        column-gap: 5%;
+    }
+    .kd-nav-link {
+        font-size: 17px;
+    }
+}
+/* =========================================
+   MOBILE
+========================================= */
+@media (max-width: 700px) {
+    .kd-nav-logo {
+        top: 24px;
+        left: 25px;
+        width: 105px;
+    }
+    .kd-nav-actions {
+        top: 21px;
+        right: 25px;
+        gap: 8px;
+    }
+    .kd-nav-search-trigger {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        justify-content: center;
+    }
+    .kd-nav-search-trigger span {
+        display: none;
+    }
+    .kd-nav-login {
+        min-height: 40px;
+        padding: 0 12px;
+        font-size: 10px;
+    }
+    .kd-nav-toggle {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+    .kd-nav-toggle span {
+        left: 12px;
+    }
+    .kd-nav-toggle span:first-child {
+        top: 17px;
+    }
+    .kd-nav-toggle span:last-child {
+        top: 23px;
+    }
+    .kd-nav-panel {
+        top: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
+        height: calc(100dvh - 20px);
+        border-radius: 22px;
+    }
+    .kd-nav-panel-inner {
+        justify-content: flex-start;
+        padding: 115px 32px 35px;
+    }
+    .kd-nav-columns {
+        grid-template-columns: 1fr;
+        gap: 38px;
+        margin-bottom: 55px;
+    }
+    .kd-nav-heading {
+        margin-bottom: 16px;
+        font-size: 9px;
+    }
+    .kd-nav-column nav {
+        gap: 13px;
+    }
+    .kd-nav-link {
+        font-size: 23px;
+    }
+    .kd-nav-panel-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .kd-nav-search-panel {
+        top: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
+        border-radius: 22px;
+    }
+    .kd-nav-search-inner {
+        padding: 100px 25px 40px;
+    }
+    .kd-nav-search-form input {
+        font-size: 19px;
+    }
+}
+/* =========================================
+   REDUCED MOTION
+========================================= */
+@media (prefers-reduced-motion: reduce) {
+    .kd-nav *,
+    .kd-nav-backdrop {
+        animation: none !important;
+        transition-duration: .01ms !important;
+    }
+}
 
-.wsi-navbar {
+/* Logo inside the purple panel — unchanged when opened */
+.kd-nav-panel-logo {
+    position: absolute;
+    top: 45px;
+    left: 9%;
+    width: 150px;
+    max-width: 150px;
+    z-index: 5;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .5s ease, transform .6s ease;
+}
+.kd-nav-panel-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.kd-nav.is-open .kd-nav-panel-logo {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .25s;
+}
+.kd-nav.is-open .kd-nav-logo {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.kd-nav-panel { min-height: 480px; }
+/* Keep the original open-menu action position */
+.kd-nav.is-open .kd-nav-actions { top: 55px !important;
+right: 55px !important; }
+
+/* White navigation background on scroll */
+.kd-nav::before {
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
-    z-index: 99999;
+    height: 90px;
+    background: #fff;
+    box-shadow: 0 5px 30px rgba(0,0,0,.07);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+}
+.kd-nav.is-scrolled::before { opacity: 1; }
+.kd-nav.is-scrolled:not(.is-open) .kd-nav-logo,
+.kd-nav.is-scrolled:not(.is-open) .kd-nav-actions { top: 27px; }
+.kd-nav.is-scrolled:not(.is-open) .kd-nav-search-trigger {
+    color: #850078;
+    border-color: rgba(133,0,120,.2);
+    background: #f8f4f8;
+}
+.kd-nav.is-scrolled:not(.is-open) .kd-nav-toggle { background: #850078; }
+.kd-nav.is-scrolled:not(.is-open) .kd-nav-toggle span { background: #fff; }
+.kd-nav-logo, .kd-nav-actions { transition: top .4s ease, opacity .35s ease; }
 
-    color: #fff;
-
-    /* Glossy black/red */
-    background: rgba(5, 5, 5, 0.72) !important;
-
-    /* Glass blur */
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    /* Glossy effect */
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.04),
-        0 8px 30px rgba(0, 0, 0, 0.35);
+@media (min-width: 701px) and (max-width: 1100px) {
+    .kd-nav-panel-logo { left: 9%; width: 145px; }
+}
+@media (max-width: 700px) {
+    .kd-nav-panel { min-height: 0; }
+    .kd-nav-panel-logo {
+        top: 55px;
+        left: 30px;
+        width: 115px;
+        max-width: calc(100% - 160px);
+    }
+    .kd-nav.is-open .kd-nav-actions { top: 21px; }
+    .kd-nav::before { height: 78px; }
+    .kd-nav.is-scrolled:not(.is-open) .kd-nav-logo,
+    .kd-nav.is-scrolled:not(.is-open) .kd-nav-actions { top: 17px; }
+}
+@media (max-width: 380px) {
+    .kd-nav-panel-logo {
+        top: 27px;
+        left: 24px;
+        width: 90px;
+        max-width: calc(100% - 150px);
+    }
+    .kd-nav-panel-inner { padding: 105px 24px 30px; }
+    .kd-nav-login { padding: 0 9px; font-size: 9px; }
+    .kd-nav-link { font-size: 20px; }
 }
 
 
-.wsi-navbar-inner {
-    height: 82px;
-    width: 100%;
-    padding: 0 5.2vw;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    position: relative;
-    z-index: 10;
-}
 
 
-/* =========================================================
-   LOGO
-   ========================================================= */
-
-.wsi-navbar-logo {
-    width: 86px;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.wsi-navbar-logo img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
 
 
-/* =========================================================
-   DESKTOP NAV
-   ========================================================= */
 
-.wsi-navbar-menu {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-  
-    margin-right: 38px;
-}
+/* ==============================================
+   KEN DALA — GET YOUR VISA BUTTON
+   ============================================== */
 
-
-.wsi-navbar-item {
-    height: 82px;
-    display: flex;
-    align-items: center;
-}
-
-
-.wsi-navbar-link {
-    position: relative;
-
-    border: 0;
-    background: transparent;
-
-    color: #fff;
-    text-decoration: none;
-
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-
-    padding: 0;
-
-    cursor: pointer;
-
-    display: flex;
-    /* align-items: center; */
-    gap: 7px;
-
-    transition: opacity 0.25s ease;
-}
-
-
-.wsi-navbar-link:hover {
-    color: #fff;
-    opacity: 0.72;
-}
-
-
-.wsi-navbar-chevron {
-    font-size: 15px;
-    line-height: 1;
-
-    transition:
-        transform 0.35s cubic-bezier(.2,.8,.2,1);
-}
-
-
-/* Rotate arrow while dropdown is active */
-
-.wsi-navbar-item.wsi-navbar-active
-.wsi-navbar-chevron {
-    transform: rotate(180deg);
-}
-
-
-/* =========================================================
-   ACTIONS
-   ========================================================= */
-
-.wsi-navbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-
-.wsi-navbar-circle-button {
-    width: 36px;
-    height: 36px;
-
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.65);
-
-    background: transparent;
-    color: #fff;
-
-    display: flex;
+.kd-nav-visa-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 
-    cursor: pointer;
+    height: 43px;
+    padding: 0 21px;
 
-    transition:
-        background .3s ease,
-        border-color .3s ease,
-        transform .3s ease;
-}
+    background: #850078;
+    color: #fff !important;
 
+    border: 1px solid #850078;
+    border-radius: 30px;
 
-.wsi-navbar-circle-button:hover {
-    background: rgba(255,255,255,.1);
-    border-color: #fff;
-    transform: translateY(-1px);
-}
-
-
-.wsi-navbar-action-button {
-    min-height: 36px;
-
-    padding: 0 14px;
-
-    border-radius: 22px;
-    border: 1px solid rgba(255,255,255,.6);
-
-    background: transparent;
-    color: #fff;
-
-    text-decoration: none;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-
-    cursor: pointer;
-
-    transition:
-        background .3s ease,
-        border-color .3s ease,
-        transform .3s ease;
-}
-
-
-.wsi-navbar-action-button:hover {
-    color: #fff;
-    background: rgba(255,255,255,.08);
-    border-color: #fff !important;
-    transform: translateY(-1px);
-}
-                    .wsi-navbar-action-button:focus,
-.wsi-navbar-action-button:active,
-.wsi-navbar-action-button:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.wsi-navbar-visa {
-    padding-left: 17px;
-    padding-right: 17px;
-}
-
-
-.wsi-navbar-login {
-    min-height: 38px;
-
-    padding: 0 19px;
-
-    border-radius: 22px;
-
-    background: #7046d9;
-    color: #fff;
-
-    text-decoration: none;
-
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     font-weight: 700;
+    letter-spacing: .2px;
+    line-height: 1;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-decoration: none !important;
+    white-space: nowrap;
 
     transition:
-        transform .3s ease,
         background .3s ease,
+        transform .3s ease,
         box-shadow .3s ease;
 }
 
-
-.wsi-navbar-login:hover {
-    color: #fff;
-    background: #8058e5;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 8px 25px rgba(112,70,217,.25);
-}
-
-
-/* =========================================================
-   DESKTOP MEGA MENU
-   ========================================================= */
-
-.wsi-navbar-mega-wrapper {
-    position: absolute;
-
-    top: 82px;
-    left: 0;
-
-    width: 100%;
-
-    padding: 0 9.6vw;
-
-    pointer-events: none;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: translateY(-12px);
-
-    transition:
-        opacity .28s ease,
-        transform .35s cubic-bezier(.2,.8,.2,1),
-        visibility .28s ease;
-}
-
-
-/*
-   OPEN STATE
-*/
-
-.wsi-navbar.wsi-navbar-open
-.wsi-navbar-mega-wrapper {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-
-    transform: translateY(0);
-}
-
-
-.wsi-navbar-mega {
-    position: relative;
-
-    width: 100%;
-    min-height: 235px;
-
-    overflow: hidden;
-
-    background: #fff;
-    color: #111;
-
-    border-radius: 0 0 17px 17px;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.25);
-}
-
-
-/* =========================================================
-   MEGA CONTENT
-   ========================================================= */
-
-.wsi-navbar-mega-content {
-    min-height: 235px;
-
-    display: none;
-
-    position: relative;
-}
-
-
-.wsi-navbar-mega-content.wsi-navbar-panel-active {
-    display: flex;
-}
-
-
-.wsi-navbar-mega-left {
-    width: 68%;
-
-    padding:
-        38px
-        40px
-        55px
-        45px;
-}
-
-
-.wsi-navbar-destination-grid {
-    display: grid;
-
-    grid-template-columns:
-        160px
-        190px
-        100px;
-
-    column-gap: 45px;
-}
-
-
-.wsi-navbar-destination-column {
-    display: flex;
-    flex-direction: column;
-
-    border-left: 1px solid #ddd;
-}
-
-
-.wsi-navbar-destination {
-    position: relative;
-
-    padding:
-        8px 0
-        8px 18px;
-
-    color: #181818;
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    transition:
-        color .25s ease,
-        padding-left .25s ease;
-}
-
-
-.wsi-navbar-destination::before {
-    content: "";
-
-    position: absolute;
-
-    left: -1px;
-    top: 0;
-
-    width: 2px;
-    height: 100%;
-
-    background: #7046d9;
-
-    transform: scaleY(0);
-    transform-origin: center;
-
-    transition: transform .25s ease;
-}
-
-
-.wsi-navbar-destination:hover {
-    color: #7046d9;
-    padding-left: 23px;
-}
-
-
-.wsi-navbar-destination:hover::before {
-    transform: scaleY(1);
-}
-
-
-.wsi-navbar-destination-view {
-    display: flex;
-    align-items: flex-start;
-    padding-top: 8px;
-}
-
-
-.wsi-navbar-view-all {
-    color: #7046d9;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    text-decoration: none;
-}
-
-
-.wsi-navbar-view-all:hover {
-    color: #5830bd;
-}
-
-
-/* =========================================================
-   PLAN YOUR TRIP
-   ========================================================= */
-
-.wsi-navbar-trip-list {
-    display: flex;
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-
-.wsi-navbar-trip-link {
-    position: relative;
-
-    width: fit-content;
-
-    padding: 9px 0;
-
-    color: #171717;
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    transition:
-        color .25s ease,
-        transform .25s ease;
-}
-
-
-.wsi-navbar-trip-link:hover {
-    color: #7046d9;
-    transform: translateX(5px);
-}
-
-
-/* =========================================================
-   MEGA IMAGE
-   ========================================================= */
-
-.wsi-navbar-mega-image {
-    position: absolute;
-
-    top: 0;
-    right: 0;
-
-    width: 32%;
-    height: 100%;
-
-    overflow: hidden;
-}
-
-
-.wsi-navbar-menu-image {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    opacity: 0;
-
-    transform: scale(1.06);
-
-    transition:
-        opacity .45s ease,
-        transform .8s cubic-bezier(.2,.8,.2,1);
-}
-
-
-.wsi-navbar-menu-image.wsi-navbar-image-active {
-    opacity: 1;
-    transform: scale(1);
-}
-
-
-/* =========================================================
-   BOTTOM PATTERN
-   ========================================================= */
-
-.wsi-navbar-pattern {
-    position: absolute;
-
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 43px;
-
-    background-image:
-        url("../images/navbar/navbar-pattern.png");
-
-    background-position: center bottom;
-    background-repeat: repeat-x;
-    background-size: auto 100%;
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   HAMBURGER
-   ========================================================= */
-
-.wsi-navbar-mobile-button {
-    display: none;
-
-    width: 48px;
-    height: 48px;
-
-    padding: 0;
-
-    border: 0;
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.08);
-
-    cursor: pointer;
-
-    position: relative;
-
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    gap: 5px;
-
-    transition:
-        background .3s ease,
-        transform .3s ease;
-}
-
-
-.wsi-navbar-mobile-button:hover {
-    background: rgba(255,255,255,.14);
-}
-
-
-.wsi-navbar-mobile-button span {
-    width: 19px;
-    height: 1.5px;
-
-    background: #fff;
-
-    display: block;
-
-    transform-origin: center;
-
-    transition:
-        transform .4s cubic-bezier(.77,0,.18,1),
-        opacity .25s ease,
-        width .3s ease;
-}
-
-
-
-/* =========================================================
-   HAMBURGER — REFERENCE STYLE
-   ========================================================= */
-
-.wsi-navbar-mobile-button {
-    display: none;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    cursor: pointer;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 6px;
-    transition: opacity .25s ease;
-}
-
-.wsi-navbar-mobile-button:hover {
-    background: transparent;
-    opacity: .7;
-}
-
-.wsi-navbar-mobile-button span {
-    display: block;
-    height: 1.5px;
-    background: #fff;
-    transform-origin: center;
-    transition:
-        transform .35s cubic-bezier(.77,0,.18,1),
-        opacity .25s ease,
-        width .25s ease;
-}
-
-.wsi-navbar-mobile-button span:nth-child(1) {
-    width: 22px;
-}
-
-.wsi-navbar-mobile-button span:nth-child(2) {
-    width: 15px;
-    margin-left: 7px;
-}
-
-.wsi-navbar-mobile-button span:nth-child(3) {
-    display: none;
-}
-
-.wsi-navbar.wsi-navbar-mobile-open .wsi-navbar-mobile-button span:nth-child(1) {
-    transform: translateY(3.75px) rotate(45deg);
-}
-
-.wsi-navbar.wsi-navbar-mobile-open .wsi-navbar-mobile-button span:nth-child(2) {
-    width: 22px;
-    margin-left: 0;
-    transform: translateY(-3.75px) rotate(-45deg);
-}
-
-/* =========================================================
-   FULL SCREEN MOBILE MENU
-   ========================================================= */
-
-.wsi-navbar-mobile-menu {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-    height: 100dvh;
-
-     background: #ffffff;
-    color: #111;
-
-    z-index: 20;
-
-    overflow-y: auto;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: translateY(-100%);
-
-    transition:
-        transform .65s cubic-bezier(.77,0,.18,1),
-        opacity .4s ease,
-        visibility .65s;
-    
-    box-shadow: 0 20px 55px rgba(0,0,0,.18);
-}
-
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-
-/* =========================================================
-   MOBILE MENU TOP
-   ========================================================= */
-
-.wsi-navbar-mobile-menu-top {
-    height: 82px;
-
-    padding: 0 5.2vw;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border-bottom: 1px solid rgba(255,255,255,.1);
-}
-
-
-.wsi-navbar-mobile-logo {
-    width: 86px;
-
-    display: block;
-}
-
-
-.wsi-navbar-mobile-logo img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-
-/* =========================================================
-   CLOSE BUTTON
-   ========================================================= */
-
-.wsi-navbar-mobile-top {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.wsi-navbar-mobile-close {
-    width: 48px;
-    height: 48px;
-
-    border: 1px solid rgba(12, 12, 12, 0.25);
-    background: rgba(10, 10, 10, 0.822);
-
-    position: relative;
-    cursor: pointer;
-
-    margin-left: auto;
-}
-
-.wsi-navbar-mobile-close span {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 19px;
-    height: 1.5px;
-
-    background: #fff;
-
-    transform-origin: center;
-}
-
-.wsi-navbar-mobile-close span:first-child {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.wsi-navbar-mobile-close span:last-child {
-    transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-/* =========================================================
-   MOBILE CONTENT
-   ========================================================= */
-
-.wsi-navbar-mobile-content {
-    /* min-height: calc(100dvh - 82px); */
-
-    padding:
-        8vh
-        8vw
-        30px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-
-.wsi-navbar-mobile-nav {
-    display: flex;
-    flex-direction: column;
-}
-
-
-.wsi-navbar-mobile-link {
-    position: relative;
-
-    padding: 17px 0;
-
-    border-bottom: 1px solid rgba(255,255,255,.11);
-
-    color: #fff;
-    text-decoration: none;
-
-    font-size: clamp(28px, 4vw, 54px);
-    font-weight: 600;
-    letter-spacing: -.035em;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    overflow: hidden;
-
-    opacity: 0;
-    transform: translateY(35px);
-
-    transition:
-        color .3s ease,
-        opacity .5s ease,
-        transform .6s cubic-bezier(.2,.8,.2,1);
-}
-
-
-/* stagger animation */
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-link {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-link:nth-child(1) {
-    transition-delay: .12s;
-}
-
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-link:nth-child(2) {
-    transition-delay: .18s;
-}
-
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-link:nth-child(3) {
-    transition-delay: .24s;
-}
-
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-link:nth-child(4) {
-    transition-delay: .30s;
-}
-
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-link:nth-child(5) {
-    transition-delay: .36s;
-}
-
-
-.wsi-navbar.wsi-navbar-mobile-open
-.wsi-navbar-mobile-link:nth-child(6) {
-    transition-delay: .42s;
-}
-
-
-.wsi-navbar-mobile-link:hover {
-    color: #9b7bea;
-}
-
-
-.wsi-navbar-mobile-link i {
+.kd-nav-visa-btn i {
     font-size: 15px;
-    font-weight: 400;
-
-    opacity: .55;
-
-    transition:
-        transform .3s ease,
-        opacity .3s ease;
 }
 
+.kd-nav-visa-btn:hover {
+    background: #65005c;
+    border-color: #65005c;
+    color: #fff !important;
 
-.wsi-navbar-mobile-link:hover i {
-    opacity: 1;
-    transform: translate(4px,-4px);
-}
-
-
-/* =========================================================
-   MOBILE ACTIONS
-   ========================================================= */
-
-.wsi-navbar-mobile-actions {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 10px;
-
-    margin-top: 50px;
-}
-
-
-.wsi-navbar-mobile-action {
-    min-height: 52px;
-
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 30px;
-
-    color: #020202;
-    text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    transition:
-        background .3s ease,
-        border-color .3s ease;
-}
-
-
-.wsi-navbar-mobile-action:hover {
-    color: #fff;
-    background: rgba(255,255,255,.08);
-    border-color: rgba(255,255,255,.5);
-}
-
-
-.wsi-navbar-mobile-visa {
-    grid-column: 1 / -1;
-
-    min-height: 54px;
-
-    border-radius: 30px;
-
-    background: #fff;
-    color: #080808;
-
-    text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    transition:
-        transform .3s ease,
-        background .3s ease;
-}
-
-
-.wsi-navbar-mobile-visa:hover {
-    color: #080808;
-    background: #e8e8e8;
     transform: translateY(-2px);
+
+    box-shadow: 0 8px 24px rgba(133, 0, 120, .25);
 }
 
-
-.wsi-navbar-mobile-login {
-    grid-column: 1 / -1;
-
-    min-height: 54px;
-
-    border-radius: 30px;
-
-    background: #7046d9;
-    color: #fff;
-
-    text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    transition:
-        transform .3s ease,
-        background .3s ease;
+.kd-nav-visa-btn:focus-visible {
+    outline: 2px solid #850078;
+    outline-offset: 4px;
 }
 
+/* Medium screens */
+@media (max-width: 1100px) {
 
-.wsi-navbar-mobile-login:hover {
-    color: #fff;
-    background: #8058e5;
-    transform: translateY(-2px);
-}
+    .kd-nav-visa-btn {
+        padding: 0 15px;
+        height: 40px;
+    }
 
-
-/* =========================================================
-   MOBILE FOOTER
-   ========================================================= */
-
-.wsi-navbar-mobile-footer {
-    padding: 20px 8vw 25px;
-
-    color: rgba(255,255,255,.35);
-
-    font-size: 10px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-
-    display: flex;
-    justify-content: space-between;
-}
-
-
-/* =========================================================
-   TABLET + MOBILE
-   HAMBURGER STARTS AT 1100PX
-   ========================================================= */
-
-@media (max-width: 1365px) {
-
-    .wsi-navbar-menu,
-    .wsi-navbar-actions,
-    .wsi-navbar-mega-wrapper {
+    .kd-nav-visa-btn span {
         display: none;
     }
 
-    .wsi-navbar-mobile-button {
+    .kd-nav-visa-btn i {
+        font-size: 17px;
+    }
+
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+
+    .kd-nav-visa-btn {
+        height: 37px;
+        width: 37px;
+        padding: 0;
+        border-radius: 50%;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   KEN DALA — RESPONSIVE ACCOUNT NAVIGATION
+   ========================================== */
+
+/* Hidden on desktop */
+.kd-nav-mobile-account {
+    display: none;
+}
+
+/* Tablet and mobile */
+@media (max-width: 1100px) {
+
+    /* Hide top login/account button */
+    .kd-nav-actions > .kd-nav-login {
+        display: none !important;
+    }
+
+    /* Show account section inside navigation */
+    .kd-nav-mobile-account {
+        display: block;
+    }
+
+    /* Login and signup buttons */
+    .kd-nav-auth-buttons {
         display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .kd-nav-auth-login,
+    .kd-nav-auth-signup {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        min-height: 46px;
+        padding: 0 25px;
+
+        border-radius: 10px !important;
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+
+        text-decoration: none;
+        white-space: nowrap;
+
+        transition:
+            background .3s ease,
+            color .3s ease,
+            transform .3s ease;
+    }
+
+    /* Outlined login button */
+    .kd-nav-auth-login {
+        color: #fff;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,.5);
+    }
+
+    .kd-nav-auth-login:hover {
+        background: rgba(255,255,255,.12);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    /* White signup button */
+    .kd-nav-auth-signup {
+        color: #850078;
+        background: #fff;
+        border: 1px solid #fff;
+    }
+
+    .kd-nav-auth-signup:hover {
+        background: #f3e9f2;
+        color: #850078;
+        transform: translateY(-2px);
+    }
+
+    /* Ensure account section can fit in the menu */
+    .kd-nav-panel-inner {
+        overflow-y: auto;
+    }
+
+    .kd-nav-columns {
+        row-gap: 35px;
+    }
+
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .kd-nav-mobile-account {
+        padding-top: 25px;
+        border-top: 1px solid rgba(255,255,255,.15);
+    }
+
+    .kd-nav-auth-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .kd-nav-auth-login,
+    .kd-nav-auth-signup {
+        width: 100%;
+        padding: 0 14px;
+        min-height: 48px;
+    }
+
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+
+    .kd-nav-auth-buttons {
+        grid-template-columns: 1fr;
     }
 
 }
 
 
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
 
-@media (max-width: 600px) {
 
-    .wsi-navbar-inner {
-        height: 72px;
-        padding: 0 20px;
+
+
+@media (min-width: 701px) and (max-width: 1100px) {
+
+    .kd-nav-panel {
+        height: min(780px, calc(100dvh - 30px));
+        min-height: 0;
     }
 
-    .wsi-navbar-mobile-menu-top {
-        height: 72px;
-        padding: 0 20px;
+    .kd-nav-panel-inner {
+        justify-content: flex-start;
+        padding-top: 130px;
+        padding-bottom: 35px;
     }
 
-    .wsi-navbar-mobile-content {
-        padding:
-            45px 20px 25px;
-    }
-
-    .wsi-navbar-mobile-link {
-        padding: 15px 0;
-
-        font-size: clamp(25px, 8vw, 38px);
-    }
-
-    .wsi-navbar-mobile-actions {
-        margin-top: 35px;
-    }
-
-    .wsi-navbar-mobile-footer {
-        padding-left: 20px;
-        padding-right: 20px;
+    .kd-nav-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 35px;
+        margin-bottom: 40px;
     }
 
 }
@@ -1090,254 +920,119 @@
 
 
 
-
-
-
-
-/* =========================================================
-   REFERENCE-STYLE MOBILE / TABLET MENU
-   ========================================================= */
-
-/* .wsi-navbar-mobile-menu {
-    position: fixed;
-    top: 82px;
-    left: 5.2vw;
-    width: calc(100vw - 10.4vw);
-    height: calc(100dvh - 105px);
-    height: calc(100dvh - 105px);
-    min-height: 570px;
-    background: #ffffff;
-    color: #111;
-    z-index: 20;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-12px);
-    transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        opacity .28s ease,
-        visibility .45s;
-    box-shadow: 0 20px 55px rgba(0,0,0,.18);
+/* Hidden on desktop */
+.kd-nav-mobile-visa {
+    display: none;
 }
 
-.wsi-navbar.wsi-navbar-mobile-open .wsi-navbar-mobile-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-} */
+/* Tablet and mobile */
+@media (max-width: 1100px) {
 
-.wsi-navbar-mobile-top {
-    position: absolute;
-    inset: 0;
-    height: 76px;
-    z-index: 4;
-    pointer-events: none;
-}
+    /* Hide Get Your Visa from top navbar */
+    .kd-nav-actions > .kd-nav-visa-btn {
+        display: none !important;
+    }
 
-.wsi-navbar-mobile-back,
-.wsi-navbar-mobile-close {
-    pointer-events: auto;
-}
+    /* Show inside purple navigation panel */
+    .kd-nav-mobile-visa {
+        display: block;
+    }
 
-.wsi-navbar-mobile-back {
-    position: absolute;
-    top: 22px;
-    left: 24px;
-    width: 34px;
-    height: 34px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .2s ease;
-}
+    .kd-nav-mobile-visa-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
 
-.wsi-navbar-mobile-back.is-visible {
-    opacity: 1;
-    visibility: visible;
-}
+        padding: 14px 26px;
+        border-radius: 10px !important;
 
-.wsi-navbar-mobile-back span {
-    position: absolute;
-    left: 15px;
-    top: 16px;
-    width: 9px;
-    height: 9px;
-    border-left: 1.5px solid #111;
-    border-bottom: 1.5px solid #111;
-    transform: rotate(45deg);
-}
+        background: #fff;
+        color: #850078;
 
-.wsi-navbar-mobile-page {
-    position: absolute;
-    inset: 0;
-    padding: 67px 24px 50px;
-    overflow-y: auto;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(18px);
-    transition: opacity .25s ease, transform .3s ease, visibility .25s;
-}
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
 
-.wsi-navbar-mobile-page.is-active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
+        transition: background .3s, transform .3s;
+    }
 
-.wsi-navbar-mobile-nav {
-    display: flex;
-    flex-direction: column;
-}
-
-.wsi-navbar-mobile-link {
-    position: relative;
-    width: 100%;
-    min-height: 53px;
-    padding: 0;
-    border: 0;
-    border-bottom: 0;
-    background: transparent;
-    color: #111;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 800;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 9px;
-    cursor: pointer;
-}
-
-.wsi-navbar-mobile-link i {
-    font-size: 9px;
-    font-weight: 700;
-    opacity: .9;
-}
-
-.wsi-navbar-mobile-link:hover {
-    color: #65005f;
-}
-
-.wsi-navbar-mobile-divider {
-    width: 100%;
-    height: 1px;
-    background: #cfcfcf;
-    margin: 8px 0 18px;
-}
-
-.wsi-navbar-mobile-secondary {
-    display: flex;
-    flex-direction: column;
-    gap: 27px;
-}
-
-.wsi-navbar-mobile-secondary a {
-    color: #65005f;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.wsi-navbar-mobile-language {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-}
-
-.wsi-navbar-mobile-language strong {
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.wsi-navbar-mobile-language a {
-    color: #666;
-    text-decoration: none;
-    font-size: 12px;
-}
-
-.wsi-navbar-mobile-language a span {
-    font-size: 17px;
-    margin-left: 4px;
-}
-
-.wsi-navbar-mobile-submenu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 34px;
-}
-
-.wsi-navbar-mobile-submenu-header a {
-    color: #65005f;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.wsi-navbar-mobile-submenu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 27px;
-}
-
-.wsi-navbar-mobile-destination {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    width: fit-content;
-    color: #111;
-    text-decoration: none;
-    transition: transform .25s ease, color .25s ease;
-}
-
-.wsi-navbar-mobile-destination img {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    border-radius: 2px;
-    flex: 0 0 48px;
-}
-
-.wsi-navbar-mobile-destination span {
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.wsi-navbar-mobile-destination:hover {
-    color: #65005f;
-    transform: translateX(4px);
-}
-
-body.wsi-navbar-no-scroll {
-    overflow: hidden;
+    .kd-nav-mobile-visa-btn:hover {
+        background: #f3e9f2;
+        color: #850078;
+        transform: translateY(-2px);
+    }
 }
 
 
 
+/* ==========================================
+   KEN DALA — MOBILE NAVIGATION HEADER FIX
+   ========================================== */
 
+@media (max-width: 700px) {
 
+    /* Keep the navigation panel as positioning context */
+    .kd-nav-panel {
+        position: fixed;
+        isolation: isolate;
+    }
 
+    /* Fixed purple background behind logo and buttons */
+    .kd-nav-panel::before {
+        content: "";
+        position: absolute;
 
+        top: 0;
+        left: 0;
+        right: 0;
 
-.wsi-navbar .wsi-navbar-inner {
-    height: 82px;
-    padding: 0 5.2vw;
-    box-sizing: border-box;
+        height: 105px;
+
+        background: linear-gradient(
+            180deg,
+            #29003e 0%,
+            #29003e 85%,
+            rgba(41, 0, 62, 0) 100%
+        );
+
+        z-index: 4;
+        pointer-events: none;
+    }
+
+    /* Logo stays above the background */
+    .kd-nav-panel-logo {
+        z-index: 6;
+    }
+
+    /* Search and close buttons stay above everything */
+    .kd-nav.is-open .kd-nav-actions {
+        z-index: 110;
+    }
+
+    /* Navigation content scrolls beneath the header */
+    .kd-nav-panel-inner {
+        position: relative;
+        z-index: 1;
+
+        height: 100%;
+        overflow-y: auto;
+
+        padding-top: 115px;
+        overscroll-behavior: contain;
+    }
+
 }
 
-.wsi-navbar .wsi-navbar-link {
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 0;
-    line-height: normal;
-}
+/* Extra small screens */
+@media (max-width: 380px) {
 
-.wsi-navbar .wsi-navbar-menu {
-    gap: 30px;
-    margin-right: 38px;
+    .kd-nav-panel::before {
+        height: 95px;
+    }
+
+    .kd-nav-panel-inner {
+        padding-top: 105px;
+    }
+
 }

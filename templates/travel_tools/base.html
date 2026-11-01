@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>  Ken Dala | {% block title %}Travel Intelligence{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'travel_tools/travel.css' %}">
+        <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        {% block head %}{% endblock %}
+    </head>
+<body>
+    {% include 'main/loader.html' %}
+    {% include 'main/header.html' %}
+<section class="travel-hero"><div class="hero-overlay"></div><div class="hero-inner"><span class="eyebrow">KEN DALA <span class="slash">/</span> TRAVEL INTELLIGENCE</span><h1>{% block heading %}Travel Intelligence{% endblock %}</h1><p>{% block subheading %}Explore the world with confidence.{% endblock %}</p></div></section>
+<div class="travel-shell"><aside class="travel-sidebar"><div class="side-label">YOUR TRAVEL TOOLS</div><nav class="travel-nav" aria-label="Travel intelligence tools"><a class="{% if page == 'visa' %}active{% endif %}" href="{% url 'visa_regulations' %}"><span class="nav-icon">◈</span><span><b>Visa Regulations</b><small>Entry requirements</small></span><span class="nav-arrow">›</span></a><a class="{% if page == 'map' %}active{% endif %}" href="{% url 'visa_map' %}"><span class="nav-icon">◎</span><span><b>World Visa Map</b><small>Explore global access</small></span><span class="nav-arrow">›</span></a><a class="{% if page == 'rankings' %}active{% endif %}" href="{% url 'passport_rankings' %}"><span class="nav-icon">♛</span><span><b>Passport Rankings</b><small>Compare passport power</small></span><span class="nav-arrow">›</span></a><a class="{% if page == 'history' %}active{% endif %}" href="{% url 'visa_history' %}"><span class="nav-icon">◷</span><span><b>Visa History</b><small>See changes over time</small></span><span class="nav-arrow">›</span></a></nav><div class="side-promo"><span>EXPLORE MORE</span><h3>Discover your next journey.</h3><p>Extraordinary destinations, thoughtfully curated.</p><a href="/destinations/">Explore destinations ↗</a></div></aside>
+
+<main class="travel-main">{% if error %}<div class="notice error" role="alert">{{ error }}</div>{% endif %}{% block content %}{% endblock %}<footer class="disclaimer">Travel information is for planning purposes only. Regulations can change without notice. Always verify entry and boarding requirements with the destination's official immigration authority and your airline. Visa history on the free plan may be demonstration data.</footer></main></div>
+
+ {% include 'main/footer.html' %}
+
+
+ <script src="{% static 'js/navbar.js' %}"></script>
+</body>
+</html>

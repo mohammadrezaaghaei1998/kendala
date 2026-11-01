@@ -1,0 +1,419 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ attraction.subtitle|default:attraction.title }}">
+    <title>{{ attraction.title }} | Ken Dala</title>
+    <link rel="stylesheet" href="{% static 'css/attraction-detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>.kd-viator-book{display:block;text-align:center;background:#850078;color:#fff!important;border-radius:7px;padding:17px 20px;font-weight:700;text-decoration:none;margin-top:16px}.kd-viator-book:hover{background:#6e0064}</style>
+</head>
+<body>
+     {% include 'main/loader.html' %}
+    {% include 'main/header.html' %}
+
+    <main class="attraction-page">
+        <div class="attraction-container">
+            <nav class="attraction-breadcrumb" aria-label="Breadcrumb">
+                <a href="{% url 'index' %}">Home</a>
+                <span>›</span>
+                <a href="{% url 'destination-detail' attraction.country.slug %}">{{ attraction.country.name }}</a>
+                {% if attraction.city %}
+                    <span>›</span>
+                    <a href="{{ attraction.city.get_absolute_url }}">{{ attraction.city.name }}</a>
+                {% endif %}
+                <span>›</span>
+                <span>{{ attraction.title }}</span>
+            </nav>
+
+            <header class="attraction-heading">
+                <p class="attraction-eyebrow">KEN DALA / THINGS TO DO</p>
+                <h1>{{ attraction.title }}</h1>
+                {% if attraction.subtitle %}
+                    <p class="attraction-subtitle">{{ attraction.subtitle }}</p>
+                {% endif %}
+            </header>
+
+            <section class="attraction-gallery" aria-label="Attraction photographs" id="kdGallery">
+                <div class="attraction-main-image">
+                                    
+                    {% if attraction.hero_image_url %}
+                        <img src="{{ attraction.hero_image_url }}" alt="{{ attraction.title }}" data-kd-gallery="0" tabindex="0" role="button">
+                    {% elif attraction.hero_image %}
+                        <img src="{{ attraction.hero_image.url }}" alt="{{ attraction.title }}">
+                    {% else %}
+                        <div class="attraction-image-placeholder">{{ attraction.title }}</div>
+                    {% endif %}
+
+                </div>
+                <div class="attraction-gallery-side">
+                    {% for photo in gallery %}
+                        <img src="{{ photo.image.url }}" alt="{{ photo.alt_text|default:attraction.title }}" data-kd-gallery="{{ forloop.counter }}" tabindex="0" role="button">
+                    {% empty %}
+                        <div class="attraction-image-placeholder">Discover {{ attraction.country.name }}</div>
+                        <div class="attraction-image-placeholder">Ken Dala Travel Guide</div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <div class="attraction-content-grid">
+                <div class="attraction-content-main">
+                    <section class="attraction-about">
+                        <p class="attraction-eyebrow">THE EXPERIENCE</p>
+                        <h2>About {{ attraction.title }}</h2>
+                        <div class="attraction-description">{{ attraction.description|linebreaks }}</div>
+                    </section>
+
+
+                                        
+                    {% if viator_details.rating %}
+                    <section class="kd-tour-panel kd-reviews" id="kdReviews" style="margin-bottom: 20px;">
+
+                        <p class="attraction-eyebrow">TRAVELER FEEDBACK</p>
+                        <h2>Traveler Reviews</h2>
+
+                        <div class="kd-review-summary">
+
+                            <div class="kd-review-score">
+                                <strong>{{ viator_details.rating|floatformat:1 }}</strong>
+
+                                <div class="kd-review-stars" aria-label="Rating out of five">
+                                    ★★★★★
+                                </div>
+
+                                <span>
+                                    Based on {{ viator_details.review_count }} reviews
+                                </span>
+                            </div>
+
+                            <div class="kd-review-distribution">
+                                {% for bar in viator_details.review_bars %}
+                                <div class="kd-review-bar-row">
+
+                                    <span>{{ bar.stars }} stars</span>
+
+                                    <div class="kd-review-track">
+                                        <div class="kd-review-fill"
+                                            style="width:{{ bar.percentage|stringformat:'.2f' }}%">
+                                        </div>
+                                    </div>
+
+                                    <span>{{ bar.count }}</span>
+
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                        <p class="kd-review-source">
+                            Ratings collected by Viator and Tripadvisor.
+                        </p>
+
+                        {% if attraction.booking_url %}
+                        <a href="{{ attraction.booking_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="kd-review-link">
+                            Read traveler reviews on Viator ↗
+                        </a>
+                        {% endif %}
+
+                    </section>
+                    {% endif %}
+
+
+
+
+                    {% if viator_details %}
+                    <div class="kd-tour-sections">
+                      <!-- <section class="kd-tour-panel"><h2>Experience details</h2>
+                        {% if viator_details.duration %}<p><strong>Duration:</strong> {{ viator_details.duration }}</p>{% endif %}
+                        {% if viator_details.rating %}<p><strong>Traveler rating:</strong> {{ viator_details.rating }} / 5 {% if viator_details.review_count %}({{ viator_details.review_count }} reviews){% endif %}</p>{% endif %}
+                        <p><strong>Product code:</strong> {{ viator_details.product_code }}</p>
+                      </section> -->
+                      {% if viator_details.included or viator_details.excluded %}
+                      <section class="kd-tour-panel kd-inclusions-panel" id="kdInclusions">
+                        <h2>What's included</h2>
+                        <div class="kd-inclusion-grid">
+                          <div><h3>Included</h3><ul class="kd-benefits">
+                            {% for item in viator_details.included %}<li><span class="kd-benefit-icon kd-yes" aria-hidden="true">✓</span><span>{{ item }}</span></li>{% empty %}<li>Check the provider's listing for inclusions.</li>{% endfor %}
+                          </ul></div>
+                          <div><h3>Not included</h3><ul class="kd-benefits">
+                            {% for item in viator_details.excluded %}<li><span class="kd-benefit-icon kd-no" aria-hidden="true">×</span><span>{{ item }}</span></li>{% empty %}<li>See the provider's listing for exclusions.</li>{% endfor %}
+                          </ul></div>
+                        </div>
+                      </section>
+                      {% endif %}
+                      {% if viator_details.pickup %}<section class="kd-tour-panel"><h2>Meeting &amp; pickup</h2><p>{{ viator_details.pickup|linebreaksbr }}</p></section>{% endif %}
+                      {% if viator_details.itinerary %}
+                      <section class="kd-tour-panel kd-itinerary-panel" id="kdItinerary">
+                        <p class="attraction-eyebrow">YOUR JOURNEY</p><h2>Itinerary</h2>
+                        <div class="kd-timeline">
+                          {% for stop in viator_details.itinerary %}
+                          <article class="kd-stop">
+                            <div class="kd-stop-number" aria-hidden="true">{{ forloop.counter }}</div>
+                            <div class="kd-stop-body">
+                              <h3>{{ stop.title }}</h3>
+                              {% if stop.description %}<p class="kd-stop-description">{{ stop.description }}</p>{% endif %}
+                              {% if stop.minutes or stop.admission %}<div class="kd-stop-meta">
+                                {% if stop.minutes %}<span>◷ {{ stop.minutes }} min</span>{% endif %}
+                                {% if stop.admission %}<span>{{ stop.admission }}</span>{% endif %}
+                              </div>{% endif %}
+                            </div>
+                          </article>
+                          {% endfor %}
+                        </div>
+                      </section>{% endif %}
+                      {% if viator_details.additional_info %}<section class="kd-tour-panel"><h2>Additional information</h2><ul>{% for item in viator_details.additional_info %}<li>{{ item }}</li>{% endfor %}</ul></section>{% endif %}
+                      {% if viator_details.cancellation %}<section class="kd-tour-panel"><h2>Cancellation policy</h2><p>{{ viator_details.cancellation|linebreaksbr }}</p></section>{% endif %}
+                    </div>
+                    {% endif %}
+
+                    <section class="attraction-destination-banner">
+                        <div>
+                            <p>EXPLORE MORE</p>
+                            <h2>Discover {{ attraction.country.name }}</h2>
+                            <span>Explore destinations and Ken Dala journeys.</span>
+                            <a href="{% url 'destination-detail' attraction.country.slug %}">Explore destination</a>
+                        </div>
+                    </section>
+
+                    <section class="attraction-more">
+                        <div class="attraction-section-title">
+                            <div>
+                                <p class="attraction-eyebrow">KEEP EXPLORING</p>
+                                <h2>More in {% if related_city_name %}{{ related_city_name }}{% elif attraction.city %}{{ attraction.city.name }}{% else %}{{ attraction.country.name }}{% endif %}</h2>
+                            </div>
+                            <div class="attraction-carousel-controls">
+                                <button type="button" id="attractionPrev" aria-label="Previous attractions">←</button>
+                                <button type="button" id="attractionNext" aria-label="Next attractions">→</button>
+                            </div>
+                        </div>
+                        <div class="attraction-card-track" id="attractionTrack">
+                            {% for item in related_attractions %}
+                                <a class="attraction-card" href="{% if item.detail_url %}{{ item.detail_url }}{% else %}{{ item.get_absolute_url }}{% endif %}">
+                                    {% if item.hero_image_url %}
+                                        <img src="{{ item.hero_image_url }}" alt="{{ item.title }}" loading="lazy">
+                                    {% elif item.hero_image %}
+                                        <img src="{{ item.hero_image.url }}" alt="{{ item.title }}" loading="lazy">
+                                    {% else %}
+                                        <div class="attraction-card-placeholder">{{ item.title }}</div>
+                                    {% endif %}
+                                    <small>
+                                        {% if item.city_name %}{{ item.city_name }}{% elif item.city %}{{ item.city.name }}{% else %}{{ item.country.name }}{% endif %}
+                                        <span> | </span>
+                                        {% if item.category_name %}{{ item.category_name }}{% else %}{{ item.get_category_display }}{% endif %}
+                                    </small>
+                                    <h3>{{ item.title }}</h3>
+                                </a>
+                            {% empty %}
+                                <p>More places to discover are coming soon.</p>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="attraction-sidebar">
+                    <div class="attraction-info-card">
+                        <h2>Visitor information</h2>
+                        <dl>
+                            <div>
+                                <dt>Location</dt>
+                                <dd>{% if attraction.city %}{{ attraction.city.name }}, {% endif %}{{ attraction.country.name }}</dd>
+                            </div>
+                            <div>
+                                <dt>Category</dt>
+                                <dd>{{ attraction.get_category_display }}</dd>
+                            </div>
+                            {% if attraction.age_guidance %}
+                                <div>
+                                    <dt>Ages</dt>
+                                    <dd>{{ attraction.age_guidance }}</dd>
+                                </div>
+                            {% endif %}
+                            {% if attraction.ideal_for %}
+                                <div>
+                                    <dt>Ideal for</dt>
+                                    <dd>{{ attraction.ideal_for }}</dd>
+                                </div>
+                            {% endif %}
+                        </dl>
+                    </div>
+
+                    {% if attraction.admission_info %}
+                        <div class="attraction-note-card">
+                            <h3>Admission</h3>
+                            <p>{{ attraction.admission_info }}</p>
+                        </div>
+                    {% endif %}
+
+                    {% if attraction.opening_hours %}
+                        <div class="attraction-info-card">
+                            <h2>Opening hours</h2>
+                            <p>{{ attraction.opening_hours|linebreaksbr }}</p>
+                            <small>Hours may change. Verify before visiting.</small>
+                        </div>
+                    {% endif %}
+
+                    {% if attraction.latitude and attraction.longitude %}
+                        <div class="attraction-map-card">
+                            <h2>Find your way</h2>
+                            {% if attraction.address %}
+                                <p>{{ attraction.address }}</p>
+                            {% endif %}
+                            <a
+                                href="https://www.google.com/maps/search/?api=1&amp;query={{ attraction.latitude }},{{ attraction.longitude }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >Get directions ↗</a>
+                        </div>
+                    {% endif %}
+
+                                        
+                    {% if attraction.image_credit or attraction.image_license_url or attraction.image_source_url or attraction.source_url %}
+                    <div class="attraction-attribution">
+
+                        {% if attraction.image_credit %}
+                            <p>Photo: {{ attraction.image_credit }}</p>
+                        {% endif %}
+
+                        {% if attraction.image_license_url %}
+                            <a href="{{ attraction.image_license_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                                Image license: {{ attraction.image_license }}
+                            </a>
+                        {% endif %}
+
+                        {% if attraction.image_source_url %}
+                            <a href="{{ attraction.image_source_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                                Image source
+                            </a>
+                        {% endif %}
+
+                        {% if attraction.source_url %}
+                            <a href="{{ attraction.source_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                                Map data source
+                            </a>
+                        {% endif %}
+
+                    </div>
+                    {% endif %}
+
+                  {% if viator_experience %}
+                    <div class="kd-booking-summary">
+
+                        <div class="kd-price-label">Experience price</div>
+
+                        {% if attraction.starting_price is not None %}
+                            <div class="kd-price">
+                                <strong>${{ attraction.starting_price|floatformat:2 }}</strong>
+                                <span>USD / person</span>
+                            </div>
+                        {% else %}
+                            <p>View current price on Viator</p>
+                        {% endif %}
+
+                        <p class="kd-price-disclaimer">
+                            Final price, dates and availability are confirmed on Viator.
+                        </p>
+
+                        {% if viator_details.cancellation_free_hours is not None %}
+                        <div class="kd-booking-benefit">
+                            <svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2"
+                                aria-hidden="true">
+                                <circle cx="12" cy="12" r="9"/>
+                                <path d="m8 12 3 3 5-6"/>
+                            </svg>
+
+                            <span>
+                                <strong>Free cancellation</strong>
+                                up to {{ viator_details.cancellation_free_hours }}
+                                hours before the experience starts (local time)
+                            </span>
+                        </div>
+                        {% endif %}
+
+                        {% if viator_details.reserve_pay_later %}
+                        <div class="kd-booking-benefit">
+                            <svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2"
+                                aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                                <path d="M3 10h18m-13 5h3"/>
+                            </svg>
+
+                            <span>
+                                <strong>Reserve Now and Pay Later</strong>
+                                — Secure your spot while staying flexible
+                            </span>
+                        </div>
+                        {% endif %}
+
+                        <!-- {% if attraction.booking_url %}
+                        <a class="kd-booking-button"
+                        href="{{ attraction.booking_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            Check Availability ↗
+                        </a>
+                        {% endif %} -->
+
+                    </div>
+                    {% endif %}
+                    {% if viator_booking_missing %}<div class="attraction-note-card"><h3>Booking currently unavailable</h3><p>The provider did not return a verified booking link. Please check again later.</p></div>{% endif %}
+                    {% if attraction.booking_url %}
+                        <a class="kd-viator-book" href="{{ attraction.booking_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            {% if viator_experience %}Check Availability ↗{% else %}Book with {{ attraction.provider_name|default:"the provider" }}{% endif %}
+                        </a>
+                    {% endif %}
+
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    {% if all_photos %}
+    <div class="kd-lightbox" id="kdLightbox" hidden role="dialog" aria-modal="true" aria-label="Photo gallery">
+      <button class="kd-lightbox-close" type="button" id="kdClose" aria-label="Close gallery">×</button>
+      <button class="kd-lightbox-prev" type="button" id="kdPrev" aria-label="Previous photo">‹</button>
+      <img id="kdLightboxImage" alt="{{ attraction.title }}">
+      <button class="kd-lightbox-next" type="button" id="kdNext" aria-label="Next photo">›</button>
+      <span id="kdPhotoCounter" class="kd-lightbox-count"></span>
+    </div>
+    {{ all_photos|json_script:"kd-gallery-photos" }}
+    <script src="{% static 'js/attraction-gallery.js' %}" defer></script>
+    {% endif %}
+    {% include 'main/footer.html' %}
+     <script src="{% static 'js/navbar.js' %}"></script>
+
+    <script>
+        const attractionTrack = document.getElementById("attractionTrack");
+        const attractionPrev = document.getElementById("attractionPrev");
+        const attractionNext = document.getElementById("attractionNext");
+
+        if (attractionTrack && attractionPrev && attractionNext) {
+            attractionPrev.addEventListener("click", function () {
+                attractionTrack.scrollBy({ left: -360, behavior: "smooth" });
+            });
+
+            attractionNext.addEventListener("click", function () {
+                attractionTrack.scrollBy({ left: 360, behavior: "smooth" });
+            });
+        }
+    </script>
+</body>
+</html>

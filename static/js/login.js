@@ -1,49 +1,64 @@
-        // Show / hide password
 
-        const passwordInput = document.getElementById("password");
-        const togglePassword = document.getElementById("togglePassword");
-        const passwordIcon = document.getElementById("passwordIcon");
+document.addEventListener("DOMContentLoaded", function () {
 
+    // Show / hide password
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordIcon = document.getElementById("passwordIcon");
+
+    if (passwordInput && togglePassword && passwordIcon) {
         togglePassword.addEventListener("click", function () {
             const isHidden = passwordInput.type === "password";
 
             passwordInput.type = isHidden ? "text" : "password";
+
             passwordIcon.className = isHidden
                 ? "fa-regular fa-eye-slash"
                 : "fa-regular fa-eye";
 
-            togglePassword.setAttribute("aria-pressed", String(isHidden));
+            togglePassword.setAttribute(
+                "aria-pressed",
+                String(isHidden)
+            );
+
             togglePassword.setAttribute(
                 "aria-label",
                 isHidden ? "Hide password" : "Show password"
             );
         });
+    }
 
-        // Login form UI placeholder.
-        // Connect this form to your backend before using it for authentication.
 
-        document.getElementById("loginForm").addEventListener(
-            "submit",
-            function (event) {
-                event.preventDefault();
+    // Login error message
+    const formMessage = document.getElementById("formMessage");
 
-                const message = document.getElementById("formMessage");
-
-                message.textContent =
-                    "Authentication is not connected yet. Please connect your login backend.";
-
-                message.classList.add("visible");
-            }
+    if (formMessage && formMessage.dataset.loginError === "true") {
+        showToast(
+            formMessage.textContent.trim(),
+            "error",
+            "Unable to sign in"
         );
 
-        // Google OAuth placeholder.
-        // Replace this handler with your configured Google sign-in flow.
+        formMessage.classList.remove("visible");
+        formMessage.hidden = true;
+    }
 
-        document.getElementById("googleLogin").addEventListener(
-            "click",
-            function () {
-                alert(
-                    "Google sign-in needs to be connected to your authentication provider."
-                );
-            }
-        );
+
+    // Google login is not connected yet
+    const googleLogin = document.getElementById("googleLogin");
+
+    if (googleLogin) {
+        googleLogin.addEventListener("click", function () {
+
+            if (!formMessage) return;
+
+            formMessage.textContent =
+                "Google sign-in is not available yet.";
+
+            formMessage.classList.remove("hide");
+            formMessage.classList.add("visible");
+
+        });
+    }
+
+});

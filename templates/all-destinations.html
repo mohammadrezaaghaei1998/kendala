@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>WSI | All Destinations</title>
+  <title>Ken Dala | All Destinations</title>
 
     <!-- Custom Css -->
     <link rel="stylesheet" href="{% static 'css/navbar_main.css' %}">
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/all-destinations.css' %}">
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/support-button.css' %}">
 
      
     <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
@@ -45,6 +46,7 @@
 
 <body>
 
+{% include 'main/loader.html' %}
 
 {% include 'main/header.html' %}
 
@@ -70,7 +72,7 @@
         <div class="destination-hero">
 
             <img
-                src="{% static 'images/oman-tourism.jpg' %}"
+                src="https://images.unsplash.com/photo-1787240663846-598e1033a919?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                 alt="Aerial view of a dramatic desert landscape"
                 class="hero-image">
 
@@ -219,96 +221,40 @@
             <div class="container-wide">
                 <div class="container-fluid">
                     
-                    <div class="section-heading">
+                   <div class="section-heading">
                         <div>
-                            <span class="section-kicker">WHAT'S HAPPENING</span>
-                            <h2>Discover Current Events</h2>
+                            <span class="section-kicker">EXPLORE DESTINATIONS</span>
+                            <h2>Discover Cities Worth Exploring</h2>
                         </div>
-                         <p>Find your next unforgettable experience.</p>
+                        <p>From vibrant city streets to breathtaking landscapes, find your next destination.</p>
                     </div>
 
 
-
                     <div class="row">
-
+                        {% for city in cities %}
                         <div class="col-xl-4 col-md-6 col-12 mb-4">
-                        <a href="#" class="destination-card">
-                            <div class="destination-image">
-                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Abha">
-                            <div class="card-overlay"></div>
-                            <div class="destination-card-content">
-                                <span>NATURE & MOUNTAINS</span>
-                                <h3>Abha</h3>
-                            </div>
-                            </div>
-                        </a>
+                            <a href="{% url 'city_guide_detail' country_slug=city.country.slug city_slug=city.slug %}" class="destination-card">
+                                <div class="destination-image">
+                                    {% if city.image %}
+                                    <img src="{{ city.image.url }}" alt="{{ city.name }}" loading="lazy">
+                                    {% elif city.hero_image %}
+                                    <img src="{{ city.hero_image.url }}" alt="{{ city.name }}" loading="lazy">
+                                    {% elif city.country.hero_image %}
+                                    <img src="{{ city.country.hero_image.url }}" alt="{{ city.name }}" loading="lazy">
+                                    {% endif %}
+                                    <div class="card-overlay"></div>
+                                    <div class="destination-card-content">
+                                        <span>{{ city.category|default:city.country.name|upper }}</span>
+                                        <h3>{{ city.name }}</h3>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-
-                        <div class="col-xl-4 col-md-6 col-12 mb-4">
-                        <a href="#" class="destination-card">
-                            <div class="destination-image">
-                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Taif">
-                            <div class="card-overlay"></div>
-                            <div class="destination-card-content">
-                                <span>NATURE & ADVENTURE</span>
-                                <h3>Taif</h3>
-                            </div>
-                            </div>
-                        </a>
+                        {% empty %}
+                        <div class="col-12">
+                            <p>No cities are available yet.</p>
                         </div>
-
-                        <div class="col-xl-4 col-md-6 col-12 mb-4">
-                        <a href="#" class="destination-card">
-                            <div class="destination-image">
-                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="The Red Sea">
-                            <div class="card-overlay"></div>
-                            <div class="destination-card-content">
-                                <span>SEA & ISLANDS</span>
-                                <h3>The Red Sea</h3>
-                            </div>
-                            </div>
-                        </a>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 col-12 mb-4">
-                        <a href="#" class="destination-card">
-                            <div class="destination-image">
-                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Diriyah">
-                            <div class="card-overlay"></div>
-                            <div class="destination-card-content">
-                                <span>HERITAGE & CULTURE</span>
-                                <h3>Diriyah</h3>
-                            </div>
-                            </div>
-                        </a>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 col-12 mb-4">
-                        <a href="#" class="destination-card">
-                            <div class="destination-image">
-                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Yanbu">
-                            <div class="card-overlay"></div>
-                            <div class="destination-card-content">
-                                <span>COASTAL ADVENTURES</span>
-                                <h3>Yanbu</h3>
-                            </div>
-                            </div>
-                        </a>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 col-12 mb-4">
-                        <a href="#" class="destination-card">
-                            <div class="destination-image">
-                            <img src="{% static 'images/oman-tourism.jpg' %}" alt="Jazan">
-                            <div class="card-overlay"></div>
-                            <div class="destination-card-content">
-                                <span>NATURE & EXPLORATION</span>
-                                <h3>Jazan</h3>
-                            </div>
-                            </div>
-                        </a>
-                        </div>
-
+                        {% endfor %}
                     </div>
 
                 </div>
@@ -321,6 +267,18 @@
 
 
    {% include 'main/footer.html' %}
+
+
+
+    <button id="kd-chat-launcher" type="button" aria-label="Open chat">
+
+        <img
+            id="kd-chat-icon"
+            src="{% static 'images/chat-icon.png' %}"
+            alt="Chat"
+        >
+    </button>
+
 
 
 
@@ -353,6 +311,49 @@
       document.getElementById('mobileNavLinks').classList.toggle('show');
     });
   </script>
+
+
+
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="dcc5cb29-4c61-4714-a4ea-7ee6b4722986";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        window.$crisp = window.$crisp || [];
+
+        const chatLauncher = document.getElementById("kd-chat-launcher");
+
+        if (!chatLauncher) {
+            console.error("Ken Dala chat launcher not found.");
+            return;
+        }
+
+        $crisp.push(["do", "chat:hide"]);
+
+        chatLauncher.addEventListener("click", function () {
+
+            $crisp.push(["do", "chat:show"]);
+            $crisp.push(["do", "chat:open"]);
+
+        });
+
+        $crisp.push(["on", "chat:opened", function () {
+
+            chatLauncher.classList.add("chat-open");
+
+        }]);
+
+        $crisp.push(["on", "chat:closed", function () {
+
+            chatLauncher.classList.remove("chat-open");
+
+            $crisp.push(["do", "chat:hide"]);
+
+        }]);
+
+    });
+</script>
 
 </body>
 </html>

@@ -87,16 +87,27 @@ a{
     position:relative;
     overflow:hidden;
     color:#fff;
-    margin-top:70px;
 }
-.hero-media{
+/* .hero-media{
     position:absolute;
     inset:0;background-image:url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=2400&q=90');
     background-size:cover;
     background-position:center 42%;
     transform:scale(1.01);
     transition:background-image .5s ease;
+} */
+
+.hero-media {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 42%;
+    transform: scale(1.01);
+    transition: background-image .5s ease;
 }
+
+
+
 .hero-shade{
     position:absolute;
     inset:0;
@@ -274,7 +285,7 @@ a{
     gap:34px;
 }
 .event-card{
-    flex:0 0 calc((100% - 136px)/5);
+    flex:0 0 calc((100% - 236px)/3);
     position:relative;
 }
 .event-card img{
@@ -637,6 +648,7 @@ a{
     display: block;
     font-size: 16px;
     line-height: 1.4;
+    margin-bottom: 20px !important;
 }
 
 .thing-info button {
@@ -644,6 +656,20 @@ a{
     cursor: pointer;
     max-width: 100%;
 }
+
+.thing-info a {
+   
+    cursor: pointer;
+    max-width: 100%;
+    background:var(--purple);
+    border:0;
+    color:#fff;
+    border-radius:6px;
+    padding:9px 15px;
+    font-size:11px;
+    font-weight:700;
+}
+
 
 /* ========================================
    PROGRESS BAR
@@ -1366,8 +1392,11 @@ a{
     }
     .hero-tabs{
         height:65px;
-        overflow:auto;
+        overflow-x: auto;
+        overflow-y: hidden;
         display:flex;
+         scrollbar-color: #ffffff transparent;
+        scrollbar-width: thin;
     }
     .hero-tab{
         min-width:180px;
@@ -1735,4 +1764,309 @@ a{
     .stories-stat > b {
         font-size: 16px;
     }
+}
+
+
+
+.destinations-await-card{
+    align-items: center !important;
+}
+
+
+
+.destinations-await-card a{
+    align-items: center !important;
+    align-self: center !important;
+    padding-bottom: 15px !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+
+.destinations-await-card p{
+    margin-bottom: 10px !important;
+    text-align: center !important;
+    
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    color: #666;
+    
+}
+
+
+
+.event-bottom .event-ticket-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    background: #850078;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s ease;
+}
+
+.event-bottom .event-ticket-link:hover {
+    background: #65005c;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+.event-bottom .tour-book-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    background: #850078;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s ease;
+}
+
+.event-bottom .tour-book-link:hover {
+    background: #65005c;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+.before-grid article a {
+    display: inline-block;
+    color: #850078;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.before-grid article a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+/* KNOW BEFORE YOU GO - HOVER VIDEOS */
+
+.before-grid article video {
+    display: block;
+    width: 220px;
+    height: 180px;
+    object-fit: cover;
+    margin: 0 auto 18px;
+    background: #eee;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .before-grid article video {
+        width: 150px;
+        height: 130px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TRAVEL ILLUSTRATION */
+
+.fake-illustration {
+    flex: 0 0 auto;
+    width: clamp(130px, 18vw, 250px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fake-illustration img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .fake-illustration {
+        width: 110px;
+        flex-shrink: 0;
+    }
+}
+
+/* EXTRA SMALL PHONES */
+
+@media (max-width: 360px) {
+    .fake-illustration {
+        width: 85px;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* KEN DALA IN NUMBERS HEADING */
+
+.numbers-heading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding-left: 11px;
+}
+
+.numbers-heading img {
+    display: block;
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.numbers-section .numbers-heading h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 34px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .numbers-heading {
+        gap: 8px;
+    }
+
+    .numbers-heading img {
+        width: 160px;
+    }
+
+    .numbers-section .numbers-heading h2 {
+        font-size: 27px;
+    }
+}
+
+
+
+
+
+
+
+
+.things-section .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.things-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #850078;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.things-view-all:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .things-section .section-head {
+        flex-wrap: wrap;
+    }
+}
+
+
+
+
+
+
+
+
+
+.things-destination-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.destination-filter {
+    padding: 11px 20px;
+    border: 1px solid #e8e0ea;
+    border-radius: 30px;
+    background: #fff;
+    color: #343039;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.destination-filter:hover {
+    border-color: #850078;
+    color: #850078;
+}
+
+.destination-filter.active {
+    background: #850078;
+    border-color: #850078;
+    color: #fff;
 }

@@ -1,0 +1,9 @@
+<article class="kd-event-card">
+  <a class="kd-event-card-link" href="{{ event.external_url|default:'#' }}" {% if event.external_url %}target="_blank" rel="noopener noreferrer"{% endif %} aria-label="View details for {{ event.title }}">
+    <div class="kd-event-image">{% if event.source_image_url %}<img src="{{ event.source_image_url }}" alt="{{ event.title }}" loading="lazy" referrerpolicy="no-referrer">{% elif event.image %}<img src="{{ event.image.url }}" alt="{{ event.title }}" loading="lazy">{% else %}<div class="kd-image-placeholder">KEN DALA</div>{% endif %}</div>
+    <div class="kd-event-info"><h3>{{ event.title }}</h3><p class="kd-category">{{ event.category|default:'Event' }}</p><p class="kd-event-meta"><span aria-hidden="true">⌖</span> {{ event.country.name }}
+{% if event.city %}
+    — {{ event.city.name }}
+{% endif %}{% if event.venue %} — {{ event.venue }}{% endif %}</p><p class="kd-event-meta"><span aria-hidden="true">◷</span> {{ event.start_date|date:'M d, Y' }}{% if event.end_date and event.end_date != event.start_date %} – {{ event.end_date|date:'M d, Y' }}{% endif %}</p></div>
+  </a>
+</article>
